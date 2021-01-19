@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on b1ogtank</title>
+    <link>http://b1tank.github.io/tags/</link>
+    <description>Recent content in Tags on b1ogtank</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Jan 2021 23:34:13 -0800</lastBuildDate><atom:link href="http://b1tank.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>basketball</title>
+      <link>http://b1tank.github.io/tags/basketball/</link>
+      <pubDate>Mon, 18 Jan 2021 23:34:13 -0800</pubDate>
+      
+      <guid>http://b1tank.github.io/tags/basketball/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>init</title>
+      <link>http://b1tank.github.io/tags/init/</link>
+      <pubDate>Mon, 18 Jan 2021 23:34:13 -0800</pubDate>
+      
+      <guid>http://b1tank.github.io/tags/init/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>warriors</title>
+      <link>http://b1tank.github.io/tags/warriors/</link>
+      <pubDate>Mon, 18 Jan 2021 23:34:13 -0800</pubDate>
+      
+      <guid>http://b1tank.github.io/tags/warriors/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on b1ogtank</title>
+    <link>http://b1tank.github.io/categories/</link>
+    <description>Recent content in Categories on b1ogtank</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Jan 2021 23:34:13 -0800</lastBuildDate><atom:link href="http://b1tank.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Thoughts</title>
+      <link>http://b1tank.github.io/categories/thoughts/</link>
+      <pubDate>Mon, 18 Jan 2021 23:34:13 -0800</pubDate>
+      
+      <guid>http://b1tank.github.io/categories/thoughts/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

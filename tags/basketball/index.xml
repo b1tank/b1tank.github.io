@@ -1,21 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>basketball on b1ogtank</title>
-    <link>http://b1tank.github.io/tags/basketball/</link>
-    <description>Recent content in basketball on b1ogtank</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Mon, 18 Jan 2021 23:34:13 -0800</lastBuildDate><atom:link href="http://b1tank.github.io/tags/basketball/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Init Post</title>
-      <link>http://b1tank.github.io/post/2021/01/18/init-post/</link>
-      <pubDate>Mon, 18 Jan 2021 23:34:13 -0800</pubDate>
-      
-      <guid>http://b1tank.github.io/post/2021/01/18/init-post/</guid>
-      <description>Finally, I got my first post here, after witnessing Warriors&#39; stunning comebacks against 2 LA championship calibre contenders (today marks the MLK day&amp;rsquo;s showdown between @StephenCurry30 and @KingJames) and scrapping through a whole bunch of hassles for building this Hugo-powered blog.
-I have already thought of jotting down that Steph&amp;rsquo;s quote &amp;ldquo;You try to just continue to stay humble and stay in the moment. That&amp;rsquo;s the best way to approach it&amp;rdquo; after the vintage Warriors&#39; comeback against the Clippers on Jan 8, 2021.</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>basketball on b1ogtank</title><link>http://b1tank.github.io/tags/basketball/</link><description>Recent content in basketball on b1ogtank</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 18 Jan 2021 23:34:13 -0800</lastBuildDate><atom:link href="http://b1tank.github.io/tags/basketball/index.xml" rel="self" type="application/rss+xml"/><item><title>Init Post</title><link>http://b1tank.github.io/post/2021/01/18/init-post/</link><pubDate>Mon, 18 Jan 2021 23:34:13 -0800</pubDate><guid>http://b1tank.github.io/post/2021/01/18/init-post/</guid><description>Finally, I got my first post here, after witnessing Warriors' stunning comebacks against 2 LA championship calibre contenders (today marks the MLK day&amp;rsquo;s showdown between @StephenCurry30 and @KingJames) and scrapping through a whole bunch of hassles for building this Hugo-powered blog.
+I have already thought of jotting down that Steph&amp;rsquo;s quote &amp;ldquo;You try to just continue to stay humble and stay in the moment. That&amp;rsquo;s the best way to approach it&amp;rdquo; after the vintage Warriors' comeback against the Clippers on Jan 8, 2021.</description></item></channel></rss>

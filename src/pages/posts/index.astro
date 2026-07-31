@@ -6,7 +6,7 @@ const posts = publishedPosts(await getCollection('posts'));
 ---
 <BaseLayout title="Writing" description="Writing by Zhichao Li about software, systems, visual explanations, and building products.">
   <div class="shell page">
-    <header class="page-header"><span class="kicker">Archive</span><h1>Writing</h1><p>Technical explanations, notes from building, and occasional thoughts outside software.</p></header>
+    <header class="page-header"><span class="kicker">Notes and essays</span><h1>Writing</h1><p>Technical explanations, notes from building, and occasional thoughts outside software.</p></header>
     <ol class="entry-list archive-list">
       {posts.map((post) => <li>
         <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>

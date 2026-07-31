@@ -68,7 +68,6 @@
   .site-header { border-bottom: 1px solid var(--line); background: var(--header); backdrop-filter: blur(12px); }
   .header-inner { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 25px; min-height: 64px; }
   .wordmark { width: fit-content; color: var(--ink); font: 700 .86rem var(--mono); letter-spacing: -.03em; text-decoration: none; }
-  .wordmark::after { content: "."; color: var(--gold); }
   .wordmark:hover { color: var(--blue); }
   .nav-list { display: flex; gap: 20px; padding: 0; list-style: none; }
   .nav-list a { color: var(--muted); font: .85rem var(--mono); text-decoration: none; }
@@ -81,9 +80,9 @@
 
   .site-footer { margin-top: 70px; padding-block: 22px 30px; color: var(--muted); border-top: 1px solid var(--line); font: .78rem var(--mono); }
   .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
-  .email-copy, .inline-email { padding: 0; color: var(--blue); border: 0; background: none; cursor: pointer; }
-  .email-copy:hover, .inline-email:hover { color: var(--gold); }
-  .email-copy code, .inline-email code { font-size: inherit; }
+  .inline-email { padding: 0; color: var(--blue); border: 0; background: none; cursor: pointer; }
+  .inline-email:hover { color: var(--gold); }
+  .inline-email code { font-size: inherit; }
 
   .home { padding-top: clamp(48px, 7vw, 76px); }
   .home-intro { max-width: 720px; }
@@ -94,7 +93,10 @@
   .home-intro > p:not(.kicker, .contact-line) { max-width: 690px; color: var(--ink); font: clamp(1.12rem, 2.2vw, 1.34rem)/1.72 var(--serif); }
   .home-intro > p + p { margin-top: 15px; }
   .contact-line { margin-top: 22px; color: var(--muted); font: .84rem/1.75 var(--mono); }
-  .placeholder-links { color: var(--faint); }
+  .social-icons { display: inline-flex; align-items: center; gap: 8px; vertical-align: middle; }
+  .social-icon { display: inline-flex; color: var(--muted); opacity: .7; }
+  .social-icon svg { width: 16px; height: 16px; fill: currentColor; }
+  .social-icons small { color: var(--faint); font: .68rem var(--mono); }
   .mobile-only { display: none; }
   .home-section { margin-top: clamp(48px, 6vw, 68px); }
   .section-title { display: flex; align-items: baseline; justify-content: space-between; gap: 25px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); }
@@ -103,14 +105,14 @@
 
   .entry-list { padding: 0; list-style: none; }
   .entry-list > li { display: grid; grid-template-columns: 115px minmax(0, 1fr); gap: 28px; padding-block: 19px; border-bottom: 1px solid var(--line); }
-  .entry-list time, .project-mark { padding-top: 3px; color: var(--muted); font: .76rem var(--mono); }
+  .entry-list time, .project-updated { padding-top: 3px; color: var(--muted); font: .76rem/1.45 var(--mono); }
   .entry-list h3, .entry-list h2 { font: 600 1.25rem var(--serif); letter-spacing: -.015em; }
   .entry-list h3 a, .entry-list h2 a { color: var(--ink); text-decoration: none; }
   .entry-list h3 a:hover, .entry-list h2 a:hover { color: var(--blue); }
   .entry-list p { max-width: 590px; margin-top: 6px; color: var(--muted); font: 1rem/1.52 var(--serif); }
   .entry-list .entry-tags { margin-top: 8px; font: .74rem var(--mono); }
   .entry-tags a { text-decoration: none; }
-  .project-mark { color: var(--gold); }
+  .project-list > li { grid-template-columns: 185px minmax(0, 1fr); }
   .personal-note { display: grid; grid-template-columns: 115px 1fr; gap: 28px; margin-top: 52px; padding: 18px 0; border-block: 1px solid var(--line); }
   .personal-note p { max-width: 570px; color: var(--muted); font: italic 1rem/1.65 var(--serif); }
 
@@ -195,7 +197,8 @@
     .home { padding-top: 60px; }
     .mobile-only { display: inline; }
     .entry-list > li, .personal-note { grid-template-columns: 1fr; gap: 8px; }
-    .entry-list time, .project-mark { padding-top: 0; }
+    .entry-list time, .project-updated { padding-top: 0; }
+    .project-list > li { grid-template-columns: 1fr; }
     .personal-note { gap: 12px; }
     .about-grid, .article-shell { grid-template-columns: 1fr; gap: 35px; }
     .tag-index { grid-template-columns: 1fr; }

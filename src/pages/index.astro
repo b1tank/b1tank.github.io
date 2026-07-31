@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { formatDate, publishedPosts, tagSlug } from '../lib/content';
+import SocialIcons from '../components/SocialIcons.astro';
+import { formatDate, formatDateTime, publishedPosts, tagSlug } from '../lib/content';
 const posts = publishedPosts(await getCollection('posts'));
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
@@ -13,12 +14,12 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
       <p>My route into software passed through chemical engineering, data science, and cloud systems. I like turning digital abstractions into diagrams, physical analogies, and small things you can try.</p>
       <p class="contact-line">
         Seattle, WA · <button class="inline-email" type="button"><code>{'b1tank${StephenCurry.jerseyNumber}@gmail.com'}</code></button>
-        <br class="mobile-only" /> · <span class="placeholder-links">GitHub / LinkedIn / X soon</span>
+        <br class="mobile-only" /> · <SocialIcons />
       </p>
     </header>
 
     <section class="home-section" aria-labelledby="writing-heading">
-      <div class="section-title"><h2 id="writing-heading">Writing</h2><a href="/posts/">archive →</a></div>
+      <div class="section-title"><h2 id="writing-heading">Writing</h2><a href="/posts/">all writing →</a></div>
       <ol class="entry-list">
         {posts.map((post) => <li>
           <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
@@ -32,7 +33,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
       <div class="section-title"><h2 id="projects-heading">Projects</h2><a href="/projects/">all projects →</a></div>
       <ol class="entry-list project-list">
         {projects.map((project) => <li>
-          <span class="project-mark" aria-hidden="true">{String(project.data.order).padStart(2, '0')}</span>
+          <time class="project-updated" datetime={project.data.updated.toISOString()}>{formatDateTime(project.data.updated)}</time>
           <div><h3><a href={`/projects/${project.id}/`}>{project.data.title}</a></h3><p>{project.data.description}</p>
           <p class="entry-tags">{project.data.demo && <a href={project.data.demo}>{project.data.demoLabel.toLowerCase()}</a>}{project.data.source && <> · <a href={project.data.source}>source</a></>}</p></div>
         </li>)}

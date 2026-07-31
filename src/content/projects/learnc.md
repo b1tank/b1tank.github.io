@@ -3,6 +3,7 @@ title: "Learn C"
 description: "An interactive, hand-written companion to K&R where examples and exercises run directly in the browser."
 status: "active"
 order: 2
+updated: 2026-07-14T13:59:38-07:00
 tags: ["c", "education", "webassembly"]
 source: "https://github.com/b1tank/learnc"
 demo: "/learnc/"

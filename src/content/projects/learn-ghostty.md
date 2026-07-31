@@ -3,6 +3,7 @@ title: "Learn Ghostty"
 description: "A visual, source-backed course for understanding a modern terminal from PTYs and parsers to fonts, GPU rendering, and native UI."
 status: "experimental"
 order: 1
+updated: 2026-07-31T15:55:02-07:00
 tags: ["systems", "terminal", "visual-learning"]
 source: "https://github.com/b1tank/learn-ghostty"
 demo: "/learn-ghostty/"

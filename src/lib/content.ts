@@ -9,6 +9,14 @@ export function formatDate(date: Date) {
   }).format(date);
 }
 
+export function formatDateTime(date: Date) {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric', month: 'short', day: 'numeric',
+    hour: 'numeric', minute: '2-digit',
+    timeZone: 'America/Los_Angeles',
+  }).format(date);
+}
+
 export function readingTime(body = '') {
   const words = body.trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.ceil(words / 220));

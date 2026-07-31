@@ -1,18 +1,6 @@
 <footer class="site-footer">
   <div class="shell footer-inner">
     <span>© {new Date().getFullYear()} Zhichao Li</span>
-    <span class="footer-links"><a href="/rss.xml">rss</a> · <button class="email-copy" type="button"><code>{'b1tank${StephenCurry.jerseyNumber}@gmail.com'}</code></button></span>
+    <a href="/rss.xml">rss</a>
   </div>
 </footer>
-<script>
-  document.querySelector<HTMLButtonElement>('.email-copy')?.addEventListener('click', async (event) => {
-    const button = event.currentTarget as HTMLButtonElement;
-    const address = ['zhichli', String(6 * 5), '@gmail.com'].join('');
-    try {
-      await navigator.clipboard.writeText(address);
-      const original = button.textContent;
-      button.textContent = 'copied';
-      window.setTimeout(() => button.textContent = original, 1400);
-    } catch { window.location.href = `mailto:${address}`; }
-  });
-</script>

@@ -3,6 +3,7 @@ title: "OpenSnipping"
 description: "A private, browser-based screenshot, annotation, and screen-recording tool with no uploads or signup."
 status: "active"
 order: 3
+updated: 2026-04-30T23:39:07-07:00
 tags: ["browser", "privacy", "canvas"]
 source: "https://github.com/b1tank/opensnipping-web"
 live: "https://yummyjars.com/opensnipping/"

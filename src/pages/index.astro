@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatDate, publishedPosts } from '../lib/content';
+
+const posts = publishedPosts(await getCollection('posts')).slice(0, 4);
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order).slice(0, 2);
+---
+<BaseLayout>
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <span class="eyebrow">Zhichao Li · aka b1tank</span>
+        <h1>Zhichao Li <span>aka b1tank.</span></h1>
+        <p class="hero-intro">I’m a software engineer building Visual Studio Code and GitHub Copilot at Microsoft. This is where I write, explain systems visually, and keep track of things I make.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="/posts/">Read the posts</a>
+          <a class="button" href="/projects/">Explore projects</a>
+        </div>
+      </div>
+      <aside class="currently">
+        <span class="eyebrow">Currently</span>
+        <p>Working where <strong>developer tools</strong>, <strong>AI</strong>, and the craft of software meet.</p>
+        <p>Based in Seattle. Usually thinking through a diagram, analogy, or small experiment.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading">
+        <div><span class="eyebrow">Writing</span><h2>Latest posts</h2></div>
+        <a class="text-link" href="/posts/">All posts</a>
+      </div>
+      <div class="card-grid">
+        {posts.map((post) => <a class="card" href={`/posts/${post.id}/`}>
+          <div class="card-meta"><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time></div>
+          <h3>{post.data.title}</h3>
+          <p>{post.data.description}</p>
+          <span class="card-arrow" aria-hidden="true">↗</span>
+        </a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="shell">
+      <div class="section-heading">
+        <div><span class="eyebrow">Projects</span><h2>Things I make</h2></div>
+        <a class="text-link" href="/projects/">All projects</a>
+      </div>
+      <div class="card-grid">
+        {projects.map((project) => <a class="card" href={`/projects/${project.id}/`}>
+          <div class="card-meta"><span class={`status ${project.data.status}`}>{project.data.status}</span></div>
+          <h3>{project.data.title}</h3>
+          <p>{project.data.description}</p>
+          <span class="card-arrow" aria-hidden="true">↗</span>
+        </a>)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

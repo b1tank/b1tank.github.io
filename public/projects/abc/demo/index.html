@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>ABC Balloon Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="topbar">
+    <div id="topbar-left">
+      <button id="mode-free" class="mode-btn mode-active" title="Free Play">🎈</button>
+      <button id="mode-spell" class="mode-btn" title="Spelling">A</button>
+      <button id="mode-math" class="mode-btn" title="Math">1</button>
+      <button id="continueBtn" class="hidden">Continue</button>
+      <button id="gameBtn">Start</button>
+      <button id="hint-badge" class="hidden" aria-label="Hint">💡</button>
+    </div>
+    <div id="topbar-center">
+      <span id="score-display">🎈 0</span>
+      <span id="challenge-display" class="hidden"></span>
+      <div id="math-hint" class="hidden"></div>
+    </div>
+    <div id="topbar-right">
+      <span id="rewards-display"></span>
+      <div id="settings-wrap">
+        <button id="settingsBtn" aria-label="Settings">⚙</button>
+        <div id="settings-dropdown" class="hidden">
+          <label class="lang-switch-label">EN <input type="checkbox" id="set-lang" checked> <span
+              class="lang-slider"></span> 中文</label>
+          <label><input type="checkbox" id="set-wiggle" checked> <span data-i18n="wiggle">Wiggle</span></label>
+          <label><span data-i18n="speed">Speed</span>
+            <input type="range" id="set-speed" min="0.4" max="2.5" step="0.1" value="1.4">
+          </label>
+          <label><span data-i18n="size">Size</span>
+            <input type="range" id="set-size" min="30" max="120" step="5" value="75">
+          </label>
+          <label><input type="checkbox" id="set-spellHints"> <span data-i18n="spellHints">Spelling hints</span></label>
+          <label><input type="checkbox" id="set-mathHints"> <span data-i18n="mathHints">Math hints</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Restart confirmation modal -->
+  <div id="modal-overlay" class="hidden">
+    <div id="modal">
+      <p id="modal-msg">Restart? Score and rewards will be cleared.</p>
+      <div id="modal-actions">
+        <button id="modal-cancel">Cancel</button>
+        <button id="modal-confirm">Restart</button>
+      </div>
+    </div>
+  </div>
+  <div id="stats-panel">
+    <div id="stats-letters">
+      <div id="letter-grid"></div>
+    </div>
+  </div>
+  <div id="canvas-container">
+    <canvas id="balloonCanvas"></canvas>
+  </div>
+  <script src="game.js"></script>
+</body>
+
+</html>

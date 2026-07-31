@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Projects" description="Projects built by Zhichao Li, including browser tools and visual experiments.">
+  <header class="page-hero"><div class="shell"><span class="eyebrow">Projects</span><h1>Things I make</h1><p class="lede">Focused tools and experiments. Each project gets a permanent page; static projects can also run directly here.</p></div></header>
+  <section class="section"><div class="shell">
+    <div class="card-grid">
+      {projects.map((project) => <a class="card" href={`/projects/${project.id}/`}>
+        <div class="card-meta"><span class={`status ${project.data.status}`}>{project.data.status}</span><span>{project.data.tags.join(' · ')}</span></div>
+        <h3>{project.data.title}</h3>
+        <p>{project.data.description}</p>
+        <span class="card-arrow" aria-hidden="true">↗</span>
+      </a>)}
+    </div>
+  </div></section>
+</BaseLayout>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenSnipping</title>
+  <link rel="icon" type="image/svg+xml" href="src/assets/logo.svg">
+  <link rel="stylesheet" href="src/style.css">
+  <!-- Fix WebM duration metadata for proper seeking in external players.
+       Self-hosted so the page makes zero third-party requests (see README → Privacy). -->
+  <script src="src/lib/fix-webm-duration.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <!-- Left section: Logo and branding -->
+      <div class="toolbar-left">
+        <a href="../" class="logo-link" title="Back to Yummy Jars">
+          <img src="src/assets/logo-with-text.svg" alt="OpenSnipping" class="logo">
+        </a>
+      </div>
+
+      <!-- Center section: Main buttons -->
+      <div class="toolbar-center">
+        <!-- Mode Toggle: Screenshot / Record -->
+        <div class="mode-toggle" id="modeToggle">
+          <button class="mode-btn active" id="screenshotModeBtn" data-i18n-title="newSnipTitle" title="Screenshot">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke-width="2" />
+              <circle cx="12" cy="12" r="3" stroke-width="2" />
+            </svg>
+          </button>
+          <button class="mode-btn" id="recordModeBtn" data-i18n-title="recordTitle" title="Record">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M23 7l-7 5 7 5V7z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <rect x="1" y="5" width="15" height="14" rx="2" stroke-width="2" />
+            </svg>
+          </button>
+        </div>
+
+        <button class="toolbar-btn" id="newBtn" data-i18n-title="newSnipTitle" title="New Snip">
+          <img src="src/assets/logo.svg" class="btn-icon" alt="New Snip">
+          <span class="btn-text" data-i18n="newSnip">New</span>
+        </button>
+
+        <div class="delay-btn-wrapper">
+          <button class="toolbar-btn" id="delayBtn" data-i18n-title="delayTitle" title="Set delay before capture">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10" stroke-width="2" />
+              <polyline points="12 6 12 12 16 14" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <span class="btn-text" data-i18n="delay">Delay</span>
+            <svg class="dropdown-arrow" viewBox="0 0 12 12" fill="currentColor">
+              <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+          <div class="dropdown-menu" id="delayMenu">
+            <div class="dropdown-item active" data-delay="0" data-i18n="noDelay">No Delay</div>
+            <div class="dropdown-item" data-delay="1000" data-i18n="oneSecond">1 Second</div>
+            <div class="dropdown-item" data-delay="2000" data-i18n="twoSeconds">2 Seconds</div>
+            <div class="dropdown-item" data-delay="3000" data-i18n="threeSeconds">3 Seconds</div>
+            <div class="dropdown-item" data-delay="4000" data-i18n="fourSeconds">4 Seconds</div>
+            <div class="dropdown-item" data-delay="5000" data-i18n="fiveSeconds">5 Seconds</div>
+          </div>
+        </div>
+
+        <div class="toolbar-separator hidden" id="mainSeparator"></div>
+
+        <button class="toolbar-btn hidden" id="copyBtn" data-i18n-title="copyTitle" title="Copy">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke-width="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke-width="2" />
+          </svg>
+        </button>
+
+        <div class="split-btn-wrapper hidden" id="saveBtnWrapper">
+          <button class="toolbar-btn main-btn" id="saveBtn" data-i18n-title="saveTitle" title="Save">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" stroke-width="2" />
+              <path d="M17 21v-8H7v8M7 3v5h8" stroke-width="2" />
+            </svg>
+          </button>
+          <button class="toolbar-btn arrow-btn" id="saveOptionsBtn" data-i18n-title="saveOptionsTitle"
+            title="Save Options">
+            <svg class="dropdown-arrow" viewBox="0 0 12 12" fill="currentColor">
+              <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+          <div class="dropdown-menu" id="saveMenu">
+            <div class="dropdown-item info-item" id="defaultSaveInfo">
+              <span class="menu-label"><b data-i18n="defaultSave">Default</b></span>
+              <span class="menu-hint" id="dlPathHint"></span>
+            </div>
+            <div class="dropdown-item" id="saveAsItem">
+              <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" stroke-width="2" />
+                <path d="M17 21v-8H7v8M7 3v5h8" stroke-width="2" />
+                <path d="M21 15l-2-2-6 6-1 3 3-1 6-6z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  fill="white" />
+                <path d="M18 14l2 2" stroke-width="2" stroke-linecap="round" />
+              </svg>
+              <span class="menu-label" data-i18n="saveAs">Save As...</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="toolbar-separator hidden" id="toolsSeparator"></div>
+
+        <button class="toolbar-btn hidden" id="penBtn" data-i18n-title="penTitle" title="Pen">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 19l7-7 3 3-7 7-3-3z" stroke-width="2" />
+            <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" stroke-width="2" />
+            <path d="M2 2l7.586 7.586" stroke-width="2" />
+            <circle cx="11" cy="11" r="2" stroke-width="2" />
+          </svg>
+        </button>
+
+        <button class="toolbar-btn hidden" id="rectBtn" data-i18n-title="rectTitle" title="Rectangle">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <rect x="4" y="6" width="16" height="12" rx="1" stroke-width="2" />
+          </svg>
+        </button>
+
+        <div class="style-btn-wrapper">
+          <button class="toolbar-btn hidden" id="styleBtn" data-i18n-title="styleTitle" title="Style">
+            <span class="style-swatch" id="styleSwatch"></span>
+            <svg class="dropdown-arrow" viewBox="0 0 12 12" fill="currentColor">
+              <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </button>
+          <div class="dropdown-menu style-menu" id="styleMenu">
+            <div class="style-section">
+              <div class="style-label" data-i18n="styleColor">Color</div>
+              <div class="color-row" id="colorRow">
+                <button class="color-swatch active" data-color="#d10000" style="background:#d10000" title="Red"></button>
+                <button class="color-swatch" data-color="#f97316" style="background:#f97316" title="Orange"></button>
+                <button class="color-swatch" data-color="#facc15" style="background:#facc15" title="Yellow"></button>
+                <button class="color-swatch" data-color="#10b981" style="background:#10b981" title="Green"></button>
+                <button class="color-swatch" data-color="#3b82f6" style="background:#3b82f6" title="Blue"></button>
+                <button class="color-swatch" data-color="#111827" style="background:#111827" title="Black"></button>
+              </div>
+            </div>
+            <div class="style-section">
+              <div class="style-label" data-i18n="styleWidth">Width</div>
+              <div class="width-row" id="widthRow">
+                <button class="width-opt" data-width="2" title="Thin"><span class="width-dot" style="width:4px;height:4px"></span></button>
+                <button class="width-opt active" data-width="4" title="Medium"><span class="width-dot" style="width:8px;height:8px"></span></button>
+                <button class="width-opt" data-width="8" title="Thick"><span class="width-dot" style="width:14px;height:14px"></span></button>
+              </div>
+            </div>
+            <label class="fill-row">
+              <input type="checkbox" id="fillCheck">
+              <span class="fill-text" data-i18n="styleFillRect">Fill rectangle</span>
+            </label>
+          </div>
+        </div>
+
+        <button class="toolbar-btn hidden" id="undoBtn" data-i18n-title="undoTitle" title="Undo" disabled>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M3 7v6h6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+
+        <button class="toolbar-btn hidden" id="redoBtn" data-i18n-title="redoTitle" title="Redo" disabled>
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M21 7v6h-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3L21 13" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </button>
+
+        <button class="toolbar-btn hidden" id="eraserBtn" data-i18n-title="eraserTitle" title="Eraser">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <g transform="rotate(45 12 12)">
+              <rect x="6" y="3" width="12" height="18" rx="2" stroke-width="2" />
+              <line x1="6" y1="16" x2="18" y2="16" stroke-width="2" />
+            </g>
+          </svg>
+        </button>
+
+        <!-- Discard Button (hidden by default, used for both image and video) -->
+        <button class="toolbar-btn hidden" id="discardBtn" data-i18n-title="discard" title="Discard">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+
+        <!-- Trim Button (video preview mode only) -->
+        <button class="toolbar-btn hidden" id="trimBtn" title="Trim Video">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="6" cy="6" r="3" stroke-width="2" />
+            <circle cx="6" cy="18" r="3" stroke-width="2" />
+            <line x1="20" y1="4" x2="8.12" y2="15.88" stroke-width="2" />
+            <line x1="14.47" y1="14.48" x2="20" y2="20" stroke-width="2" />
+            <line x1="8.12" y1="8.12" x2="12" y2="12" stroke-width="2" />
+          </svg>
+          <span class="btn-text">Trim</span>
+        </button>
+
+        <!-- Trim Mode Buttons (only shown in trim mode) -->
+        <button class="toolbar-btn hidden trim-mode-btn" id="cancelTrimBtn" title="Cancel Trim">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <line x1="18" y1="6" x2="6" y2="18" stroke-width="2" stroke-linecap="round" />
+            <line x1="6" y1="6" x2="18" y2="18" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <span class="btn-text">Cancel</span>
+        </button>
+
+        <button class="toolbar-btn primary hidden trim-mode-btn" id="applyTrimBtn" title="Apply Trim">
+          <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="20 6 9 17 4 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="btn-text">Apply</span>
+        </button>
+      </div>
+
+      <!-- Right section: Status notification and language -->
+      <div class="toolbar-right">
+        <div class="status-notification" id="statusNotification">
+          <svg class="notification-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="10" stroke-width="2" />
+            <polyline points="12 6 12 12 16 14" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <span class="notification-text" data-i18n="autoDelayNotice">Auto-delaying 5s for entire screen</span>
+        </div>
+        <div class="user-tooltip" id="userTooltip">
+          <svg class="tooltip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="10" stroke-width="2" />
+            <path d="M12 16v-4M12 8h.01" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span class="tooltip-text" id="tooltipText">Click pen button to enter crop mode</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="content-area">
+      <div id="dropZone" class="drop-zone">
+        <div class="drop-zone-content">
+          <!-- Hero Action Button + Mode Toggle -->
+          <div class="hero-controls">
+            <div class="hero-split-btn">
+              <!-- The main button part -->
+              <button id="heroNewBtn" class="hero-main-btn">
+                <img src="src/assets/logo.svg" class="hero-icon" alt="" id="heroActionIcon">
+                <span id="heroBtnText" data-i18n="newSnip">New</span>
+              </button>
+              <!-- The dropdown arrow part -->
+              <button id="heroDelayBtn" class="hero-arrow-btn" data-i18n-title="delayTitle" title="Set Delay">
+                <svg class="hero-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  style="width: 16px; height: 16px;">
+                  <circle cx="12" cy="12" r="10" stroke-width="2" />
+                  <polyline points="12 6 12 12 16 14" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </button>
+              <!-- Hero specific delay menu -->
+              <div class="dropdown-menu" id="heroDelayMenu">
+                <div class="dropdown-item active" data-delay="0" data-i18n="noDelay">No Delay</div>
+                <div class="dropdown-item" data-delay="1000" data-i18n="oneSecond">1 Second</div>
+                <div class="dropdown-item" data-delay="2000" data-i18n="twoSeconds">2 Seconds</div>
+                <div class="dropdown-item" data-delay="3000" data-i18n="threeSeconds">3 Seconds</div>
+                <div class="dropdown-item" data-delay="4000" data-i18n="fourSeconds">4 Seconds</div>
+                <div class="dropdown-item" data-delay="5000" data-i18n="fiveSeconds">5 Seconds</div>
+              </div>
+            </div>
+
+            <div class="hero-mode-toggle">
+              <button class="hero-mode-btn active" id="heroScreenshotModeBtn" data-i18n-title="newSnipTitle"
+                title="Screenshot">
+                <svg class="hero-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <rect x="3" y="3" width="18" height="18" rx="2" stroke-width="2" />
+                  <circle cx="12" cy="12" r="3" stroke-width="2" />
+                </svg>
+                <span>Screenshot</span>
+              </button>
+              <button class="hero-mode-btn" id="heroRecordModeBtn" data-i18n-title="recordTitle" title="Record">
+                <svg class="hero-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M23 7l-7 5 7 5V7z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <rect x="1" y="5" width="15" height="14" rx="2" stroke-width="2" />
+                </svg>
+                <span>Record</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-separator" data-i18n="heroOr">or</div>
+
+          <div class="upload-hint">
+            <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
+              <line x1="16" x2="22" y1="5" y2="5" />
+              <line x1="19" x2="19" y1="2" y2="8" />
+              <circle cx="9" cy="9" r="2" />
+              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+            </svg>
+            <div class="drop-text-main" data-i18n="dropHintMain">Drop image here, paste, or click to open</div>
+            <div class="drop-text-sub" data-i18n="dropHintSub">Supports JPG, PNG, GIF, and WebP</div>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" style="display: none;">
+        </div>
+      </div>
+      <div id="canvasContainer">
+        <canvas id="drawingCanvas"></canvas>
+      </div>
+      <div id="countdownOverlay">
+        <div id="countdownNumber">3</div>
+      </div>
+      <!-- Recording Overlay -->
+      <div id="recordingOverlay">
+        <div class="recording-overlay-content">
+          <div class="recording-indicator">
+            <span class="recording-dot-large"></span>
+            <span class="recording-label" data-i18n="recording">Recording</span>
+          </div>
+          <div class="recording-timer" id="recordingTimer">
+            <span id="timerText">00:00</span>
+          </div>
+          <button id="stopRecordBtn" class="stop-record-btn" data-i18n-title="stopRecording" title="Stop Recording">
+            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+              <rect x="6" y="6" width="12" height="12" rx="2" />
+            </svg>
+            <span data-i18n="stopRecording">Stop Recording</span>
+          </button>
+        </div>
+      </div>
+      <!-- Video Preview Overlay -->
+      <div id="videoPreviewOverlay">
+        <video id="previewVideo" controls></video>
+        <!-- Trim Controls -->
+        <div class="trim-controls" id="trimControls">
+          <div class="trim-bar" id="trimBar">
+            <div class="trim-progress" id="trimProgress"></div>
+            <div class="trim-handle trim-handle-start" id="trimHandleStart"></div>
+            <div class="trim-handle trim-handle-end" id="trimHandleEnd"></div>
+            <div class="trim-playhead" id="trimPlayhead"></div>
+          </div>
+          <div class="trim-times">
+            <div class="trim-time-group">
+              <button class="trim-btn" id="setInBtn" title="Set start point (I)">Set In</button>
+              <span class="trim-time" id="trimInTime">00:00</span>
+            </div>
+            <div class="trim-duration" id="trimDuration">Duration: 00:00</div>
+            <div class="trim-time-group">
+              <span class="trim-time" id="trimOutTime">00:00</span>
+              <button class="trim-btn" id="setOutBtn" title="Set end point (O)">Set Out</button>
+            </div>
+          </div>
+          <div class="trim-actions">
+            <button class="trim-btn trim-play" id="trimPlayBtn" title="Play trimmed section (Space)">
+              <svg class="trim-play-icon" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+              <span>Play</span>
+            </button>
+            <button class="trim-btn trim-stop hidden" id="trimStopBtn" title="Stop (Space)">
+              <svg class="trim-stop-icon" viewBox="0 0 24 24" fill="currentColor">
+                <rect x="6" y="4" width="4" height="16" />
+                <rect x="14" y="4" width="4" height="16" />
+              </svg>
+              <span>Pause</span>
+            </button>
+            <button class="trim-btn trim-reset" id="resetTrimBtn">Reset Trim</button>
+          </div>
+        </div>
+      </div>
+      <!-- Selection Overlay -->
+      <div id="selectionOverlay">
+        <canvas id="screenCanvas"></canvas>
+        <div id="selectionRect"></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+
+</html>

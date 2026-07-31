@@ -1,0 +1,31 @@
+<svg width="220" height="50" viewBox="0 0 220 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+      <feOffset dx="0.5" dy="1" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Icon/Logo Part (scaled down favicon) -->
+  <g id="icon" transform="translate(5, 5)">
+    <!-- Blades (Neutral: Light Grey) -->
+    <path d="M16 30 L30.5 8" stroke="#B0BEC5" stroke-width="4" stroke-linecap="round" filter="url(#soft-shadow)"/>
+    <path d="M25 30 L9.5 8" stroke="#B0BEC5" stroke-width="4" stroke-linecap="round" filter="url(#soft-shadow)"/>
+    
+    <!-- Handles (Unified Color: Reddish, Hollow) -->
+    <circle cx="12.5" cy="36" r="5" fill="none" stroke="#EE5253" stroke-width="3" filter="url(#soft-shadow)"/>
+    <circle cx="27.5" cy="36" r="5" fill="none" stroke="#EE5253" stroke-width="3" filter="url(#soft-shadow)"/>
+  </g>
+  
+  <!-- Text Part -->
+  <g id="text">
+    <text x="55" y="36" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="400" fill="#4a4a4a" letter-spacing="-0.5">opensnipping</text>
+  </g>
+</svg>

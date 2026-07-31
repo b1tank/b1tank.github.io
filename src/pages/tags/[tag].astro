@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, publishedPosts, tagSlug } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = publishedPosts(await getCollection('posts'));
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+  return tags.map((tag) => ({ params: { tag: tagSlug(tag) }, props: { tag, posts: posts.filter((post) => post.data.tags.includes(tag)) } }));
+}
+const { tag, posts } = Astro.props;
+---
+<BaseLayout title={`Posts tagged ${tag}`} description={`Writing by Zhichao Li tagged ${tag}.`}>
+  <header class="page-hero"><div class="shell"><span class="eyebrow">Tag</span><h1>{tag}</h1><p class="lede">{posts.length} {posts.length === 1 ? 'post' : 'posts'} filed under this topic.</p></div></header>
+  <section class="section"><div class="shell"><div class="card-grid">
+    {posts.map((post) => <a class="card" href={`/posts/${post.id}/`}><div class="card-meta">{formatDate(post.data.published)}</div><h3>{post.data.title}</h3><p>{post.data.description}</p><span class="card-arrow">↗</span></a>)}
+  </div></div></section>
+</BaseLayout>

@@ -2,10 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Page not found" description="The requested page could not be found.">
-  <section class="hero"><div class="shell hero-grid"><div>
-    <span class="eyebrow">404 · off the map</span>
-    <h1>This path doesn’t lead anywhere.</h1>
-    <p class="hero-intro">The link may be old, or the page may have moved.</p>
-    <div class="hero-actions"><a class="button primary" href="/">Return home</a><a class="button" href="/posts/">Browse posts</a></div>
-  </div></div></section>
+  <div class="shell page">
+    <header class="page-header"><span class="kicker">404</span><h1>Nothing here.</h1><p>The link may be old, or the page may have moved. <a href="/">Return home</a> or browse the <a href="/posts/">writing</a>.</p></header>
+  </div>
 </BaseLayout>

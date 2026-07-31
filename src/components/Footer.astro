@@ -1,42 +1,18 @@
 <footer class="site-footer">
-  <div class="shell footer-grid">
-    <div>
-      <strong>Zhichao Li <span class="muted">aka b1tank</span></strong>
-      <p>Building Visual Studio Code and GitHub Copilot at Microsoft.</p>
-    </div>
-    <div class="footer-contact">
-      <span class="eyebrow">Contact</span>
-      <button class="email-copy" type="button" data-state="idle">
-        <code>{'b1tank${StephenCurry.jerseyNumber}@gmail.com'}</code>
-        <span>Copy</span>
-      </button>
-    </div>
-    <div class="footer-socials" aria-label="Social links">
-      <span class="eyebrow">Elsewhere</span>
-      <span class="social-placeholder">GitHub · LinkedIn · X <small>soon</small></span>
-    </div>
-  </div>
-  <div class="shell footer-bottom">
+  <div class="shell footer-inner">
     <span>© {new Date().getFullYear()} Zhichao Li</span>
-    <a href="/rss.xml">RSS</a>
+    <span class="footer-links"><a href="/rss.xml">rss</a> · <button class="email-copy" type="button"><code>{'b1tank${StephenCurry.jerseyNumber}@gmail.com'}</code></button></span>
   </div>
 </footer>
-
 <script>
   document.querySelector<HTMLButtonElement>('.email-copy')?.addEventListener('click', async (event) => {
     const button = event.currentTarget as HTMLButtonElement;
     const address = ['zhichli', String(6 * 5), '@gmail.com'].join('');
     try {
       await navigator.clipboard.writeText(address);
-      button.dataset.state = 'copied';
-      const label = button.querySelector('span');
-      if (label) label.textContent = 'Copied';
-      window.setTimeout(() => {
-        button.dataset.state = 'idle';
-        if (label) label.textContent = 'Copy';
-      }, 1800);
-    } catch {
-      window.location.href = `mailto:${address}`;
-    }
+      const original = button.textContent;
+      button.textContent = 'copied';
+      window.setTimeout(() => button.textContent = original, 1400);
+    } catch { window.location.href = `mailto:${address}`; }
   });
 </script>

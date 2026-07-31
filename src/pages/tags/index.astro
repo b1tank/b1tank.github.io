@@ -8,8 +8,8 @@ posts.flatMap((post) => post.data.tags).forEach((tag) => counts.set(tag, (counts
 const tags = [...counts].sort((a, b) => a[0].localeCompare(b[0]));
 ---
 <BaseLayout title="Tags" description="Browse posts by topic.">
-  <header class="page-hero"><div class="shell"><span class="eyebrow">Index</span><h1>Tags</h1><p class="lede">A compact map of topics across the writing.</p></div></header>
-  <section class="section"><div class="shell"><ul class="tag-list">
-    {tags.map(([tag, count]) => <li><a class="tag" href={`/tags/${tagSlug(tag)}/`}>{tag} · {count}</a></li>)}
-  </ul></div></section>
+  <div class="shell page">
+    <header class="page-header"><span class="kicker">Index</span><h1>Tags</h1><p>A small map of topics across the writing.</p></header>
+    <ul class="tag-index">{tags.map(([tag, count]) => <li><a href={`/tags/${tagSlug(tag)}/`}>{tag}</a> <span>{count}</span></li>)}</ul>
+  </div>
 </BaseLayout>

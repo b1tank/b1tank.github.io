@@ -4,18 +4,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatDate, publishedPosts, tagSlug } from '../../lib/content';
 const posts = publishedPosts(await getCollection('posts'));
 ---
-<BaseLayout title="Posts" description="Writing by Zhichao Li about software, systems, visual explanations, and building products.">
-  <header class="page-hero"><div class="shell"><span class="eyebrow">Writing</span><h1>Posts</h1><p class="lede">Technical explanations, notes from building, and occasional thoughts outside software.</p></div></header>
-  <section class="section"><div class="shell">
-    <div class="card-grid">
-      {posts.map((post) => <article class="card">
-        <div class="card-meta"><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time></div>
-        <h3><a href={`/posts/${post.id}/`} style="color: inherit; text-decoration: none;">{post.data.title}</a></h3>
-        <p>{post.data.description}</p>
-        <ul class="tag-list" style="margin-top: auto; padding-top: 24px;">
-          {post.data.tags.map((tag) => <li><a class="tag" href={`/tags/${tagSlug(tag)}/`}>{tag}</a></li>)}
-        </ul>
-      </article>)}
-    </div>
-  </div></section>
+<BaseLayout title="Writing" description="Writing by Zhichao Li about software, systems, visual explanations, and building products.">
+  <div class="shell page">
+    <header class="page-header"><span class="kicker">Archive</span><h1>Writing</h1><p>Technical explanations, notes from building, and occasional thoughts outside software.</p></header>
+    <ol class="entry-list archive-list">
+      {posts.map((post) => <li>
+        <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
+        <div><h2><a href={`/posts/${post.id}/`}>{post.data.title}</a></h2><p>{post.data.description}</p>
+        <p class="entry-tags">{post.data.tags.map((tag, i) => <><a href={`/tags/${tagSlug(tag)}/`}>{tag}</a>{i < post.data.tags.length - 1 ? ' · ' : ''}</>)}</p></div>
+      </li>)}
+    </ol>
+  </div>
 </BaseLayout>

@@ -1,62 +1,58 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { formatDate, publishedPosts } from '../lib/content';
-
-const posts = publishedPosts(await getCollection('posts')).slice(0, 4);
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order).slice(0, 2);
+import { formatDate, publishedPosts, tagSlug } from '../lib/content';
+const posts = publishedPosts(await getCollection('posts'));
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 ---
 <BaseLayout>
-  <section class="hero">
-    <div class="shell hero-grid">
-      <div>
-        <span class="eyebrow">Zhichao Li · aka b1tank</span>
-        <h1>Zhichao Li <span>aka b1tank.</span></h1>
-        <p class="hero-intro">I’m a software engineer building Visual Studio Code and GitHub Copilot at Microsoft. This is where I write, explain systems visually, and keep track of things I make.</p>
-        <div class="hero-actions">
-          <a class="button primary" href="/posts/">Read the posts</a>
-          <a class="button" href="/projects/">Explore projects</a>
-        </div>
-      </div>
-      <aside class="currently">
-        <span class="eyebrow">Currently</span>
-        <p>Working where <strong>developer tools</strong>, <strong>AI</strong>, and the craft of software meet.</p>
-        <p>Based in Seattle. Usually thinking through a diagram, analogy, or small experiment.</p>
-      </aside>
-    </div>
-  </section>
+  <div class="shell home">
+    <header class="home-intro">
+      <p class="kicker">Zhichao Li <span>aka b1tank</span></p>
+      <h1>Hello, I’m Zhichao.</h1>
+      <p>I build <strong>Visual Studio Code</strong> and <strong>GitHub Copilot</strong> at Microsoft.</p>
+      <p>My route into software passed through chemical engineering, data science, and cloud systems. I like turning digital abstractions into diagrams, physical analogies, and small things you can try.</p>
+      <p class="contact-line">
+        Seattle, WA · <button class="inline-email" type="button"><code>{'b1tank${StephenCurry.jerseyNumber}@gmail.com'}</code></button>
+        <br class="mobile-only" /> · <span class="placeholder-links">GitHub / LinkedIn / X soon</span>
+      </p>
+    </header>
 
-  <section class="section">
-    <div class="shell">
-      <div class="section-heading">
-        <div><span class="eyebrow">Writing</span><h2>Latest posts</h2></div>
-        <a class="text-link" href="/posts/">All posts</a>
-      </div>
-      <div class="card-grid">
-        {posts.map((post) => <a class="card" href={`/posts/${post.id}/`}>
-          <div class="card-meta"><time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time></div>
-          <h3>{post.data.title}</h3>
-          <p>{post.data.description}</p>
-          <span class="card-arrow" aria-hidden="true">↗</span>
-        </a>)}
-      </div>
-    </div>
-  </section>
+    <section class="home-section" aria-labelledby="writing-heading">
+      <div class="section-title"><h2 id="writing-heading">Writing</h2><a href="/posts/">archive →</a></div>
+      <ol class="entry-list">
+        {posts.map((post) => <li>
+          <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
+          <div><h3><a href={`/posts/${post.id}/`}>{post.data.title}</a></h3><p>{post.data.description}</p>
+          <p class="entry-tags">{post.data.tags.map((tag, i) => <><a href={`/tags/${tagSlug(tag)}/`}>{tag}</a>{i < post.data.tags.length - 1 ? ' · ' : ''}</>)}</p></div>
+        </li>)}
+      </ol>
+    </section>
 
-  <section class="section">
-    <div class="shell">
-      <div class="section-heading">
-        <div><span class="eyebrow">Projects</span><h2>Things I make</h2></div>
-        <a class="text-link" href="/projects/">All projects</a>
-      </div>
-      <div class="card-grid">
-        {projects.map((project) => <a class="card" href={`/projects/${project.id}/`}>
-          <div class="card-meta"><span class={`status ${project.data.status}`}>{project.data.status}</span></div>
-          <h3>{project.data.title}</h3>
-          <p>{project.data.description}</p>
-          <span class="card-arrow" aria-hidden="true">↗</span>
-        </a>)}
-      </div>
-    </div>
-  </section>
+    <section class="home-section" aria-labelledby="projects-heading">
+      <div class="section-title"><h2 id="projects-heading">Projects</h2><a href="/projects/">all projects →</a></div>
+      <ol class="entry-list project-list">
+        {projects.map((project) => <li>
+          <span class="project-mark" aria-hidden="true">{String(project.data.order).padStart(2, '0')}</span>
+          <div><h3><a href={`/projects/${project.id}/`}>{project.data.title}</a></h3><p>{project.data.description}</p>
+          <p class="entry-tags">{project.data.demo && <a href={project.data.demo}>try it here</a>}{project.data.source && <> · <a href={project.data.source}>source</a></>}</p></div>
+        </li>)}
+      </ol>
+    </section>
+
+    <aside class="personal-note">
+      <span class="kicker">Off the clock</span>
+      <p>Basketball, billiards, and the ongoing study of how Steph Curry makes impossible geometry look routine.</p>
+    </aside>
+  </div>
+  <script>
+    document.querySelector<HTMLButtonElement>('.inline-email')?.addEventListener('click', async (event) => {
+      const button = event.currentTarget as HTMLButtonElement;
+      const email = ['zhichli', String(6 * 5), '@gmail.com'].join('');
+      await navigator.clipboard.writeText(email);
+      const original = button.textContent;
+      button.textContent = 'copied';
+      window.setTimeout(() => button.textContent = original, 1400);
+    });
+  </script>
 </BaseLayout>

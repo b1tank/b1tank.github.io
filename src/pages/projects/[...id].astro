@@ -16,8 +16,8 @@ const { Content } = await render(project);
     <h1>{project.data.title}</h1>
     <p class="lede">{project.data.description}</p>
     <div class="project-links">
-      {project.data.demo && <a class="button primary" href={project.data.demo}>Launch local demo</a>}
-      {project.data.live && <a class="button" href={project.data.live}>Open on Yummy Jars ↗</a>}
+      {project.data.demo && <a class="button primary" href={project.data.demo}>{project.data.demoLabel}</a>}
+      {project.data.live && <a class="button" href={project.data.live}>{project.data.liveLabel} ↗</a>}
       {project.data.source && <a class="button" href={project.data.source}>Source ↗</a>}
     </div>
     <ul class="tag-list">{project.data.tags.map((tag) => <li><span class="tag">{tag}</span></li>)}</ul>

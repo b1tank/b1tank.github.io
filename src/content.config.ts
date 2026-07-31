@@ -29,6 +29,8 @@ const projects = defineCollection({
     source: z.url().optional(),
     live: z.string().optional(),
     demo: z.string().optional(),
+    demoLabel: z.string().default('Launch demo'),
+    liveLabel: z.string().default('Original deployment'),
   }),
 });
 

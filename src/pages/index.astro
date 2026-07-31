@@ -35,7 +35,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
         {projects.map((project) => <li>
           <span class="project-mark" aria-hidden="true">{String(project.data.order).padStart(2, '0')}</span>
           <div><h3><a href={`/projects/${project.id}/`}>{project.data.title}</a></h3><p>{project.data.description}</p>
-          <p class="entry-tags">{project.data.demo && <a href={project.data.demo}>try it here</a>}{project.data.source && <> · <a href={project.data.source}>source</a></>}</p></div>
+          <p class="entry-tags">{project.data.demo && <a href={project.data.demo}>{project.data.demoLabel.toLowerCase()}</a>}{project.data.source && <> · <a href={project.data.source}>source</a></>}</p></div>
         </li>)}
       </ol>
     </section>

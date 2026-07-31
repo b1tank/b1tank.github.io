@@ -2,10 +2,11 @@
 title: "ABC Balloon"
 description: "A bilingual, browser-based learning game where kids practice letters, spelling, and arithmetic by popping balloons."
 status: "active"
-order: 2
+order: 4
 tags: ["education", "canvas", "javascript"]
 source: "https://github.com/b1tank/abc"
 live: "https://yummyjars.com/abc/"
+liveLabel: "Open on Yummy Jars"
 demo: "/projects/abc/demo/"
 ---
 

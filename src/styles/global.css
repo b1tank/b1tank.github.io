@@ -67,7 +67,8 @@
 @layer layout {
   .site-header { border-bottom: 1px solid var(--line); background: var(--header); backdrop-filter: blur(12px); }
   .header-inner { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 25px; min-height: 64px; }
-  .wordmark { width: fit-content; color: var(--ink); font: 700 .82rem var(--mono); text-decoration: none; }
+  .wordmark { width: fit-content; color: var(--ink); font: 700 .86rem var(--mono); letter-spacing: -.03em; text-decoration: none; }
+  .wordmark::after { content: "."; color: var(--gold); }
   .wordmark:hover { color: var(--blue); }
   .nav-list { display: flex; gap: 20px; padding: 0; list-style: none; }
   .nav-list a { color: var(--muted); font: .8rem var(--mono); text-decoration: none; }
@@ -88,7 +89,8 @@
   .home-intro { max-width: 720px; }
   .kicker { color: var(--gold); font: 700 .7rem var(--mono); letter-spacing: .08em; text-transform: uppercase; }
   .kicker span { color: var(--muted); font-weight: 400; }
-  .home-intro h1 { margin-block: 13px 24px; font: 500 clamp(2.6rem, 7vw, 4.7rem)/1.03 var(--serif); letter-spacing: -.045em; }
+  .home-intro h1 { margin-bottom: 25px; font: 600 clamp(1.9rem, 4vw, 2.55rem)/1.15 var(--serif); letter-spacing: -.035em; }
+  .home-intro h1 span { margin-left: .35em; color: var(--muted); font: 400 .42em var(--mono); letter-spacing: 0; white-space: nowrap; }
   .home-intro > p:not(.kicker, .contact-line) { max-width: 690px; color: var(--ink); font: clamp(1.12rem, 2.2vw, 1.34rem)/1.72 var(--serif); }
   .home-intro > p + p { margin-top: 15px; }
   .contact-line { margin-top: 28px; color: var(--muted); font: .77rem/1.9 var(--mono); }
@@ -114,7 +116,7 @@
 
   .page { padding-top: clamp(65px, 10vw, 105px); }
   .page-header { max-width: 700px; padding-bottom: 55px; }
-  .page-header h1 { margin-block: 10px 18px; font: 500 clamp(2.7rem, 7vw, 4.8rem)/1 var(--serif); }
+  .page-header h1 { margin-block: 10px 18px; font: 600 clamp(2rem, 5vw, 3.2rem)/1.08 var(--serif); }
   .page-header > p { max-width: 620px; color: var(--muted); font: 1.14rem/1.65 var(--serif); }
   .archive-list { border-top: 2px solid var(--ink); }
   .archive-list > li { padding-block: 29px; }
@@ -128,7 +130,7 @@
   .page-hero { padding-top: clamp(65px, 10vw, 105px); }
   .page-hero > .shell { padding-bottom: 50px; border-bottom: 1px solid var(--line); }
   .page-hero .eyebrow { color: var(--gold); font: 700 .7rem var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-  .page-hero h1 { max-width: 760px; margin-block: 10px 18px; font: 500 clamp(2.7rem, 7vw, 4.8rem)/1 var(--serif); }
+  .page-hero h1 { max-width: 760px; margin-block: 10px 18px; font: 600 clamp(2rem, 5vw, 3.2rem)/1.08 var(--serif); }
   .page-hero .lede { max-width: 670px; color: var(--muted); font: 1.16rem/1.65 var(--serif); }
   .project-links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 25px; font: .72rem var(--mono); }
   .button { color: var(--blue); text-decoration: none; }
@@ -150,7 +152,7 @@
 @layer content {
   .article-header { padding-top: clamp(65px, 10vw, 105px); padding-bottom: 44px; }
   .article-header .eyebrow { color: var(--gold); font: 700 .7rem var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-  .article-header h1 { max-width: 800px; margin-block: 11px 18px; font: 500 clamp(2.7rem, 7vw, 4.8rem)/1.04 var(--serif); }
+  .article-header h1 { max-width: 800px; margin-block: 11px 18px; font: 600 clamp(2rem, 5vw, 3.35rem)/1.08 var(--serif); }
   .article-description { max-width: 660px; color: var(--muted); font: 1.14rem/1.65 var(--serif); }
   .article-meta { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 23px; color: var(--muted); font: .68rem var(--mono); }
   .article-shell { display: grid; grid-template-columns: minmax(0, 650px) 150px; justify-content: space-between; gap: 50px; padding-top: 40px; border-top: 1px solid var(--line); }
@@ -191,7 +193,6 @@
     .nav-list { gap: 18px; }
     .theme-toggle { justify-self: end; }
     .home { padding-top: 60px; }
-    .home-intro h1 { font-size: clamp(2.7rem, 14vw, 4rem); }
     .mobile-only { display: inline; }
     .entry-list > li, .personal-note { grid-template-columns: 1fr; gap: 8px; }
     .entry-list time, .project-mark { padding-top: 0; }

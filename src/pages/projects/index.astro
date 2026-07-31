@@ -1,8 +1,8 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatDateTime } from '../../lib/content';
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+import { getProjects } from '../../lib/projects';
+const projects = await getProjects();
 ---
 <BaseLayout title="Projects" description="Projects built by Zhichao Li, including browser tools and visual experiments.">
   <div class="shell page">

@@ -105,14 +105,14 @@
 
   .entry-list { padding: 0; list-style: none; }
   .entry-list > li { display: grid; grid-template-columns: 115px minmax(0, 1fr); gap: 28px; padding-block: 19px; border-bottom: 1px solid var(--line); }
-  .entry-list time, .project-updated { padding-top: 3px; color: var(--muted); font: .76rem/1.45 var(--mono); }
+  .entry-list time, .project-updated { padding-top: 3px; color: var(--muted); font: .9rem/1.45 var(--mono); }
   .entry-list h3, .entry-list h2 { font: 600 1.25rem var(--serif); letter-spacing: -.015em; }
   .entry-list h3 a, .entry-list h2 a { color: var(--ink); text-decoration: none; }
   .entry-list h3 a:hover, .entry-list h2 a:hover { color: var(--blue); }
   .entry-list p { max-width: 590px; margin-top: 6px; color: var(--muted); font: 1rem/1.52 var(--serif); }
-  .entry-list .entry-tags { margin-top: 8px; font: .74rem var(--mono); }
+  .entry-list .entry-tags { margin-top: 8px; font: .86rem var(--mono); }
   .entry-tags a { text-decoration: none; }
-  .project-list > li { grid-template-columns: 185px minmax(0, 1fr); }
+  .project-list > li { grid-template-columns: 220px minmax(0, 1fr); }
   .personal-note { display: grid; grid-template-columns: 115px 1fr; gap: 28px; margin-top: 52px; padding: 18px 0; border-block: 1px solid var(--line); }
   .personal-note p { max-width: 570px; color: var(--muted); font: italic 1rem/1.65 var(--serif); }
 
@@ -138,7 +138,7 @@
   .button { color: var(--blue); text-decoration: none; }
   .button.primary::before { content: "→ "; color: var(--gold); }
   .tag-list { display: flex; flex-wrap: wrap; gap: 6px 13px; margin-top: 18px; padding: 0; list-style: none; }
-  .tag { color: var(--muted); font: .74rem var(--mono); text-decoration: none; }
+  .tag { color: var(--muted); font: .86rem var(--mono); text-decoration: none; }
   .tag::before { content: "#"; color: var(--faint); }
   .section { padding-block: 36px; }
   .section > .shell > .prose { margin-inline: 0; }

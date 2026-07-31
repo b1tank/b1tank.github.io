@@ -3,8 +3,9 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SocialIcons from '../components/SocialIcons.astro';
 import { formatDate, formatDateTime, publishedPosts, tagSlug } from '../lib/content';
+import { getProjects } from '../lib/projects';
 const posts = publishedPosts(await getCollection('posts'));
-const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const projects = await getProjects();
 ---
 <BaseLayout>
   <div class="shell home">

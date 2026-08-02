@@ -70,9 +70,6 @@
   .simple-page { padding-top: clamp(44px, 7vw, 72px); }
   .plain-content { max-width: 700px; font: 1.09rem/1.72 var(--serif); }
   .plain-content p + p { margin-top: 1.35em; }
-  .inline-email { padding: 0; color: var(--blue); border: 0; background: none; cursor: pointer; }
-  .inline-email:hover { color: var(--gold); }
-  .inline-email code { font-size: .8em; }
 
   .page-title { margin-bottom: 28px; font: 600 2rem/1.15 var(--serif); letter-spacing: -.025em; }
   .writing-list { padding: 0; border-top: 1px solid var(--line); list-style: none; }
@@ -82,7 +79,11 @@
   .writing-list time { flex: 0 0 auto; color: var(--muted); font: .82rem var(--mono); }
 
   .site-footer { margin-top: 72px; padding-block: 22px 30px; color: var(--muted); border-top: 1px solid var(--line); font: .76rem var(--mono); }
-  .footer-inner { display: flex; justify-content: space-between; gap: 24px; }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .footer-socials { display: flex; align-items: center; gap: 13px; }
+  .footer-icon { display: inline-flex; color: var(--muted); text-decoration: none; }
+  .footer-icon:hover { color: var(--blue); }
+  .footer-icon svg { width: 17px; height: 17px; fill: currentColor; }
 
   @media (max-width: 620px) {
     :root { --shell: min(100% - 28px, 780px); }

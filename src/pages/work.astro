@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Work" description="Selected public work by Zhichao Li on AI agents, evaluation, OpenTelemetry, and developer tools.">
+  <div class="shell page work-page">
+    <header class="page-header">
+      <span class="kicker">Selected public work</span>
+      <h1>Work</h1>
+      <p>I work on AI-agent products in Visual Studio Code and GitHub Copilot, especially the systems used to observe, evaluate, and improve them.</p>
+    </header>
+
+    <article class="prose work-prose">
+      <p class="work-stat">Over the last twelve months, I authored <strong>115 public pull requests</strong> across VS Code-related repositories; <strong>91 were merged</strong>.</p>
+
+      <h2>Agent observability</h2>
+      <p>I designed and implemented OpenTelemetry foundations for coding agents across Copilot Chat, Copilot CLI, Claude sessions, MCP tools, and the native VS Code Agent Host. The work covers GenAI semantic conventions, trace correlation, local storage, OTLP export, streaming signals, tool metadata, and enterprise policy.</p>
+      <ul class="work-links">
+        <li><a href="https://github.com/microsoft/vscode-copilot-chat/pull/3917">OpenTelemetry GenAI instrumentation in Copilot Chat</a></li>
+        <li><a href="https://github.com/microsoft/vscode-copilot-chat/pull/4507">Native tracing for Copilot CLI sessions</a></li>
+        <li><a href="https://github.com/microsoft/vscode/pull/310878">Tracing for Claude agent sessions</a></li>
+        <li><a href="https://github.com/microsoft/vscode/pull/316338">Agent Host SQLite trace storage and OTLP forwarding</a></li>
+        <li><a href="https://github.com/microsoft/vscode/pull/312929">W3C trace-context propagation to MCP servers</a></li>
+      </ul>
+
+      <h2>Trajectories and evaluation</h2>
+      <p>I co-created an automated agent-evaluation harness and VSC-Bench, which contains more than 100 cases across languages and difficulty levels. Public work established portable trajectory capture, structured tool metadata, repository-aware exports, and evidence that can be inspected after a run.</p>
+      <ul class="work-links">
+        <li><a href="https://code.visualstudio.com/blogs/2026/06/19/what-50000-runs-taught-us">What 50,000 Runs of a 5-Line Eval Taught Us</a></li>
+        <li><a href="https://github.com/microsoft/vscode-copilot-chat/pull/2893">ATIF trajectory capture and export</a></li>
+        <li><a href="https://github.com/microsoft/vscode-copilot-chat/pull/4465">Programmatic trajectory export with agent filtering</a></li>
+        <li><a href="https://github.com/microsoft/vscode/pull/291128">Tool metadata in language-model results</a></li>
+        <li><a href="https://github.com/microsoft/vscode/pull/286812">Chat export with repository context</a></li>
+      </ul>
+      <p>Some evaluation infrastructure is developed internally. At a public-safe level: it runs agent tasks locally and remotely, collects results and OTel trajectories, and feeds a verifiable analysis and reporting system. Reports retain links to raw runs and traces so people can check the conclusions.</p>
+
+      <h2>Enterprise monitoring and documentation</h2>
+      <p>I took the public monitoring experience beyond instrumentation: managed settings, enterprise export, local inspection workflows, adoption signals, and documentation that users can follow.</p>
+      <ul class="work-links">
+        <li><a href="https://code.visualstudio.com/docs/agents/guides/monitoring-agents">Monitoring agents in VS Code</a></li>
+        <li><a href="https://code.visualstudio.com/docs/enterprise/ai-settings#_configure-telemetry-export-with-opentelemetry">Enterprise OpenTelemetry export</a></li>
+        <li><a href="https://github.com/microsoft/vscode/pull/323227">Enterprise-managed OTel settings</a></li>
+        <li><a href="https://github.com/microsoft/vscode-docs/pull/10011">Enterprise OTel documentation</a></li>
+        <li><a href="https://www.linkedin.com/posts/zhichao-li-engineer_inside-the-llm-call-genai-observability-activity-7462390425824358400-qui6">Inside the LLM call: GenAI observability</a></li>
+      </ul>
+
+      <h2>Model integrations and product reliability</h2>
+      <p>Other public changes span BYOK and provider integration, OpenAI Responses API support, streaming, model metadata and caching, privacy-sensitive telemetry, chat debugging, and terminal-agent behavior.</p>
+      <ul class="work-links">
+        <li><a href="https://github.com/microsoft/vscode-copilot-chat/pull/3540">Streaming support for BYOK model configurations</a></li>
+        <li><a href="https://github.com/microsoft/vscode-copilot-chat/pull/1527">Responses API support for custom OpenAI providers</a></li>
+        <li><a href="https://github.com/microsoft/vscode-copilot-chat/pull/3475">A correlation-map memory-leak fix</a></li>
+        <li><a href="https://github.com/microsoft/vscode-copilot-chat/pull/4018">Privacy-aware repository telemetry</a></li>
+      </ul>
+
+      <h2>What I’m building now</h2>
+      <p><strong>OTelux</strong> is my next local-first agent-observability effort: one OpenTelemetry runtime for traces, logs, and metrics, a shared visual workbench, and read-only MCP tools that let coding agents inspect the same evidence. The repository will become public when the first release is ready.</p>
+
+      <h2>Browse the public record</h2>
+      <ul class="work-links">
+        <li><a href="https://github.com/microsoft/vscode/pulls?q=is%3Apr+author%3Ab1tank">Pull requests in microsoft/vscode</a></li>
+        <li><a href="https://github.com/microsoft/vscode-copilot-chat/pulls?q=is%3Apr+author%3Ab1tank">Pull requests in microsoft/vscode-copilot-chat</a></li>
+        <li><a href="https://github.com/microsoft/vscode-docs/pulls?q=is%3Apr+author%3Ab1tank">Pull requests in microsoft/vscode-docs</a></li>
+      </ul>
+    </article>
+  </div>
+</BaseLayout>

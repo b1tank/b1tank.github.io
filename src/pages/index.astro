@@ -11,22 +11,33 @@ const projects = await getProjects();
   <div class="shell home">
     <header class="home-intro">
       <h1>Zhichao Li <span>aka b1tank</span></h1>
-      <p>I build <strong>Visual Studio Code</strong> and <strong>GitHub Copilot</strong> at Microsoft.</p>
-      <p>My route into software passed through chemical engineering, data science, and cloud systems. I like turning digital abstractions into diagrams, physical analogies, and small things you can try.</p>
+      <p>I build AI-agent experiences in <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://github.com/features/copilot">GitHub Copilot</a> at Microsoft, with a focus on making agents observable, evaluable, and reliable.</p>
+      <p>My recent work spans agent telemetry, trajectories, model and tool integrations, and the infrastructure used to compare and debug coding agents.</p>
+      <p>My route into software passed through chemical engineering, data science, cloud infrastructure, and observability. I usually understand complicated systems by drawing them, finding a physical analogy, or building a small version.</p>
       <p class="contact-line">
         Seattle, WA · <button class="inline-email" type="button"><code>{'b1tank${StephenCurry.jerseyNumber}@gmail.com'}</code></button>
         <br class="mobile-only" /> · <SocialIcons />
       </p>
     </header>
 
-    <section class="home-section" aria-labelledby="writing-heading">
-      <div class="section-title"><h2 id="writing-heading">Writing</h2><a href="/posts/">all writing →</a></div>
-      <ol class="entry-list">
-        {posts.map((post) => <li>
-          <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
-          <div><h3><a href={`/posts/${post.id}/`}>{post.data.title}</a></h3><p>{post.data.description}</p>
-          <p class="entry-tags">{post.data.tags.map((tag, i) => <><a href={`/tags/${tagSlug(tag)}/`}>{tag}</a>{i < post.data.tags.length - 1 ? ' · ' : ''}</>)}</p></div>
-        </li>)}
+    <section class="home-section" aria-labelledby="selected-work-heading">
+      <div class="section-title"><h2 id="selected-work-heading">Selected work</h2><a href="/work/">more work →</a></div>
+      <ol class="entry-list work-list">
+        <li>
+          <span class="entry-year">2026</span>
+          <div><h3><a href="https://code.visualstudio.com/docs/agents/guides/monitoring-agents">Agent observability in VS Code</a></h3><p>OpenTelemetry instrumentation and monitoring across coding-agent runtimes, tools, and enterprise environments.</p>
+          <p class="entry-tags"><a href="https://code.visualstudio.com/docs/agents/guides/monitoring-agents">monitoring guide</a> · <a href="https://code.visualstudio.com/docs/enterprise/ai-settings#_configure-telemetry-export-with-opentelemetry">enterprise configuration</a> · <a href="https://github.com/microsoft/vscode/pull/316338">trace storage</a></p></div>
+        </li>
+        <li>
+          <span class="entry-year">2026</span>
+          <div><h3><a href="https://code.visualstudio.com/blogs/2026/06/19/what-50000-runs-taught-us">Evaluating coding agents</a></h3><p>Evaluation infrastructure for comparing models, tools, and agent harnesses—with conclusions tied back to trajectories and raw evidence.</p>
+          <p class="entry-tags"><a href="https://code.visualstudio.com/blogs/2026/06/19/what-50000-runs-taught-us">50,000-run analysis</a> · <a href="https://github.com/microsoft/vscode-copilot-chat/pull/2893">trajectory export</a> · <a href="https://github.com/microsoft/vscode/pull/291128">tool metadata</a></p></div>
+        </li>
+        <li>
+          <span class="entry-year">2025–26</span>
+          <div><h3><a href="/work/">Open-source agent tooling</a></h3><p>Public contributions across VS Code, Copilot Chat, and VS Code documentation covering observability, trajectories, model integration, and product reliability.</p>
+          <p class="entry-tags"><a href="https://github.com/microsoft/vscode/pulls?q=is%3Apr+author%3Ab1tank">VS Code</a> · <a href="https://github.com/microsoft/vscode-copilot-chat/pulls?q=is%3Apr+author%3Ab1tank">Copilot Chat</a> · <a href="https://github.com/microsoft/vscode-docs/pulls?q=is%3Apr+author%3Ab1tank">documentation</a></p></div>
+        </li>
       </ol>
     </section>
 
@@ -36,7 +47,18 @@ const projects = await getProjects();
         {projects.map((project) => <li>
           <time class="project-updated" datetime={project.data.updated.toISOString()}>{formatDateTime(project.data.updated)}</time>
           <div><h3><a href={`/projects/${project.id}/`}>{project.data.title}</a></h3><p>{project.data.description}</p>
-          <p class="entry-tags">{project.data.demo && <a href={project.data.demo}>{project.data.demoLabel.toLowerCase()}</a>}{project.data.source && <> · <a href={project.data.source}>source</a></>}</p></div>
+          {(project.data.demo || project.data.source) ? <p class="entry-tags">{project.data.demo && <a href={project.data.demo}>{project.data.demoLabel.toLowerCase()}</a>}{project.data.source && <> · <a href={project.data.source}>source</a></>}</p> : <p class="entry-tags"><span>public release coming soon</span></p>}</div>
+        </li>)}
+      </ol>
+    </section>
+
+    <section class="home-section" aria-labelledby="writing-heading">
+      <div class="section-title"><h2 id="writing-heading">Writing</h2><a href="/posts/">all writing →</a></div>
+      <ol class="entry-list">
+        {posts.map((post) => <li>
+          <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
+          <div><h3><a href={`/posts/${post.id}/`}>{post.data.title}</a></h3><p>{post.data.description}</p>
+          <p class="entry-tags">{post.data.tags.map((tag, i) => <><a href={`/tags/${tagSlug(tag)}/`}>{tag}</a>{i < post.data.tags.length - 1 ? ' · ' : ''}</>)}</p></div>
         </li>)}
       </ol>
     </section>

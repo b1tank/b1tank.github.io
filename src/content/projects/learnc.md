@@ -7,7 +7,7 @@ updated: 2026-07-14T13:59:38-07:00
 tags: ["c", "education", "webassembly"]
 source: "https://github.com/b1tank/learnc"
 demo: "/learnc/"
-demoLabel: "Open Learn C"
+demoLabel: "Start learning"
 ---
 
 Learn C follows *The C Programming Language* from beginning to end, rewriting each section in approachable language and pairing it with a runnable browser editor.

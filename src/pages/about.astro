@@ -1,32 +1,40 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="About" description="About Zhichao Li, aka b1tank: software engineer, visual thinker, and builder.">
+<BaseLayout title="About" description="About Zhichao Li, aka b1tank: software engineer working on AI agents, evaluation, and observability.">
   <header class="page-hero">
     <div class="shell">
       <span class="eyebrow">A little context</span>
       <h1>About</h1>
-      <p class="lede">I’m Zhichao Li, aka b1tank. I build Visual Studio Code and GitHub Copilot at Microsoft.</p>
+      <p class="lede">I’m Zhichao Li, aka b1tank. I work on AI agents in <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://github.com/features/copilot">GitHub Copilot</a> at Microsoft.</p>
     </div>
   </header>
   <div class="shell about-grid">
     <aside class="about-aside">
       <dl>
-        <div><dt>Now</dt><dd>Developer tools and AI</dd></div>
-        <div><dt>Before</dt><dd>Data science and cloud</dd></div>
+        <div><dt>Now</dt><dd>Agent products, evaluation, and observability</dd></div>
+        <div><dt>Before</dt><dd>Cloud infrastructure and data science</dd></div>
         <div><dt>Foundation</dt><dd>Ph.D. in chemical engineering</dd></div>
         <div><dt>Outside work</dt><dd>Basketball and billiards</dd></div>
         <div><dt>Location</dt><dd>Seattle, WA</dd></div>
       </dl>
     </aside>
     <article class="prose">
-      <p>My path into software started in the physical world. As a chemical engineer, I worked with systems you could see and touch: equipment, flows, measurements, and processes. I later moved through data science and cloud engineering into the developer tools I work on today.</p>
-      <p>That background shapes how I learn and explain technology. Digital systems are built from layers of abstraction, and I often understand them by drawing the system, finding a physical analogy, or building a small version myself.</p>
-      <h2>What this site is for</h2>
-      <p>This is my durable place for technical notes, visual explanations, longer thoughts, and projects. Some writing will be polished; some will simply capture a useful idea before it disappears.</p>
-      <p>I care about software that respects the person using it: clear purpose, thoughtful defaults, and as little accidental complexity as possible.</p>
+      <h2>Current work</h2>
+      <p>I work across agent product engineering, evaluation systems, and OpenTelemetry-based observability. Recent public work includes <a href="https://github.com/microsoft/vscode-copilot-chat/pull/3917">GenAI instrumentation in Copilot Chat</a>, <a href="https://github.com/microsoft/vscode/pull/316338">local trace storage and OTLP forwarding in the Agent Host</a>, and <a href="https://github.com/microsoft/vscode/pull/323227">enterprise-managed telemetry settings</a>.</p>
+      <p>I also co-created an automated evaluation harness and VSC-Bench, with more than 100 cases across languages and difficulty levels. Our public analysis of repeated evaluation runs is documented in <a href="https://code.visualstudio.com/blogs/2026/06/19/what-50000-runs-taught-us">What 50,000 Runs of a 5-Line Eval Taught Us</a>.</p>
+
+      <h2>Background</h2>
+      <p>My path into software started in the physical world. As a chemical engineer, I worked with equipment, flows, measurements, and processes. I later moved through data science, cloud services, training and evaluation data pipelines, and observability infrastructure.</p>
+      <p>Before my current work, I helped build Azure Managed Grafana and systems around distributed tracing, Prometheus metrics, dashboards, alerting, and fleet health. That history now informs how I think about operating and improving AI agents.</p>
+
+      <h2>How I work</h2>
+      <p>Digital systems are built from layers of abstraction. I usually understand them by drawing the system, finding a physical analogy, or building a small version myself. I care about products with a clear purpose, useful defaults, inspectable behavior, and as little accidental complexity as possible.</p>
+      <p>This site is my durable place for <a href="/work/">public work</a>, technical notes, visual explanations, and <a href="/projects/">projects</a>.</p>
+
       <h2>Away from the keyboard</h2>
       <p>I’m a basketball fan and amateur player, with a predictable appreciation for Stephen Curry. I also enjoy billiards and pool. Both reward repetition, feel, and staying humble when a good streak inevitably ends.</p>
+
       <h2>Contact</h2>
       <p>Email me at <code>{'b1tank${StephenCurry.jerseyNumber}@gmail.com'}</code>. Replace the expression with Steph’s jersey number.</p>
     </article>

@@ -9,6 +9,7 @@ source: "https://github.com/b1tank/abc"
 live: "https://yummyjars.com/abc/"
 liveLabel: "Open on Yummy Jars"
 demo: "/projects/abc/demo/"
+demoLabel: "Play ABC Balloon"
 ---
 
 ABC Balloon turns early learning into a small, tactile browser game. It includes free play, spelling challenges, math challenges, English and Chinese interfaces, and progress stored locally in the browser.

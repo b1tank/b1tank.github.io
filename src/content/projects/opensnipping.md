@@ -9,6 +9,7 @@ source: "https://github.com/b1tank/opensnipping-web"
 live: "https://yummyjars.com/opensnipping/"
 liveLabel: "Open on Yummy Jars"
 demo: "/projects/opensnipping/demo/"
+demoLabel: "Try OpenSnipping"
 ---
 
 OpenSnipping brings screenshot capture, cropping, annotation, and screen recording into the browser. Captured media stays on the device: there is no backend, account, telemetry, or upload step.

@@ -7,7 +7,7 @@ updated: 2026-07-31T15:55:02-07:00
 tags: ["systems", "terminal", "visual-learning"]
 source: "https://github.com/b1tank/learn-ghostty"
 demo: "/learn-ghostty/"
-demoLabel: "Explore the public course"
+demoLabel: "Explore course"
 ---
 
 Learn Ghostty is a learn-by-doing course for building an end-to-end mental model of a modern terminal emulator. Ghostty’s pinned source is the textbook, the browser is the visual learning cockpit, and Pi acts as a teacher alongside the local course.

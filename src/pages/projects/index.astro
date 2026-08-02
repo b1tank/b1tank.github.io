@@ -6,12 +6,12 @@ const projects = await getProjects();
 ---
 <BaseLayout title="Projects" description="Projects built by Zhichao Li, including browser tools and visual experiments.">
   <div class="shell page">
-    <header class="page-header"><span class="kicker">Workbench</span><h1>Projects</h1><p>Focused tools and experiments. Static projects run here as snapshots while their original deployments remain independent.</p></header>
+    <header class="page-header"><span class="kicker">Workbench</span><h1>Projects</h1><p>Independent tools, learning projects, and experiments. Some run here as static snapshots; others have their own release cycle.</p></header>
     <ol class="entry-list archive-list project-list">
       {projects.map((project) => <li>
         <time class="project-updated" datetime={project.data.updated.toISOString()}>{formatDateTime(project.data.updated)}</time>
         <div><h2><a href={`/projects/${project.id}/`}>{project.data.title}</a></h2><p>{project.data.description}</p>
-        <p class="entry-tags">{project.data.demo && <a href={project.data.demo}>{project.data.demoLabel.toLowerCase()}</a>}{project.data.live && <> · <a href={project.data.live}>{project.data.liveLabel.toLowerCase()}</a></>}{project.data.source && <> · <a href={project.data.source}>source</a></>}</p></div>
+        {(project.data.demo || project.data.live || project.data.source) ? <p class="entry-tags">{project.data.demo && <a href={project.data.demo}>{project.data.demoLabel.toLowerCase()}</a>}{project.data.live && <> · <a href={project.data.live}>{project.data.liveLabel.toLowerCase()}</a></>}{project.data.source && <> · <a href={project.data.source}>source</a></>}</p> : <p class="entry-tags"><span>public release coming soon</span></p>}</div>
       </li>)}
     </ol>
   </div>

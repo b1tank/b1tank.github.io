@@ -15,11 +15,11 @@ const { Content } = await render(project);
     <span class="eyebrow">Project · {project.data.status}</span>
     <h1>{project.data.title}</h1>
     <p class="lede">{project.data.description}</p>
-    <div class="project-links">
+    {(project.data.demo || project.data.live || project.data.source) ? <div class="project-links">
       {project.data.demo && <a class="button primary" href={project.data.demo}>{project.data.demoLabel}</a>}
       {project.data.live && <a class="button" href={project.data.live}>{project.data.liveLabel} ↗</a>}
       {project.data.source && <a class="button" href={project.data.source}>Source ↗</a>}
-    </div>
+    </div> : <p class="project-coming-soon">Public release coming soon.</p>}
     <ul class="tag-list">{project.data.tags.map((tag) => <li><span class="tag">{tag}</span></li>)}</ul>
   </div></header>
   <section class="section"><div class="shell"><article class="prose"><Content /></article></div></section>

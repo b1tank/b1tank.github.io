@@ -70,12 +70,9 @@
   .simple-page { padding-top: clamp(44px, 7vw, 72px); }
   .plain-content { max-width: 700px; font: 1.09rem/1.72 var(--serif); }
   .plain-content p + p { margin-top: 1.35em; }
-  .project-name { color: var(--ink); white-space: nowrap; }
-  .project-links-inline { display: inline-flex; align-items: center; gap: .28em; margin-inline: .34em .08em; vertical-align: -.1em; }
-  .project-icon { display: inline-flex; color: var(--muted); text-decoration: none; }
-  .project-icon:hover { color: var(--blue); }
-  .project-icon svg { width: .95em; height: .95em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .project-icon svg .fill { fill: currentColor; stroke: none; }
+  .demo-link { display: inline-flex; margin-left: .28em; color: var(--muted); text-decoration: none; vertical-align: .38em; }
+  .demo-link:hover { color: var(--blue); }
+  .demo-link svg { width: .72em; height: .72em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
   .writing-list { padding: 0; list-style: none; }
   .writing-list li { display: flex; align-items: baseline; justify-content: space-between; gap: 28px; padding-block: 15px; border-bottom: 1px solid var(--line); }

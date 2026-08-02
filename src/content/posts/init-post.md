@@ -2,7 +2,6 @@
 title: "Init Post"
 description: "The first entry in my old blog: an underdog story about starting, learning, and showing up."
 published: 2021-01-18T23:34:13-08:00
-tags: ["thoughts", "basketball", "warriors"]
 draft: false
 ---
 

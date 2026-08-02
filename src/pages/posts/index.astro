@@ -1,17 +1,16 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { formatDate, publishedPosts, tagSlug } from '../../lib/content';
+import { formatDate, publishedPosts } from '../../lib/content';
 const posts = publishedPosts(await getCollection('posts'));
 ---
-<BaseLayout title="Writing" description="Writing by Zhichao Li about software, systems, visual explanations, and building products.">
-  <div class="shell page">
-    <header class="page-header"><span class="kicker">Notes and essays</span><h1>Writing</h1><p>Technical explanations, notes from building, and occasional thoughts outside software.</p></header>
-    <ol class="entry-list archive-list">
+<BaseLayout title="Writing" description="Writing by Zhichao Li.">
+  <div class="shell simple-page">
+    <h1 class="page-title">Writing</h1>
+    <ol class="writing-list">
       {posts.map((post) => <li>
+        <a href={`/posts/${post.id}/`}><strong>{post.data.title}</strong></a>
         <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
-        <div><h2><a href={`/posts/${post.id}/`}>{post.data.title}</a></h2><p>{post.data.description}</p>
-        <p class="entry-tags">{post.data.tags.map((tag, i) => <><a href={`/tags/${tagSlug(tag)}/`}>{tag}</a>{i < post.data.tags.length - 1 ? ' · ' : ''}</>)}</p></div>
       </li>)}
     </ol>
   </div>

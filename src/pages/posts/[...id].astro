@@ -6,18 +6,9 @@ export async function getStaticPaths() {
   const posts = (await getCollection('posts')).filter((post) => !post.data.draft);
   return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
 }
-
 const { post } = Astro.props;
-const { Content, headings } = await render(post);
+const { Content } = await render(post);
 ---
-<PostLayout
-  title={post.data.title}
-  description={post.data.description}
-  published={post.data.published}
-  updated={post.data.updated}
-  tags={post.data.tags}
-  headings={headings}
-  body={post.body || ''}
->
+<PostLayout title={post.data.title} description={post.data.description} published={post.data.published} updated={post.data.updated}>
   <Content />
 </PostLayout>

@@ -4,7 +4,7 @@ description: "An interactive, hand-written companion to K&R where examples and e
 status: "active"
 category: "learning"
 featured: true
-order: 2
+order: 11
 updated: 2026-07-14T13:59:38-07:00
 tags: ["c", "education", "webassembly"]
 source: "https://github.com/b1tank/learnc"

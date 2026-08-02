@@ -5,7 +5,7 @@ import SocialIcons from '../components/SocialIcons.astro';
 import { formatDate, formatDateTime, publishedPosts, tagSlug } from '../lib/content';
 import { getProjects } from '../lib/projects';
 const posts = publishedPosts(await getCollection('posts'));
-const projects = (await getProjects()).filter((project) => project.data.featured);
+const projects = (await getProjects()).filter((project) => project.data.featured).sort((a, b) => a.data.order - b.data.order);
 ---
 <BaseLayout>
   <div class="shell home">

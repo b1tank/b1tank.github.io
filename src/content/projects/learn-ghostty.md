@@ -4,7 +4,7 @@ description: "A visual, source-backed course for understanding a modern terminal
 status: "experimental"
 category: "learning"
 featured: true
-order: 1
+order: 10
 updated: 2026-07-31T15:55:02-07:00
 tags: ["systems", "terminal", "visual-learning"]
 source: "https://github.com/b1tank/learn-ghostty"

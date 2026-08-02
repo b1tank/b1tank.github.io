@@ -70,6 +70,8 @@
   .simple-page { padding-top: clamp(44px, 7vw, 72px); }
   .plain-content { max-width: 700px; font: 1.09rem/1.72 var(--serif); }
   .plain-content p + p { margin-top: 1.35em; }
+  .demo-link { display: inline-block; margin-left: .2em; color: var(--gold); font: 700 .78em var(--mono); text-decoration: none; vertical-align: .15em; }
+  .demo-link:hover { color: var(--blue); }
 
   .writing-list { padding: 0; list-style: none; }
   .writing-list li { display: flex; align-items: baseline; justify-content: space-between; gap: 28px; padding-block: 15px; border-bottom: 1px solid var(--line); }

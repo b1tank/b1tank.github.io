@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import DemoLink from '../components/DemoLink.astro';
+import ProjectLinks from '../components/ProjectLinks.astro';
 ---
 <BaseLayout title="Misc" description="Smaller tools, earlier scientific work, and assorted interests from Zhichao Li.">
   <div class="shell simple-page">
@@ -9,7 +9,7 @@ import DemoLink from '../components/DemoLink.astro';
 
       <p>My earlier scientific work includes a <a href="https://github.com/b1tank/DSM-f90">Fortran aerosol model</a>, a few <a href="https://github.com/b1tank/computational-fluid-dynamics-basics">computational-fluid-dynamics fundamentals</a>, and <a href="https://github.com/b1tank/kmeans-clustering-pyspark">geospatial clustering with PySpark</a>.</p>
 
-      <p>I maintain <a href="https://github.com/b1tank/boringblog">BoringBlog</a><DemoLink href="https://lezhiweng.com" label="BoringBlog" /> for my family and occasionally build things with them, including <a href="https://github.com/b1tank/abc">ABC Balloon</a><DemoLink href="https://b1tank.github.io/projects/abc/demo/" label="ABC Balloon" />.</p>
+      <p>I maintain <span class="project-name">BoringBlog</span><ProjectLinks repository="https://github.com/b1tank/boringblog" demo="https://lezhiweng.com" label="BoringBlog" /> for my family and occasionally build things with them, including <span class="project-name">ABC Balloon</span><ProjectLinks repository="https://github.com/b1tank/abc" demo="https://b1tank.github.io/projects/abc/demo/" label="ABC Balloon" />.</p>
 
       <p>When I’m away from the keyboard, I like basketball and billiards. I’m a Warriors fan and still find Stephen Curry’s combination of movement, geometry, repetition, and calm unusually instructive.</p>
     </article>

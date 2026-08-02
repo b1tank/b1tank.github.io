@@ -6,7 +6,6 @@ const posts = publishedPosts(await getCollection('posts'));
 ---
 <BaseLayout title="Writing" description="Writing by Zhichao Li.">
   <div class="shell simple-page">
-    <h1 class="page-title">Writing</h1>
     <ol class="writing-list">
       {posts.map((post) => <li>
         <a href={`/posts/${post.id}/`}><strong>{post.data.title}</strong></a>

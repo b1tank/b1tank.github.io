@@ -71,8 +71,7 @@
   .plain-content { max-width: 700px; font: 1.09rem/1.72 var(--serif); }
   .plain-content p + p { margin-top: 1.35em; }
 
-  .page-title { margin-bottom: 28px; font: 600 2rem/1.15 var(--serif); letter-spacing: -.025em; }
-  .writing-list { padding: 0; border-top: 1px solid var(--line); list-style: none; }
+  .writing-list { padding: 0; list-style: none; }
   .writing-list li { display: flex; align-items: baseline; justify-content: space-between; gap: 28px; padding-block: 15px; border-bottom: 1px solid var(--line); }
   .writing-list a { color: var(--ink); font-family: var(--serif); font-size: 1.08rem; text-decoration: none; }
   .writing-list a:hover { color: var(--blue); }

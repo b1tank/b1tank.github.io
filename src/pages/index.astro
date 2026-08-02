@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import DemoLink from '../components/DemoLink.astro';
 ---
 <BaseLayout>
   <div class="shell simple-page">
@@ -10,9 +11,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <p>I’m currently building <strong>OTelux</strong>, a local-first telemetry workbench for developers and coding agents; <strong>Deskpal</strong>, verified computer use for Linux desktop applications; and <strong>pi-otel</strong>, vendor-neutral OpenTelemetry instrumentation for the Pi coding agent. Their repositories will become public with their initial releases.</p>
 
-      <p>I also build learning projects. <a href="https://github.com/b1tank/learnc">Learn C</a><a class="demo-link" href="https://b1tank.github.io/learnc/" aria-label="Open Learn C demo" title="Open demo">↗</a> is a hand-written, runnable companion to K&amp;R, and <a href="https://github.com/b1tank/learn-ghostty">Learn Ghostty</a><a class="demo-link" href="https://b1tank.github.io/learn-ghostty/" aria-label="Open Learn Ghostty demo" title="Open demo">↗</a> is a visual, source-backed path through terminal architecture.</p>
+      <p>I also build learning projects. <a href="https://github.com/b1tank/learnc">Learn C</a><DemoLink href="https://b1tank.github.io/learnc/" label="Learn C" /> is a hand-written, runnable companion to K&amp;R, and <a href="https://github.com/b1tank/learn-ghostty">Learn Ghostty</a><DemoLink href="https://b1tank.github.io/learn-ghostty/" label="Learn Ghostty" /> is a visual, source-backed path through terminal architecture.</p>
 
-      <p>Other projects include <a href="https://github.com/b1tank/opensnipping-web">OpenSnipping</a><a class="demo-link" href="https://b1tank.github.io/projects/opensnipping/demo/" aria-label="Open OpenSnipping demo" title="Open demo">↗</a>, <a href="https://github.com/b1tank/openmathboard">OpenMathBoard</a><a class="demo-link" href="https://lezhi.school" aria-label="Open OpenMathBoard demo" title="Open demo">↗</a>, <a href="https://github.com/b1tank/boringblog">BoringBlog</a><a class="demo-link" href="https://lezhiweng.com" aria-label="Open BoringBlog demo" title="Open demo">↗</a>, and <a href="https://github.com/b1tank/abc">ABC Balloon</a><a class="demo-link" href="https://b1tank.github.io/projects/abc/demo/" aria-label="Open ABC Balloon demo" title="Open demo">↗</a>. I publish reusable <a href="https://github.com/b1tank/skills">AI-agent skills</a> for the coding tools and workflows I use.</p>
+      <p>Other projects include <a href="https://github.com/b1tank/opensnipping-web">OpenSnipping</a><DemoLink href="https://b1tank.github.io/projects/opensnipping/demo/" label="OpenSnipping" />, <a href="https://github.com/b1tank/openmathboard">OpenMathBoard</a><DemoLink href="https://lezhi.school" label="OpenMathBoard" />, <a href="https://github.com/b1tank/boringblog">BoringBlog</a><DemoLink href="https://lezhiweng.com" label="BoringBlog" />, and <a href="https://github.com/b1tank/abc">ABC Balloon</a><DemoLink href="https://b1tank.github.io/projects/abc/demo/" label="ABC Balloon" />. I publish reusable <a href="https://github.com/b1tank/skills">AI-agent skills</a> for the coding tools and workflows I use.</p>
 
       <p>Before developer tools, I worked on cloud infrastructure, distributed tracing, and Azure Managed Grafana. My route into software began in chemical engineering and scientific computing, including a <a href="https://github.com/b1tank/coag">C++ aerosol model</a> that ran 90% faster than its legacy Fortran implementation.</p>
 

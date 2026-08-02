@@ -123,6 +123,12 @@
   .archive-list { border-top: 2px solid var(--ink); }
   .archive-list > li { padding-block: 21px; }
   .archive-list h2 { font-size: 1.45rem; }
+  .project-status { margin-left: .65em; color: var(--gold); font: 400 .64rem var(--mono); letter-spacing: .03em; text-transform: uppercase; vertical-align: middle; }
+  .project-group + .project-group { margin-top: 62px; }
+  .project-group-header { padding-bottom: 11px; border-bottom: 2px solid var(--ink); }
+  .project-group-header h2 { font: 600 1.45rem var(--serif); }
+  .project-group-header p { max-width: 650px; margin-top: 5px; color: var(--muted); font: .95rem/1.5 var(--serif); }
+  .project-group .entry-list { border-top: 0; }
   .tag-index { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 35px; padding: 0; border-top: 2px solid var(--ink); list-style: none; }
   .tag-index li { display: flex; justify-content: space-between; padding-block: 14px; border-bottom: 1px solid var(--line); font: .8rem var(--mono); }
   .tag-index a { color: var(--ink); text-decoration: none; }

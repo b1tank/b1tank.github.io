@@ -24,6 +24,8 @@ const projects = defineCollection({
     title: z.string(),
     description: z.string(),
     status: z.enum(['active', 'experimental', 'archived', 'coming-soon']),
+    category: z.enum(['agent-systems', 'learning', 'tools', 'personal', 'scientific']),
+    featured: z.boolean().default(false),
     order: z.number().default(99),
     updated: z.coerce.date(),
     tags: z.array(z.string()).default([]),

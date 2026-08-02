@@ -2,6 +2,8 @@
 title: "OTelux"
 description: "A local-first OpenTelemetry workbench for developers and coding agents, with a shared visual UI and evidence exposed through MCP tools."
 status: "coming-soon"
+category: "agent-systems"
+featured: true
 order: 0
 updated: 2026-08-02T11:07:09-07:00
 tags: ["opentelemetry", "agents", "developer-tools"]

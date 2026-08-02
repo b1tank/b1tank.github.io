@@ -12,7 +12,7 @@ const { Content } = await render(project);
 ---
 <BaseLayout title={project.data.title} description={project.data.description}>
   <header class="page-hero"><div class="shell">
-    <span class="eyebrow">Project · {project.data.status}</span>
+    <span class="eyebrow">Project · {project.data.status.replaceAll('-', ' ')}</span>
     <h1>{project.data.title}</h1>
     <p class="lede">{project.data.description}</p>
     {(project.data.demo || project.data.live || project.data.source) ? <div class="project-links">

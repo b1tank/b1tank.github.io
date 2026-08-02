@@ -5,7 +5,7 @@ import SocialIcons from '../components/SocialIcons.astro';
 import { formatDate, formatDateTime, publishedPosts, tagSlug } from '../lib/content';
 import { getProjects } from '../lib/projects';
 const posts = publishedPosts(await getCollection('posts'));
-const projects = await getProjects();
+const projects = (await getProjects()).filter((project) => project.data.featured);
 ---
 <BaseLayout>
   <div class="shell home">
@@ -13,6 +13,7 @@ const projects = await getProjects();
       <h1>Zhichao Li <span>aka b1tank</span></h1>
       <p>I build AI-agent experiences in <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://github.com/features/copilot">GitHub Copilot</a> at Microsoft, with a focus on making agents observable, evaluable, and reliable.</p>
       <p>My recent work spans agent telemetry, trajectories, model and tool integrations, and the infrastructure used to compare and debug coding agents.</p>
+      <p>I also publish <a href="https://github.com/b1tank/skills">reusable AI-agent skills</a>, roles, prompts, and workflow patterns for the tools I use to build software.</p>
       <p>My route into software passed through chemical engineering, data science, cloud infrastructure, and observability. I usually understand complicated systems by drawing them, finding a physical analogy, or building a small version.</p>
       <p class="contact-line">
         Seattle, WA · <button class="inline-email" type="button"><code>{'b1tank${StephenCurry.jerseyNumber}@gmail.com'}</code></button>
@@ -26,7 +27,7 @@ const projects = await getProjects();
         <li>
           <span class="entry-year">2026</span>
           <div><h3><a href="https://code.visualstudio.com/docs/agents/guides/monitoring-agents">Agent observability in VS Code</a></h3><p>OpenTelemetry instrumentation and monitoring across coding-agent runtimes, tools, and enterprise environments.</p>
-          <p class="entry-tags"><a href="https://code.visualstudio.com/docs/agents/guides/monitoring-agents">monitoring guide</a> · <a href="https://code.visualstudio.com/docs/enterprise/ai-settings#_configure-telemetry-export-with-opentelemetry">enterprise configuration</a> · <a href="https://github.com/microsoft/vscode/pull/316338">trace storage</a></p></div>
+          <p class="entry-tags"><a href="https://opentelemetry.io/blog/2026/genai-observability/">official OTel walkthrough</a> · <a href="https://code.visualstudio.com/docs/agents/guides/monitoring-agents">monitoring guide</a> · <a href="https://code.visualstudio.com/docs/enterprise/ai-settings#_configure-telemetry-export-with-opentelemetry">enterprise configuration</a></p></div>
         </li>
         <li>
           <span class="entry-year">2026</span>

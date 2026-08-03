@@ -8,7 +8,7 @@ const posts = publishedPosts(await getCollection('posts'));
   <div class="shell simple-page">
     <ol class="writing-list">
       {posts.map((post) => <li>
-        <a href={`/posts/${post.id}/`}><strong>{post.data.title}</strong></a>
+        <a href={`/writing/${post.id}/`}><strong>{post.data.title}</strong></a>
         <time datetime={post.data.published.toISOString()}>{formatDate(post.data.published)}</time>
       </li>)}
     </ol>

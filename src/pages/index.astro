@@ -1,24 +1,125 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import DemoLink from '../components/DemoLink.astro';
+import ProjectLinks from '../components/ProjectLinks.astro';
+
+const projects = [
+  {
+    name: 'OTelux',
+    repository: 'https://github.com/b1tank/otelux',
+    description: 'A local-first OpenTelemetry workbench for receiving, exploring, and correlating traces, logs, and metrics. It keeps telemetry in a retention-bounded local SQLite database and gives coding agents read-only evidence through MCP.',
+  },
+  {
+    name: 'Deskpal',
+    repository: 'https://github.com/b1tank/deskpal',
+    description: 'Verified computer use for Linux: a Playwright-like MCP server that gives AI agents eyes and hands for native GTK, Qt, Electron, X11, and Wayland applications.',
+  },
+  {
+    name: 'pi-otel',
+    repository: 'https://github.com/b1tank/pi-otel',
+    description: 'Vendor-neutral OpenTelemetry instrumentation for the Pi coding agent, exporting traces, metrics, and logs with GenAI semantic conventions, privacy-first content controls, and bounded shutdown behavior.',
+  },
+  {
+    name: '乐之翁',
+    repository: 'https://github.com/b1tank/boringblog',
+    website: 'https://lezhiweng.com',
+    description: 'A production learning platform that turns an experienced teacher’s original classroom material into structured, interactive high-school mathematics method courses with polished formulas, diagrams, and multiple learning paths.',
+  },
+  {
+    name: 'OpenMathBoard',
+    repository: 'https://github.com/b1tank/openmathboard',
+    website: 'https://lezhi.school',
+    description: 'A freehand-first mathematics whiteboard optimized for iPad and Apple Pencil. It converts drawn intent into editable parametric geometry and supports images, durable local boards, and browser-local course recording.',
+  },
+  {
+    name: 'Learn Ghostty',
+    repository: 'https://github.com/b1tank/learn-ghostty',
+    website: 'https://b1tank.github.io/learn-ghostty/',
+    description: 'A source-backed workshop that teaches terminal architecture by reconstructing Ghostty one observable subsystem at a time, from process ownership and PTYs to a native GTK window and OpenGL rendering.',
+  },
+  {
+    name: 'Learn C',
+    repository: 'https://github.com/b1tank/learnc',
+    website: 'https://b1tank.github.io/learnc/',
+    description: 'A hand-written, runnable browser companion to K&R. Every example runs without signup, tracking, or generated course content.',
+  },
+  {
+    name: 'OpenSnipping',
+    repository: 'https://github.com/b1tank/opensnipping-web',
+    website: 'https://b1tank.github.io/projects/opensnipping/demo/',
+    description: 'A browser-based screenshot and annotation tool with local editing, export, and no required backend.',
+  },
+  {
+    name: 'ABC Balloon',
+    repository: 'https://github.com/b1tank/abc',
+    website: 'https://b1tank.github.io/projects/abc/demo/',
+    description: 'A small alphabet-learning game I built with my family: hear a letter, find it, and pop the matching balloon.',
+  },
+  {
+    name: 'Agent Skills',
+    repository: 'https://github.com/b1tank/skills',
+    description: 'One source of truth for reusable skills, prompts, agents, instructions, and MCP configuration across VS Code, Copilot CLI, Claude Code, Codex, Pi, and OpenCode.',
+  },
+  {
+    name: 'WireGuard Manager for GNOME',
+    repository: 'https://github.com/b1tank/wg-gnome-ext',
+    description: 'A GNOME Shell extension for discovering, controlling, and inspecting WireGuard tunnels from the desktop panel.',
+  },
+  {
+    name: 'Git Remote Helper',
+    repository: 'https://github.com/b1tank/git-remote-helper',
+    description: 'A VS Code extension for turning selected local lines into durable GitHub links pinned to a commit.',
+  },
+  {
+    name: 'Coag',
+    repository: 'https://github.com/b1tank/coag',
+    description: 'A C++ aerosol coagulation model from my scientific-computing work that ran about 90% faster than the legacy Fortran implementation.',
+  },
+  {
+    name: 'Direct Simulation Monte Carlo',
+    repository: 'https://github.com/b1tank/DSM-f90',
+    description: 'A Fortran implementation of aerosol coagulation using the Direct Simulation Monte Carlo method.',
+  },
+  {
+    name: 'Computational Fluid Dynamics Basics',
+    repository: 'https://github.com/b1tank/computational-fluid-dynamics-basics',
+    description: 'Small implementations of foundational computational-fluid-dynamics methods.',
+  },
+  {
+    name: 'Geospatial Clustering with PySpark',
+    repository: 'https://github.com/b1tank/kmeans-clustering-pyspark',
+    description: 'An early distributed-computing project applying k-means clustering to geospatial data with PySpark.',
+  },
+];
 ---
 <BaseLayout>
   <div class="shell simple-page">
-    <article class="plain-content">
-      <p>I live in Seattle and work on AI agents in <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://github.com/features/copilot">GitHub Copilot</a> at Microsoft. I focus on agent products, evaluation, and OpenTelemetry-based observability.</p>
+    <div class="home-content">
+      <section class="plain-content intro" aria-label="About Zhichao Li">
+        <p>I live in Seattle and work on AI agents in <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://github.com/features/copilot">GitHub Copilot</a> at Microsoft. I focus on agent products, evaluation, and OpenTelemetry-based observability.</p>
 
-      <p>My public work includes <a href="https://code.visualstudio.com/docs/agents/guides/monitoring-agents">agent monitoring in VS Code</a>, <a href="https://code.visualstudio.com/docs/enterprise/ai-settings#_configure-telemetry-export-with-opentelemetry">enterprise telemetry export</a>, and an analysis of <a href="https://code.visualstudio.com/blogs/2026/06/19/what-50000-runs-taught-us">what 50,000 repeated agent-evaluation runs taught us</a>. The <a href="https://opentelemetry.io/blog/2026/genai-observability/">official OpenTelemetry GenAI walkthrough</a> uses VS Code instrumentation I worked on together with the Aspire Dashboard’s GenAI visualizer.</p>
+        <p>My public work includes <a href="https://code.visualstudio.com/docs/agents/guides/monitoring-agents">agent monitoring in VS Code</a>, <a href="https://code.visualstudio.com/docs/enterprise/ai-settings#_configure-telemetry-export-with-opentelemetry">enterprise telemetry export</a>, and an analysis of <a href="https://code.visualstudio.com/blogs/2026/06/19/what-50000-runs-taught-us">what 50,000 repeated agent-evaluation runs taught us</a>. The <a href="https://opentelemetry.io/blog/2026/genai-observability/">official OpenTelemetry GenAI walkthrough</a> uses VS Code instrumentation I worked on together with the Aspire Dashboard’s GenAI visualizer.</p>
 
-      <p>I’m currently building <strong>OTelux</strong>, a local-first telemetry workbench for developers and coding agents; <strong>Deskpal</strong>, verified computer use for Linux desktop applications; and <strong>pi-otel</strong>, vendor-neutral OpenTelemetry instrumentation for the Pi coding agent. Their repositories will become public with their initial releases.</p>
+        <p>I’m building <strong>OTelux</strong>, a local-first telemetry workbench for developers and coding agents; <strong>Deskpal</strong>, verified computer use for Linux desktop applications; and <strong>pi-otel</strong>, vendor-neutral traces, metrics, and logs for the Pi coding agent.</p>
 
-      <p>I also build learning projects. <a href="https://github.com/b1tank/learnc">Learn C</a><DemoLink href="https://b1tank.github.io/learnc/" label="Learn C" /> is a hand-written, runnable companion to K&amp;R, and <a href="https://github.com/b1tank/learn-ghostty">Learn Ghostty</a><DemoLink href="https://b1tank.github.io/learn-ghostty/" label="Learn Ghostty" /> is a visual, source-backed path through terminal architecture.</p>
+        <p>Before developer tools, I worked on cloud infrastructure, distributed tracing, and Azure Managed Grafana. My route into software began in chemical engineering and scientific computing, where I built aerosol models in Fortran and C++ and learned to care about performance, numerical correctness, and observable systems.</p>
 
-      <p>Other projects include <a href="https://github.com/b1tank/opensnipping-web">OpenSnipping</a><DemoLink href="https://b1tank.github.io/projects/opensnipping/demo/" label="OpenSnipping" />, <a href="https://github.com/b1tank/openmathboard">OpenMathBoard</a><DemoLink href="https://lezhi.school" label="OpenMathBoard" />, <a href="https://github.com/b1tank/boringblog">BoringBlog</a><DemoLink href="https://lezhiweng.com" label="BoringBlog" />, and <a href="https://github.com/b1tank/abc">ABC Balloon</a><DemoLink href="https://b1tank.github.io/projects/abc/demo/" label="ABC Balloon" />. I publish reusable <a href="https://github.com/b1tank/skills">AI-agent skills</a> for the coding tools and workflows I use.</p>
+        <p>Outside work, I enjoy basketball and billiards. I’m a Warriors fan and still find Stephen Curry’s combination of movement, geometry, repetition, and calm unusually instructive.</p>
+      </section>
 
-      <p>Before developer tools, I worked on cloud infrastructure, distributed tracing, and Azure Managed Grafana. My route into software began in chemical engineering and scientific computing, including a <a href="https://github.com/b1tank/coag">C++ aerosol model</a> that ran 90% faster than its legacy Fortran implementation.</p>
-
-      <p>Outside work, I enjoy basketball, billiards, and studying how Stephen Curry makes impossible geometry look routine.</p>
-
-    </article>
+      <section class="projects-section" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects</h2>
+        <ul class="project-list">
+          {projects.map((project) => (
+            <li class="project-item">
+              <div class="project-title-row">
+                <h3>{project.name}</h3>
+                <ProjectLinks name={project.name} repository={project.repository} website={project.website} />
+              </div>
+              <p>{project.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
   </div>
 </BaseLayout>

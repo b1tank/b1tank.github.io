@@ -68,11 +68,24 @@
   :root[data-theme="light"] .theme-toggle .moon, :root[data-theme="dark"] .theme-toggle .sun { opacity: 0; }
 
   .simple-page { padding-top: clamp(44px, 7vw, 72px); }
+  .home-content { max-width: 700px; }
   .plain-content { max-width: 700px; font: 1.09rem/1.72 var(--serif); }
   .plain-content p + p { margin-top: 1.35em; }
-  .demo-link { display: inline-flex; margin-left: .28em; color: var(--muted); text-decoration: none; vertical-align: .38em; }
-  .demo-link:hover { color: var(--blue); }
-  .demo-link svg { width: .72em; height: .72em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .projects-section { margin-top: clamp(52px, 8vw, 80px); padding-top: 30px; border-top: 1px solid var(--line); }
+  .projects-section h2 { font: 600 clamp(1.65rem, 4vw, 2rem)/1.2 var(--serif); letter-spacing: -.02em; }
+  .project-list { margin-top: 22px; padding: 0; list-style: none; }
+  .project-item { padding-block: 20px; border-bottom: 1px solid color-mix(in srgb, var(--line) 55%, transparent); }
+  .project-item:last-child { border-bottom: 0; }
+  .project-title-row { display: flex; align-items: center; gap: 10px; }
+  .project-title-row h3 { font: 600 1.08rem/1.35 var(--sans); }
+  .project-item p { max-width: 650px; margin-top: 7px; color: var(--muted); font: .94rem/1.65 var(--sans); }
+  .project-links { display: inline-flex; align-items: center; gap: 8px; }
+  .project-links a { display: inline-flex; padding: 2px; color: var(--muted); text-decoration: none; }
+  .project-links a:hover { color: var(--blue); }
+  .project-links svg { width: 16px; height: 16px; }
+  .project-links .github-icon { fill: currentColor; }
+  .project-links .website-icon { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
   .writing-list { padding: 0; list-style: none; }
   .writing-list li { display: flex; align-items: baseline; justify-content: space-between; gap: 28px; padding-block: 15px; border-bottom: 1px solid color-mix(in srgb, var(--line) 38%, transparent); }

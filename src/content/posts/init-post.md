@@ -5,13 +5,14 @@ published: 2021-01-18T23:34:13-08:00
 draft: false
 ---
 
-Finally, I got my first post here, after witnessing Warriors' stunning comebacks against 2 LA championship calibre contenders (today marks the MLK day's showdown between [@StephenCurry30](https://twitter.com/StephenCurry30) and [@KingJames](https://twitter.com/KingJames)) and scrapping through a whole bunch of hassles for building this [Hugo](https://gohugo.io/)-powered blog.
+After watching the Warriors' stunning comebacks against two championship-caliber LA contenders (today marks the MLK Day showdown between [@StephenCurry30](https://twitter.com/StephenCurry30) and [@KingJames](https://twitter.com/KingJames)) and working through a whole bunch of hassles to build this [Hugo](https://gohugo.io/)-powered blog, I finally have my first post here.
 
-I have already thought of jotting down that Steph's quote ***"You try to just continue to stay humble and stay in the moment. That's the best way to approach it"*** after the vintage Warriors' comeback against the Clippers on Jan 8, 2021. Interestingly, it is now noted in this post after I procrastinated until a second epic masterpiece against the other LA squad. It means a lot to me as a Curry's fan from many angles: 
-- never-quit mindset (no lead is safe when the other team is led by Steph)
-- team collaboration is the key (Steph is Stephless, but no game can be won without teammates' help)
-- big comebacks and wins are good, but be humble and move on (I view **being humble** as Steph's personal brand, and maybe what's why one of his nickname is "babyface assassin")
+I had already thought about jotting down Steph's quote, ***"You try to just continue to stay humble and stay in the moment. That's the best way to approach it,"*** after the Warriors' vintage comeback against the Clippers on Jan. 8, 2021. Interestingly, it is only now making its way into this post, after I procrastinated until a second epic masterpiece against the other LA squad. It means a lot to me as a Curry fan from many angles:
 
-So somehow the impulse of starting this blog comes from the underdog Warriors' great battles led by the underdog legend Steph. I'm still at an early career stage, but I feel like myself having a little motivation of do something meaningful, maybe just for my own notes of tech stuff and thoughts or even for inspiring someone else by my own experience. No matter what purpose it has, it has to start from some day and grow day by day. So maybe this day is a right day, because it showed me that Warriors and Steph managed to pull off those upsets by cumulative efforts rather than by one shot.
+- a never-quit mindset (no lead is safe when the other team is led by Steph)
+- team collaboration is key (Steph is selfless, and no game can be won without his teammates' help)
+- big comebacks and wins are great, but stay humble and move on (I view **being humble** as Steph's personal brand, and maybe that is why one of his nicknames is "Baby-Faced Assassin")
 
-Just before publishing this post, I got a feature request from my wife - who responded with "I can mark the first **Like** on your blog" to my family announcement of writing my init post. At this point, getting my post liked is not enabled unfortunately, but luckily it seems there is some extra push to get my blog rolling.
+So somehow, the impulse to start this blog comes from the underdog Warriors' great battles, led by the underdog legend Steph. I'm still at an early stage in my career, but I feel motivated to do something meaningful. Maybe that means just keeping my own notes about tech and other thoughts, or even inspiring someone else through my experience. Whatever purpose it serves, it has to start someday and grow day by day. Maybe this is the right day, because it showed me that the Warriors and Steph managed to pull off those upsets through cumulative effort rather than with a single shot.
+
+Just before publishing this post, I got a feature request from my wife. When I announced to my family that I was writing my first post, she responded, "I can mark the first **Like** on your blog." At this point, liking a post is unfortunately not enabled, but luckily, it seems I have some extra motivation to get my blog rolling.

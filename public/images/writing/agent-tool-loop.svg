@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" role="img" aria-labelledby="title desc">
+  <title id="title">The complete agent tool loop</title>
+  <desc id="desc">Human intent reaches an agent through an input interface. The agent uses action tools on files, apps, and services. Results return through presentation tools, while observability makes the agent trajectory visible to the human.</desc>
+  <defs>
+    <marker id="arrow" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto"><path d="M1 1l16 8-16 8z" fill="#507db8"/></marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#272820" flood-opacity=".12"/></filter>
+  </defs>
+  <rect width="1200" height="700" rx="28" fill="#f8f5ec"/>
+  <text x="600" y="74" text-anchor="middle" fill="#20201d" font-family="Georgia, serif" font-size="34" font-weight="700">A useful agent needs a complete working loop</text>
+
+  <g font-family="system-ui, sans-serif">
+    <g filter="url(#shadow)">
+      <rect x="70" y="245" width="210" height="120" rx="18" fill="#fff" stroke="#8a9fbc" stroke-width="3"/>
+      <circle cx="122" cy="294" r="25" fill="#dce8f7"/>
+      <path d="M106 335c5-24 28-24 33 0" fill="#8a9fbc"/>
+      <circle cx="122" cy="290" r="10" fill="#8a9fbc"/>
+      <text x="175" y="300" fill="#20201d" font-size="22" font-weight="700">Human</text>
+      <text x="175" y="328" fill="#69675f" font-size="16">intent and review</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="355" y="125" width="225" height="105" rx="18" fill="#fff" stroke="#b18cc5" stroke-width="3"/>
+      <text x="468" y="172" text-anchor="middle" fill="#20201d" font-size="21" font-weight="700">Input interface</text>
+      <text x="468" y="201" text-anchor="middle" fill="#69675f" font-size="16">chat and questions</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="355" y="275" width="225" height="125" rx="24" fill="#20201d" stroke="#20201d" stroke-width="3"/>
+      <text x="468" y="328" text-anchor="middle" fill="#f8f5ec" font-size="29" font-weight="750">Agent</text>
+      <text x="468" y="362" text-anchor="middle" fill="#aaa79d" font-size="16">reason, choose, act</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="665" y="125" width="225" height="105" rx="18" fill="#fff" stroke="#d49a5a" stroke-width="3"/>
+      <text x="778" y="172" text-anchor="middle" fill="#20201d" font-size="21" font-weight="700">Action tools</text>
+      <text x="778" y="201" text-anchor="middle" fill="#69675f" font-size="16">bounded capabilities</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="955" y="125" width="180" height="105" rx="18" fill="#fff" stroke="#6fa47b" stroke-width="3"/>
+      <text x="1045" y="166" text-anchor="middle" fill="#20201d" font-size="20" font-weight="700">The world</text>
+      <text x="1045" y="195" text-anchor="middle" fill="#69675f" font-size="15">files · apps</text>
+      <text x="1045" y="216" text-anchor="middle" fill="#69675f" font-size="15">services</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="805" y="315" width="285" height="110" rx="18" fill="#fff" stroke="#507db8" stroke-width="3"/>
+      <text x="948" y="362" text-anchor="middle" fill="#20201d" font-size="21" font-weight="700">Result presentation</text>
+      <text x="948" y="392" text-anchor="middle" fill="#69675f" font-size="16">text · chart · image · app</text>
+    </g>
+
+    <g filter="url(#shadow)">
+      <rect x="355" y="500" width="535" height="112" rx="18" fill="#eef3fa" stroke="#507db8" stroke-width="3"/>
+      <text x="623" y="547" text-anchor="middle" fill="#20201d" font-size="21" font-weight="700">Trajectory and observability</text>
+      <text x="623" y="579" text-anchor="middle" fill="#69675f" font-size="16">model calls · tool calls · failures · timing · evidence</text>
+    </g>
+  </g>
+
+  <g fill="none" stroke="#507db8" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)">
+    <path d="M280 275C315 240 326 198 355 183"/>
+    <path d="M468 230v45"/>
+    <path d="M580 312C620 270 628 214 665 183"/>
+    <path d="M890 178h65"/>
+    <path d="M1045 230v56c0 18-8 27-25 29"/>
+    <path d="M805 370C730 460 370 460 280 335"/>
+    <path d="M468 400v100"/>
+    <path d="M890 556h95c65 0 98-50 98-109"/>
+    <path d="M355 556H210c-57 0-91-55-91-191"/>
+  </g>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 390" width="1200" height="390" role="img" aria-labelledby="title desc">
+  <title id="title">The path from application to investigation</title>
+  <desc id="desc">An application produces telemetry through instrumentation, exports it with OTLP through authenticated ingestion, stores it in a backend, and presents it in an investigation interface.</desc>
+  <defs>
+    <marker id="arrow" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto"><path d="M1 1l16 8-16 8z" fill="#507db8"/></marker>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#272820" flood-opacity=".10"/></filter>
+  </defs>
+  <rect width="1200" height="390" rx="28" fill="#f8f5ec"/>
+  <text x="600" y="78" text-anchor="middle" fill="#20201d" font-family="Georgia, serif" font-size="32" font-weight="700">Follow the telemetry, not only the dashboard</text>
+
+  <g font-family="system-ui, sans-serif" text-anchor="middle" filter="url(#shadow)">
+    <g><rect x="55" y="135" width="155" height="105" rx="16" fill="#fff" stroke="#829ec3" stroke-width="3"/><text x="133" y="180" fill="#20201d" font-size="20" font-weight="700">Application</text><text x="133" y="209" fill="#69675f" font-size="15">agent or service</text></g>
+    <g><rect x="245" y="135" width="165" height="105" rx="16" fill="#fff" stroke="#a486b8" stroke-width="3"/><text x="328" y="180" fill="#20201d" font-size="19" font-weight="700">Instrumentation</text><text x="328" y="209" fill="#69675f" font-size="15">traces · logs · metrics</text></g>
+    <g><rect x="445" y="135" width="135" height="105" rx="16" fill="#fff" stroke="#d49a5a" stroke-width="3"/><text x="513" y="180" fill="#20201d" font-size="20" font-weight="700">Export</text><text x="513" y="209" fill="#69675f" font-size="15">OTLP</text></g>
+    <g><rect x="615" y="135" width="170" height="105" rx="16" fill="#fff" stroke="#c97670" stroke-width="3"/><text x="700" y="176" fill="#20201d" font-size="18" font-weight="700">Authenticated</text><text x="700" y="199" fill="#20201d" font-size="18" font-weight="700">ingestion</text><text x="700" y="224" fill="#69675f" font-size="14">identity · policy</text></g>
+    <g><rect x="820" y="135" width="135" height="105" rx="16" fill="#fff" stroke="#6fa47b" stroke-width="3"/><text x="888" y="180" fill="#20201d" font-size="20" font-weight="700">Storage</text><text x="888" y="209" fill="#69675f" font-size="15">retain · query</text></g>
+    <g><rect x="990" y="135" width="155" height="105" rx="16" fill="#20201d" stroke="#20201d" stroke-width="3"/><text x="1068" y="176" fill="#f8f5ec" font-size="19" font-weight="700">Investigation</text><text x="1068" y="202" fill="#f8f5ec" font-size="19" font-weight="700">interface</text><text x="1068" y="226" fill="#aaa79d" font-size="14">understand · act</text></g>
+  </g>
+
+  <g fill="none" stroke="#507db8" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)">
+    <path d="M210 188h35"/><path d="M410 188h35"/><path d="M580 188h35"/><path d="M785 188h35"/><path d="M955 188h35"/>
+  </g>
+  <path d="M133 285h935" stroke="#d4cec0" stroke-width="2"/>
+  <g font-family="system-ui, sans-serif" font-size="15" fill="#69675f" text-anchor="middle">
+    <text x="133" y="319">generate</text><text x="328" y="319">shape</text><text x="513" y="319">transport</text><text x="700" y="319">govern</text><text x="888" y="319">preserve</text><text x="1068" y="319">explain</text>
+  </g>
+</svg>

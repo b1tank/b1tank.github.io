@@ -1,17 +1,17 @@
 ---
-title: "Init Post"
+title: "No Lead Is Safe"
 description: "The first entry in my old blog: an underdog story about starting, learning, and showing up."
 published: 2021-01-18T23:34:13-08:00
 draft: false
 ---
 
-After watching the Warriors' stunning comebacks against two championship-caliber LA contenders (today marks the MLK Day showdown between [@StephenCurry30](https://twitter.com/StephenCurry30) and [@KingJames](https://twitter.com/KingJames)) and working through a whole bunch of hassles to build this [Hugo](https://gohugo.io/)-powered blog, I finally have my first post here.
+After watching the Warriors pull off a [22-point comeback against the Clippers](https://www.youtube.com/watch?v=ARu0jk6t4gY) and then upset the Lakers in an [MLK Day showdown](https://www.youtube.com/watch?v=hPFu6PgPnW8) between [@StephenCurry30](https://twitter.com/StephenCurry30) and [@KingJames](https://twitter.com/KingJames), and after working through a whole bunch of hassles to build this [Hugo](https://gohugo.io/)-powered blog, I finally have my first post here.
 
 I had already thought about jotting down Steph's quote after the Warriors' vintage comeback against the Clippers on Jan. 8, 2021:
 
 > *“You try to just continue to stay humble and stay in the moment. That’s the best way to approach it.”*
 
-Interestingly, it is only now making its way into this post, after I procrastinated until a second epic masterpiece against the other LA squad. It means a lot to me as a Curry fan from many angles:
+Interestingly, the quote is only now making its way into this post, after I procrastinated until a second epic masterpiece against the other LA squad. It means a lot to me as a Curry fan from many angles:
 
 - a never-quit mindset (no lead is safe when the other team is led by Steph)
 - team collaboration is key (Steph is selfless, and no game can be won without his teammates' help)

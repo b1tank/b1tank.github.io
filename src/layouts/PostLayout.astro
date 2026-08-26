@@ -14,36 +14,89 @@ const { title, description, published, updated } = Astro.props;
   <article class="shell post-page">
     <header class="post-header">
       <h1>{title}</h1>
-      <p><time datetime={published.toISOString()}>{formatDate(published)}</time>{updated && <> · updated {formatDate(updated)}</>}</p>
+      <p class="post-meta"><time datetime={published.toISOString()}>{formatDate(published)}</time>{updated && <> · updated {formatDate(updated)}</>}</p>
     </header>
     <div class="prose"><slot /></div>
   </article>
 </BaseLayout>
 
 <script>
-  const prepareCode = async () => {
+  const writeClipboard = async (text: string) => {
+    if (window.isSecureContext && navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.append(textarea);
+    textarea.select();
+    // Required as a fallback on trusted LAN pages served over plain HTTP.
+    const legacyDocument = document as unknown as { execCommand(command: string): boolean };
+    const copied = legacyDocument.execCommand('copy');
+    textarea.remove();
+    if (!copied) throw new Error('Clipboard copy was rejected');
+  };
+
+  const prepareTableOfContents = () => {
+    const prose = document.querySelector<HTMLElement>('.prose');
+    const article = prose?.closest('article');
+    if (!prose || !article) return;
+
+    const headings = [...prose.querySelectorAll<HTMLElement>('h2, h3')];
+    const wordCount = prose.textContent?.trim().split(/\s+/).length || 0;
+    if (wordCount < 700 || headings.length < 2) return;
+
+    const nav = document.createElement('nav');
+    nav.className = 'article-toc';
+    nav.setAttribute('aria-label', 'Table of contents');
+    const label = document.createElement('p');
+    label.textContent = 'In this article';
+    const list = document.createElement('ol');
+    for (const heading of headings) {
+      if (!heading.id) continue;
+      const item = document.createElement('li');
+      if (heading.tagName === 'H3') item.className = 'toc-subsection';
+      const link = document.createElement('a');
+      link.href = `#${heading.id}`;
+      link.textContent = heading.textContent || '';
+      item.append(link);
+      list.append(item);
+    }
+    nav.append(label, list);
+    headings[0].before(nav);
+  };
+
+  const codeText = (pre: HTMLElement) => {
+    const lines = [...pre.querySelectorAll<HTMLElement>('code .line')];
+    if (lines.length) return lines.map((line) => line.textContent || '').join('\n');
+    return pre.querySelector('code')?.textContent || '';
+  };
+
+  const prepareCode = () => {
     const blocks = [...document.querySelectorAll<HTMLElement>('.prose pre')];
-    const mermaidBlocks = blocks.filter((pre) => pre.dataset.language === 'mermaid');
     for (const pre of blocks) {
-      if (mermaidBlocks.includes(pre)) continue;
       const button = document.createElement('button');
-      button.type = 'button'; button.className = 'copy-code'; button.textContent = 'Copy';
+      button.type = 'button';
+      button.className = 'copy-code';
+      button.textContent = 'Copy';
       button.setAttribute('aria-label', 'Copy code');
+      button.setAttribute('aria-live', 'polite');
       button.addEventListener('click', async () => {
-        await navigator.clipboard.writeText(pre.querySelector('code')?.textContent || '');
-        button.textContent = 'Copied'; window.setTimeout(() => button.textContent = 'Copy', 1500);
+        try {
+          await writeClipboard(codeText(pre));
+          button.textContent = 'Copied';
+        } catch {
+          button.textContent = 'Copy failed';
+        }
+        window.setTimeout(() => button.textContent = 'Copy', 1500);
       });
       pre.append(button);
     }
-    if (mermaidBlocks.length) {
-      const { default: mermaid } = await import('mermaid');
-      mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'neutral' });
-      mermaidBlocks.forEach((pre) => {
-        const graph = document.createElement('div'); graph.className = 'mermaid';
-        graph.textContent = pre.querySelector('code')?.textContent || ''; pre.replaceWith(graph);
-      });
-      await mermaid.run({ querySelector: '.mermaid' });
-    }
   };
+  prepareTableOfContents();
   prepareCode();
 </script>

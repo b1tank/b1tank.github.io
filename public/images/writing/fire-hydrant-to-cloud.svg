@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700" role="img" aria-labelledby="title desc">
+  <title id="title">From fire hydrant to cloud infrastructure</title>
+  <desc id="desc">A fire hydrant, pipes, and water system on the left connect through analogy to a cloud service, network, and shared infrastructure on the right.</desc>
+  <rect width="1200" height="700" rx="28" fill="#f8f5ec"/>
+  <path d="M600 80v540" stroke="#d4cec0" stroke-width="3" stroke-dasharray="10 12"/>
+  <text x="300" y="70" text-anchor="middle" fill="#69675f" font-family="system-ui, sans-serif" font-size="22" font-weight="700">PHYSICAL WORLD</text>
+  <text x="900" y="70" text-anchor="middle" fill="#69675f" font-family="system-ui, sans-serif" font-size="22" font-weight="700">DIGITAL WORLD</text>
+
+  <g transform="translate(200 128)">
+    <path d="M74 303h154v52H74z" fill="#9b3a32"/>
+    <path d="M96 122h110v181H96z" fill="#c64f42"/>
+    <path d="M112 78h78l28 44H84z" fill="#d96454"/>
+    <rect x="125" y="35" width="52" height="43" rx="8" fill="#9b3a32"/>
+    <rect x="105" y="0" width="92" height="38" rx="19" fill="#c64f42"/>
+    <circle cx="96" cy="185" r="31" fill="#9b3a32"/>
+    <circle cx="206" cy="185" r="31" fill="#9b3a32"/>
+    <circle cx="96" cy="185" r="16" fill="#e6a29a"/>
+    <circle cx="206" cy="185" r="16" fill="#e6a29a"/>
+    <path d="M151 355v77M151 402H20M151 402h131" fill="none" stroke="#477aaa" stroke-width="24" stroke-linecap="round"/>
+    <text x="151" y="480" text-anchor="middle" fill="#20201d" font-family="Georgia, serif" font-size="26" font-weight="700">Fire hydrant</text>
+    <text x="151" y="513" text-anchor="middle" fill="#69675f" font-family="system-ui, sans-serif" font-size="18">pipes · pressure · shared supply</text>
+  </g>
+
+  <g transform="translate(750 136)">
+    <path d="M68 208c-38 0-68-28-68-63 0-32 25-59 58-63 13-48 57-82 109-82 57 0 104 40 113 93 40 2 72 33 72 71 0 40-35 72-78 72H68z" fill="#dce8f7" stroke="#2458a6" stroke-width="5"/>
+    <rect x="60" y="281" width="232" height="62" rx="12" fill="#fff" stroke="#2458a6" stroke-width="4"/>
+    <circle cx="91" cy="312" r="9" fill="#62a06a"/>
+    <path d="M122 300h135M122 323h93" stroke="#88a7d2" stroke-width="9" stroke-linecap="round"/>
+    <rect x="60" y="369" width="232" height="62" rx="12" fill="#fff" stroke="#2458a6" stroke-width="4"/>
+    <circle cx="91" cy="400" r="9" fill="#62a06a"/>
+    <path d="M122 388h135M122 411h93" stroke="#88a7d2" stroke-width="9" stroke-linecap="round"/>
+    <path d="M176 236v45" stroke="#2458a6" stroke-width="8"/>
+    <text x="176" y="478" text-anchor="middle" fill="#20201d" font-family="Georgia, serif" font-size="26" font-weight="700">Cloud service</text>
+    <text x="176" y="511" text-anchor="middle" fill="#69675f" font-family="system-ui, sans-serif" font-size="18">network · capacity · shared infrastructure</text>
+  </g>
+
+  <g transform="translate(505 250)">
+    <rect width="190" height="88" rx="44" fill="#20201d"/>
+    <text x="95" y="38" text-anchor="middle" fill="#f5f2e9" font-family="system-ui, sans-serif" font-size="17" font-weight="650">ANALOGY</text>
+    <path d="M54 57h72" stroke="#78a9ef" stroke-width="5" stroke-linecap="round"/>
+    <path d="m118 47 14 10-14 10" fill="none" stroke="#78a9ef" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

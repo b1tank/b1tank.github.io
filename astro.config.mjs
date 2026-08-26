@@ -31,7 +31,6 @@ export default defineConfig({
     '/projects/cfd-basics/': 'https://github.com/b1tank/computational-fluid-dynamics-basics',
     '/projects/dsm-f90/': 'https://github.com/b1tank/DSM-f90',
     '/projects/pyspark-kmeans/': 'https://github.com/b1tank/kmeans-clustering-pyspark',
-    '/projects/git-remote-helper/': 'https://github.com/b1tank/git-remote-helper',
     '/projects/wireguard-gnome/': 'https://github.com/b1tank/wg-gnome-ext',
     '/projects/container-use-web/': 'https://github.com/b1tank/container-use-web',
     '/projects/otelux/': '/',
@@ -49,9 +48,5 @@ export default defineConfig({
     '/tags/warriors/': '/writing/',
     '/post/2021/01/18/init-post/': '/writing/init-post/',
     '/post/2021/02/20/tldr/': '/writing/tldr/',
-  },
-  vite: {
-    // Mermaid is intentionally a lazy, article-only chunk.
-    build: { chunkSizeWarningLimit: 800 },
   },
 });

@@ -1,6 +1,34 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectLinks from '../components/ProjectLinks.astro';
+import PublicWorkIcon from '../components/PublicWorkIcon.astro';
+
+const publicWork = [
+  {
+    title: 'Agent monitoring in VS Code',
+    href: 'https://code.visualstudio.com/docs/agents/guides/monitoring-agents',
+    description: 'The public guide to collecting and inspecting traces, logs, and metrics from agent sessions.',
+    icon: 'trace' as const,
+  },
+  {
+    title: 'What 50,000 agent runs taught us',
+    href: 'https://code.visualstudio.com/blogs/2026/06/19/what-50000-runs-taught-us',
+    description: 'A co-authored analysis of repeated evaluation runs across models, prompts, and agent behavior.',
+    icon: 'chart' as const,
+  },
+  {
+    title: 'Enterprise OpenTelemetry controls',
+    href: 'https://code.visualstudio.com/docs/enterprise/ai-settings#_configure-telemetry-export-with-opentelemetry',
+    description: 'Policy-backed telemetry export controls for enterprise-managed VS Code environments.',
+    icon: 'shield' as const,
+  },
+  {
+    title: 'OpenTelemetry GenAI walkthrough',
+    href: 'https://opentelemetry.io/blog/2026/genai-observability/',
+    description: 'The official walkthrough uses VS Code instrumentation I worked on with the Aspire Dashboard visualizer.',
+    icon: 'book' as const,
+  },
+];
 
 const projects = [
   {
@@ -22,7 +50,7 @@ const projects = [
     name: '乐之翁',
     repository: 'https://github.com/b1tank/boringblog',
     website: 'https://lezhiweng.com',
-    description: 'A production learning platform that turns an experienced teacher’s original classroom material into structured, interactive high-school mathematics method courses with polished formulas, diagrams, and multiple learning paths.',
+    description: 'A production learning platform that turns my dad’s original classroom material into structured, interactive high-school mathematics method courses with polished formulas, diagrams, and multiple learning paths.',
   },
   {
     name: 'OpenMathBoard',
@@ -40,12 +68,12 @@ const projects = [
     name: 'Learn C',
     repository: 'https://github.com/b1tank/learnc',
     website: 'https://b1tank.github.io/learnc/',
-    description: 'A hand-written, runnable browser companion to K&R. Every example runs without signup, tracking, or generated course content.',
+    description: 'Runnable browser lessons for K&R and Salvatore Sanfilippo’s 37-part Let’s Learn C series, with hand-written walkthroughs, modern-C notes, and source-linked examples.',
   },
   {
     name: 'OpenSnipping',
     repository: 'https://github.com/b1tank/opensnipping-web',
-    website: 'https://b1tank.github.io/projects/opensnipping/demo/',
+    website: 'https://yummyjars.com/opensnipping/',
     description: 'A browser-based screenshot and annotation tool with local editing, export, and no required backend.',
   },
   {
@@ -63,11 +91,6 @@ const projects = [
     name: 'WireGuard Manager for GNOME',
     repository: 'https://github.com/b1tank/wg-gnome-ext',
     description: 'A GNOME Shell extension for discovering, controlling, and inspecting WireGuard tunnels from the desktop panel.',
-  },
-  {
-    name: 'Git Remote Helper',
-    repository: 'https://github.com/b1tank/git-remote-helper',
-    description: 'A VS Code extension for turning selected local lines into durable GitHub links pinned to a commit.',
   },
   {
     name: 'Coag',
@@ -97,13 +120,30 @@ const projects = [
       <section class="plain-content intro" aria-label="About Zhichao Li">
         <p>I live in Seattle and work on AI agents in <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://github.com/features/copilot">GitHub Copilot</a> at Microsoft. I focus on agent products, evaluation, and OpenTelemetry-based observability.</p>
 
-        <p>My work GitHub identity is <a href="https://github.com/zhichli">@zhichli</a>, which contains much of my open-source work and contributions. My public work includes <a href="https://code.visualstudio.com/docs/agents/guides/monitoring-agents">agent monitoring in VS Code</a>, <a href="https://code.visualstudio.com/docs/enterprise/ai-settings#_configure-telemetry-export-with-opentelemetry">enterprise telemetry export</a>, and an analysis of <a href="https://code.visualstudio.com/blogs/2026/06/19/what-50000-runs-taught-us">what 50,000 repeated agent-evaluation runs taught us</a>. The <a href="https://opentelemetry.io/blog/2026/genai-observability/">official OpenTelemetry GenAI walkthrough</a> uses VS Code instrumentation I worked on together with the Aspire Dashboard’s GenAI visualizer.</p>
-
         <p>I’m building <strong>OTelux</strong>, a local-first telemetry workbench for developers and coding agents; <strong>Deskpal</strong>, verified computer use for Linux desktop applications; and <strong>pi-otel</strong>, vendor-neutral traces, metrics, and logs for the Pi coding agent.</p>
 
         <p>Before developer tools, I worked on cloud infrastructure, distributed tracing, and Azure Managed Grafana. My route into software began in chemical engineering and scientific computing, where I built aerosol models in Fortran and C++ and learned to care about performance, numerical correctness, and observable systems.</p>
 
         <p>Outside work, I enjoy basketball and billiards. I’m a Warriors fan and still find Stephen Curry’s combination of movement, geometry, repetition, and calm unusually instructive.</p>
+      </section>
+
+      <section class="public-work-section" aria-labelledby="public-work-heading">
+        <h2 id="public-work-heading">Public work</h2>
+        <p>Much of my open-source work and contribution history lives under <a href="https://github.com/zhichli">@zhichli</a>.</p>
+        <ul class="public-work-list">
+          {publicWork.map((item) => (
+            <li>
+              <a href={item.href}>
+                <span class="public-work-icon"><PublicWorkIcon type={item.icon} /></span>
+                <span>
+                  <strong>{item.title}</strong>
+                  <small>{item.description}</small>
+                </span>
+                <svg class="public-work-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section class="projects-section" aria-labelledby="projects-heading">

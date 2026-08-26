@@ -83,7 +83,7 @@
   .public-work-list strong, .public-work-list small { display: block; }
   .public-work-list strong { font: 650 1rem/1.4 var(--sans); }
   .public-work-list small { margin-top: 3px; color: var(--muted); font: .84rem/1.5 var(--sans); }
-  .public-work-icon { display: grid; width: 38px; height: 38px; place-items: center; color: var(--blue); border: 1px solid var(--line); border-radius: 9px; background: var(--paper-deep); }
+  .public-work-icon { display: grid; width: 38px; height: 38px; place-items: center; color: var(--blue); }
   .public-work-icon img { width: 24px; height: 24px; object-fit: contain; }
   .public-work-arrow { width: 17px; height: 17px; fill: none; stroke: var(--muted); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .public-work-list a:hover .public-work-arrow { stroke: var(--blue); }
@@ -95,7 +95,7 @@
   .oss-contribution-list strong, .oss-contribution-list small { display: block; }
   .oss-contribution-list strong { font: 650 .9rem/1.4 var(--sans); }
   .oss-contribution-list small { margin-top: 3px; color: var(--muted); font: .78rem/1.45 var(--sans); }
-  .oss-contribution-icon { display: grid; width: 32px; height: 32px; place-items: center; color: var(--blue); border-radius: 8px; background: var(--paper-deep); }
+  .oss-contribution-icon { display: grid; width: 32px; height: 32px; place-items: center; color: var(--blue); }
   .oss-contribution-icon img { width: 30px; height: 30px; padding: 1px; border-radius: 6px; object-fit: contain; }
 
   .projects-section { margin-top: clamp(52px, 8vw, 80px); padding-top: 30px; border-top: 1px solid var(--line); }

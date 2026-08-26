@@ -1,32 +1,64 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectLinks from '../components/ProjectLinks.astro';
-import PublicWorkIcon from '../components/PublicWorkIcon.astro';
 
 const publicWork = [
   {
     title: 'Agent monitoring in VS Code',
     href: 'https://code.visualstudio.com/docs/agents/guides/monitoring-agents',
     description: 'The public guide to collecting and inspecting traces, logs, and metrics from agent sessions.',
-    icon: 'trace' as const,
+    image: '/images/logos/vscode.png',
   },
   {
     title: 'What 50,000 agent runs taught us',
     href: 'https://code.visualstudio.com/blogs/2026/06/19/what-50000-runs-taught-us',
     description: 'A co-authored analysis of repeated evaluation runs across models, prompts, and agent behavior.',
-    icon: 'chart' as const,
+    image: '/images/logos/vscode.png',
   },
   {
     title: 'Enterprise OpenTelemetry controls',
     href: 'https://code.visualstudio.com/docs/enterprise/ai-settings#_configure-telemetry-export-with-opentelemetry',
     description: 'Policy-backed telemetry export controls for enterprise-managed VS Code environments.',
-    icon: 'shield' as const,
+    image: '/images/logos/vscode.png',
   },
   {
     title: 'OpenTelemetry GenAI walkthrough',
     href: 'https://opentelemetry.io/blog/2026/genai-observability/',
     description: 'The official walkthrough uses VS Code instrumentation I worked on with the Aspire Dashboard visualizer.',
-    icon: 'book' as const,
+    image: '/images/logos/opentelemetry.png',
+  },
+];
+
+const ossContributions = [
+  {
+    title: 'VS Code',
+    href: 'https://github.com/microsoft/vscode/pulls?q=is%3Apr+is%3Amerged+author%3Azhichli',
+    description: 'Agent Host OpenTelemetry, trace context, content controls, and model telemetry.',
+    image: '/images/logos/vscode.png',
+  },
+  {
+    title: 'VS Code Copilot Chat',
+    href: 'https://github.com/microsoft/vscode-copilot-chat/pulls?q=is%3Apr+is%3Amerged+author%3Azhichli',
+    description: 'GenAI instrumentation, local SQLite trace storage, OTLP export, and agent activity signals.',
+    image: '/images/logos/vscode.png',
+  },
+  {
+    title: 'Grafana',
+    href: 'https://github.com/grafana/grafana/pulls?q=is%3Apr+is%3Amerged+author%3Azhichli',
+    description: 'Fixed OpenTelemetry Jaeger context propagation and added configurable outbound user-agent headers.',
+    image: '/images/avatars/grafana.jpg',
+  },
+  {
+    title: 'Dagger container-use',
+    href: 'https://github.com/dagger/container-use/pulls?q=is%3Apr+is%3Amerged+author%3Azhichli',
+    description: 'Native Windows support, a Git-notes hang fix, and command documentation.',
+    image: '/images/avatars/dagger.png',
+  },
+  {
+    title: 'Pi coding agent',
+    href: 'https://github.com/earendil-works/pi/pulls?q=is%3Apr+is%3Amerged+author%3Azhichli',
+    description: 'Clarified and reconciled coding-agent keybinding behavior in the public documentation.',
+    image: '/images/logos/pi.svg',
   },
 ];
 
@@ -129,12 +161,11 @@ const projects = [
 
       <section class="public-work-section" aria-labelledby="public-work-heading">
         <h2 id="public-work-heading">Public work</h2>
-        <p>Much of my open-source work and contribution history lives under <a href="https://github.com/zhichli">@zhichli</a>.</p>
         <ul class="public-work-list">
           {publicWork.map((item) => (
             <li>
               <a href={item.href}>
-                <span class="public-work-icon"><PublicWorkIcon type={item.icon} /></span>
+                <span class="public-work-icon"><img src={item.image} alt="" /></span>
                 <span>
                   <strong>{item.title}</strong>
                   <small>{item.description}</small>
@@ -144,6 +175,23 @@ const projects = [
             </li>
           ))}
         </ul>
+
+        <div class="oss-contributions">
+          <h3>Open source contributions</h3>
+          <ul class="oss-contribution-list">
+            {ossContributions.map((item) => (
+              <li>
+                <a href={item.href}>
+                  <span class="oss-contribution-icon"><img src={item.image} alt="" /></span>
+                  <span>
+                    <strong>{item.title}</strong>
+                    <small>{item.description}</small>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       <section class="projects-section" aria-labelledby="projects-heading">

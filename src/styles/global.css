@@ -84,9 +84,19 @@
   .public-work-list strong { font: 650 1rem/1.4 var(--sans); }
   .public-work-list small { margin-top: 3px; color: var(--muted); font: .84rem/1.5 var(--sans); }
   .public-work-icon { display: grid; width: 38px; height: 38px; place-items: center; color: var(--blue); border: 1px solid var(--line); border-radius: 9px; background: var(--paper-deep); }
-  .public-work-icon svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .public-work-icon img { width: 24px; height: 24px; object-fit: contain; }
   .public-work-arrow { width: 17px; height: 17px; fill: none; stroke: var(--muted); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .public-work-list a:hover .public-work-arrow { stroke: var(--blue); }
+  .oss-contributions { margin-top: 30px; }
+  .oss-contributions h3 { font: 600 1.18rem/1.35 var(--serif); }
+  .oss-contribution-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; padding: 0; list-style: none; }
+  .oss-contribution-list a { display: grid; grid-template-columns: 32px 1fr; align-items: start; gap: 10px; height: 100%; padding: 13px; color: var(--ink); border: 1px solid var(--line); border-radius: 6px; background: color-mix(in srgb, var(--paper-deep) 40%, transparent); text-decoration: none; }
+  .oss-contribution-list a:hover { color: var(--blue); border-color: color-mix(in srgb, var(--blue) 45%, var(--line)); }
+  .oss-contribution-list strong, .oss-contribution-list small { display: block; }
+  .oss-contribution-list strong { font: 650 .9rem/1.4 var(--sans); }
+  .oss-contribution-list small { margin-top: 3px; color: var(--muted); font: .78rem/1.45 var(--sans); }
+  .oss-contribution-icon { display: grid; width: 32px; height: 32px; place-items: center; color: var(--blue); border-radius: 8px; background: var(--paper-deep); }
+  .oss-contribution-icon img { width: 30px; height: 30px; padding: 1px; border-radius: 6px; object-fit: contain; }
 
   .projects-section { margin-top: clamp(52px, 8vw, 80px); padding-top: 30px; border-top: 1px solid var(--line); }
   .project-list { margin-top: 22px; padding: 0; list-style: none; }
@@ -125,6 +135,7 @@
     .simple-page { padding-top: 40px; }
     .plain-content { font-size: 1.04rem; }
     .writing-list li { align-items: flex-start; flex-direction: column; gap: 4px; }
+    .oss-contribution-list { grid-template-columns: 1fr; }
     .site-footer { margin-top: 56px; }
   }
 }

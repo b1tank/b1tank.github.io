@@ -1,6 +1,6 @@
 # b1tank.github.io
 
-The personal site of Zhichao Li (b1tank), built with Astro and deployed to GitHub Pages.
+The personal site of Zhichao Li (@b1tank), built with Astro and deployed to GitHub Pages.
 
 ## Development
 

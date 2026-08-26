@@ -5,7 +5,7 @@ import { publishedPosts } from '../lib/content';
 export async function GET(context) {
   const posts = publishedPosts(await getCollection('posts'));
   return rss({
-    title: 'Zhichao Li {b1tank}',
+    title: 'Zhichao Li @b1tank',
     description: 'Writing about software, systems, visual explanations, and building products.',
     site: context.site,
     items: posts.map((post) => ({

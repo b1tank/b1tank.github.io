@@ -3,6 +3,6 @@
   <circle cx="1040" cy="90" r="270" fill="#2563eb" opacity=".32"/>
   <circle cx="100" cy="590" r="230" fill="#d69e2e" opacity=".15"/>
   <text x="100" y="265" fill="#f8fafc" font-family="ui-sans-serif,system-ui" font-size="88" font-weight="700">Zhichao Li</text>
-  <text x="100" y="355" fill="#60a5fa" font-family="ui-monospace,monospace" font-size="46">aka b1tank</text>
+  <text x="100" y="355" fill="#60a5fa" font-family="ui-monospace,monospace" font-size="46">@b1tank</text>
   <text x="100" y="455" fill="#cbd5e1" font-family="ui-sans-serif,system-ui" font-size="34">Software · systems · visual explanations</text>
 </svg>

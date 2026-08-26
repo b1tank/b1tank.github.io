@@ -10,7 +10,7 @@ const active = (href: string) => href === '/' ? path === '/' : path.startsWith(h
   <div class="shell header-inner">
     <div class="identity">
       <a class="site-name" href="/">Zhichao Li</a>
-      <a class="site-handle" href="https://github.com/b1tank" aria-label="b1tank on GitHub">{'{b1tank}'}</a>
+      <a class="site-handle" href="https://github.com/b1tank" aria-label="@b1tank on GitHub">@b1tank</a>
     </div>
     <nav aria-label="Primary navigation"><ul class="nav-list">
       {links.map((link) => <li><a href={link.href} aria-current={active(link.href) ? 'page' : undefined}>{link.label}</a></li>)}

@@ -104,6 +104,9 @@
   .project-item:last-child { border-bottom: 0; }
   .project-title-row { display: flex; align-items: center; gap: 10px; }
   .project-title-row h3 { font: 600 1.08rem/1.35 var(--sans); }
+  .project-status { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 999px; font: 650 .66rem/1.4 var(--sans); letter-spacing: .02em; }
+  .project-status svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+  .project-status-experimental { color: var(--gold); border: 1px solid color-mix(in srgb, var(--gold) 38%, var(--line)); background: color-mix(in srgb, var(--gold) 8%, transparent); }
   .project-item p { max-width: 650px; margin-top: 7px; color: var(--muted); font: .94rem/1.65 var(--sans); }
   .project-links { display: inline-flex; align-items: center; gap: 8px; }
   .project-links a { display: inline-flex; padding: 2px; color: var(--muted); text-decoration: none; }

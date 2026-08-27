@@ -69,11 +69,6 @@ const projects = [
     description: 'A local-first OpenTelemetry workbench for receiving, exploring, and correlating traces, logs, and metrics. It keeps telemetry in a retention-bounded local SQLite database and gives coding agents read-only evidence through MCP.',
   },
   {
-    name: 'Deskpal',
-    repository: 'https://github.com/b1tank/deskpal',
-    description: 'Verified computer use for Linux: a Playwright-like MCP server that gives AI agents eyes and hands for native GTK, Qt, Electron, X11, and Wayland applications.',
-  },
-  {
     name: 'pi-otel',
     repository: 'https://github.com/b1tank/pi-otel',
     description: 'Vendor-neutral OpenTelemetry instrumentation for the Pi coding agent, exporting traces, metrics, and logs with GenAI semantic conventions, privacy-first content controls, and bounded shutdown behavior.',
@@ -119,6 +114,12 @@ const projects = [
     description: 'One source of truth for reusable skills, prompts, agents, instructions, and MCP configuration across VS Code, Copilot CLI, Claude Code, Codex, Pi, and OpenCode.',
   },
   {
+    name: 'Deskpal',
+    repository: 'https://github.com/b1tank/deskpal',
+    experimental: true,
+    description: 'Experimental Linux desktop-control MCP server for X11/Xwayland, AT-SPI, OCR, and isolated Xvfb verification. Native-Wayland background control is not available in the public build.',
+  },
+  {
     name: 'WireGuard Manager for GNOME',
     repository: 'https://github.com/b1tank/wg-gnome-ext',
     description: 'A GNOME Shell extension for discovering, controlling, and inspecting WireGuard tunnels from the desktop panel.',
@@ -151,7 +152,7 @@ const projects = [
       <section class="plain-content intro" aria-label="About Zhichao Li">
         <p>I live in Seattle and work on AI agents in <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://github.com/features/copilot">GitHub Copilot</a> at Microsoft. I focus on agent products, evaluation, and OpenTelemetry-based observability.</p>
 
-        <p>I’m building <strong>OTelux</strong>, a local-first telemetry workbench for developers and coding agents; <strong>Deskpal</strong>, verified computer use for Linux desktop applications; and <strong>pi-otel</strong>, vendor-neutral traces, metrics, and logs for the Pi coding agent.</p>
+        <p>I’m building <strong>OTelux</strong>, a local-first telemetry workbench for developers and coding agents, and <strong>pi-otel</strong>, vendor-neutral traces, metrics, and logs for the Pi coding agent.</p>
 
         <p>Before developer tools, I worked on cloud infrastructure, distributed tracing, and Azure Managed Grafana. My route into software began in chemical engineering and scientific computing, where I built aerosol models in Fortran and C++ and learned to care about performance, numerical correctness, and observable systems.</p>
 
@@ -200,6 +201,12 @@ const projects = [
             <li class="project-item">
               <div class="project-title-row">
                 <h3>{project.name}</h3>
+                {project.experimental && (
+                  <span class="project-status project-status-experimental" title="Experimental project">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v5l-5.5 9.5A2.3 2.3 0 0 0 6.5 21h11a2.3 2.3 0 0 0 2-3.5L14 8V3M7.5 15h9"/></svg>
+                    Experimental
+                  </span>
+                )}
                 <ProjectLinks name={project.name} repository={project.repository} website={project.website} />
               </div>
               <p>{project.description}</p>

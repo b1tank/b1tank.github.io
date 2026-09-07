@@ -1,21 +1,21 @@
 ---
 title: "How Far Can a 64 GB M2 Ultra Push Local LLMs?"
-description: "A practical test of Qwen 3.8, a fast Qwen MoE, oMLX, MTP, screenshots, long context, and a 284B DeepSeek model streamed from SSD with DwarfStar."
+description: "A practical test of Qwen 3.8, a fast Qwen MoE, oMLX, MTP, screenshots, long context, and DwarfStar models on a 64 GB M2 Ultra."
 published: 2026-09-03T10:00:00-07:00
-draft: true
+updated: 2026-09-08T22:30:00-07:00
+draft: false
 ---
 
 I wanted a local model I could actually use: a coding agent with thinking, reliable tool calls, screenshot input, and enough context for a real repository. I also wanted to know where my Mac stopped being fast and started merely proving that something was possible.
 
 The experiment grew one model at a time. I began with a normal 27B Qwen model, moved to the quantizations curated by [oMLX author Jun Kim](https://huggingface.co/Jundot/models), tried speculative decoding, found a much faster MoE, and finally loaded a 284B DeepSeek model through [DwarfStar](https://github.com/antirez/ds4). The last model can allocate a million-token context on this machine. That does not mean I want to wait for it.
 
-> **Photo placeholder — Mac Studio and desk setup.** A landscape image would work well as the article cover.
-
 ## The answer first
 
 | Use | Model and mode | What I measured |
 | --- | --- | ---: |
 | Fast daily agent | Qwen3.6 35B-A3B oQ4e + MTP | **104.4 tok/s** |
+| Practical 64 GB Flash model | Qwen3.8 Flash Next Q2 + MTP | **48.14 tok/s median** |
 | Harder coding | Qwen3.8 27B oQ4e + FP16 MTP | **39.9 tok/s** |
 | Reproducible long-context work | Qwen3.8 27B oQ4e, MTP off | **29.6 tok/s** |
 | Higher-precision dense baseline | Qwen3.8 27B oQ6e, MTP off | **23.8 tok/s** |
@@ -33,13 +33,13 @@ My current split is simple: use the MoE for quick agent loops, escalate difficul
 | CPU | 24 cores: 16 performance, 8 efficiency |
 | GPU | 60 cores |
 | Unified memory | 64 GB |
-| Memory bandwidth | 800 GB/s ([Apple](https://www.apple.com/newsroom/2023/06/apple-introduces-m2-ultra/)) |
+| Memory bandwidth | 800 GB/s[^apple] |
 | Internal storage | Approximately 1 TB SSD |
 | Metal working-set recommendation | 51.84 GiB, measured from `MTLDevice` |
 | Operating system | macOS 26.2 |
 | Main runtime | [oMLX 0.6.4](https://github.com/jundot/omlx) |
 
-Unified memory is why this works at all. CPU and GPU share the same pool, which is central to [MLX's design](https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html). It is also why every browser tab, VM, KV cache, and model weight competes for the same 64 GB.
+Unified memory is why this works at all. CPU and GPU share the same pool, which is central to MLX's design.[^mlx] It is also why every browser tab, VM, KV cache, and model weight competes for the same 64 GB.
 
 ## How I tested
 
@@ -59,15 +59,15 @@ Each model saw the same small set of tests:
 
 The code gates are smoke tests, not proof that one model is smarter. I recorded failures because they reveal different behavior, not because three toy functions settle model quality.
 
-I present the results first, explain what each graph means, and leave enough detail for someone to reproduce the experiment.
+I present the results first, explain what each graph means, and leave enough detail for someone to reproduce the experiment.[^original-results]
 
 ## First baseline: dense Qwen3.8
 
-I started with `mlx-community/Qwen3.8-27B-8bit`. It generated around **21.5 tok/s**, correctly read my terminal screenshot, produced valid tool calls, and retrieved all three hidden values from a 23K-token prompt. A repeated warm request reached the first token in 0.86 seconds.
+I started with `mlx-community/Qwen3.8-27B-8bit`.[^qwen] It generated around **21.5 tok/s**, correctly read my terminal screenshot, produced valid tool calls, and retrieved all three hidden values from a 23K-token prompt. A repeated warm request reached the first token in 0.86 seconds.
 
 The surprise was not generation. It was caching. The cold 23K prompt took 145 seconds. Reusing 20,480 cached tokens cut the next request to 21 seconds. For an agent that repeatedly sends the same tool definitions and conversation prefix, cache behavior matters more than a small decode improvement.
 
-That model came from the MLX community, but once I realized the oMLX author publishes his own [oQ builds](https://huggingface.co/Jundot/models), I switched to those for a consistent runtime and quantization pipeline. The oQ format assigns precision based on measured sensitivity rather than giving every tensor the same width ([oMLX quantization notes](https://github.com/jundot/omlx/blob/main/docs/oQ_Quantization.md)).
+That model came from the MLX community, but once I realized the oMLX author publishes his own oQ builds, I switched to those for a consistent runtime and quantization pipeline. The oQ format assigns precision based on measured sensitivity rather than giving every tensor the same width.[^omlx]
 
 ## q4, q6, and q8
 
@@ -93,8 +93,6 @@ The q8 code miss was mundane: it returned a tuple where the test requested a lis
 I then used q4 in an actual chat. A 12,865-token prompt followed by 6,819 generated tokens sustained **26.2 tok/s**. After a clean restart, a 16,384-token answer sustained **26.9 tok/s** for ten minutes. The shorter 29.6 tok/s benchmark was real, but 26–27 tok/s better describes a long thinking session.
 
 That is close to what the hardware can reasonably deliver. Qwen3.8-27B is dense: every generated token works through the model body. At 23 GB of q6 weights and 800 GB/s of memory bandwidth, even the naive bandwidth ceiling is only about 35 weight reads per second before attention, state, dequantization, and dispatch overhead.
-
-> **Screenshot placeholder — oMLX model page showing q4, q6, and q8 together.** Include model sizes and context settings.
 
 ## The model that finally felt fast
 
@@ -136,13 +134,43 @@ That small change mattered:
 
 It passed all three executable code gates and produced a clean thinking answer at roughly 35 completion tok/s. Its speculative output was not byte-identical between runs, so I would disable MTP for reproducible evaluation and enable it for interactive work.
 
-> **Screenshot placeholder — side-by-side thinking response from Qwen3.6 MoE and Qwen3.8 FP16-MTP.** Show separated reasoning, final answer, and throughput.
+<h2 id="qwen38-flash-next-64gb-m2-ultra">Qwen3.8 Flash Next on a 64 GB M2 Ultra</h2>
+
+Ivan Fioravanti's September 8 update for 64 GB systems changed the practical question for this machine.[^flash] DwarfStar now demand-pages the external PLE table when RAM is tight, and its current Q2_K-down checkpoint reduces the main model to **44.81 GB**. Rather than mix results from superseded builds or higher-memory Macs, this section reports only my measurements from a physical 64 GB M2 Ultra.
+
+I tested the updated `qwen3.8-flash-next` branch at commit [`18ca8ec`](https://github.com/ivanfioravanti/ds4-metal/commit/18ca8ecdb5732a5c77c053e554e57daadf5ca32e), the current [Q2 checkpoint](https://huggingface.co/ivanfioravanti/Qwen3.8-Flash-Next-DS4-IQ2), and its required 32 GB PLE sidecar. The model checksum matched the published SHA-256. I began from a zero-swap baseline and left my normal VM, Docker, browsers, editors, and desktop applications running. All performance runs used Metal, temperature 0, and a 1,024-token prefill chunk.
+
+### Full-context results
+
+The ordinary-decode sweeps used the repository's public-domain *I Promessi Sposi* text and generated 128 tokens at each frontier. Each context ran in a separate process so a failure or swap change could be attributed to that run.
+
+| Context | Prefill | Generation | Steady generation | Planned memory | Result |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 8K | 292.23 tok/s | 32.75 tok/s | **34.20 tok/s** | 42.86 GiB | Passed |
+| 32K | 347.98 tok/s | 33.31 tok/s | **33.42 tok/s** | 43.69 GiB | Passed |
+| 64K | 410.16 tok/s | 32.49 tok/s | **32.62 tok/s** | 44.80 GiB | Passed |
+| 128K | 345.01 tok/s | 30.03 tok/s | **30.14 tok/s** | 47.00 GiB | Passed |
+| 262K | - | - | - | 51.42 GiB | Metal out of memory before prefill |
+
+Swap rose from zero to only **0.25 MB** on the first run and stayed there through 128K. The demand-paged PLE therefore remained compatible with a normal active desktop throughout the successful sweep.
+
+### MTP, vision, and tools
+
+For MTP I repeated the same deterministic 45-token prompt, allowing up to 256 generated tokens. Three runs with an 8K allocation reached **40.89, 48.14, and 48.14 tok/s**, for a median of **48.14 tok/s**. Two 32K-allocation runs reached **48.08 and 48.13 tok/s**, and a 128K-allocation run reached **47.56 tok/s**. Every run accepted 48 of 74 drafts, or 64.9%. These are short-prompt MTP measurements, not full-context decode rates, and Ivan's comparison machine was an M3 Ultra rather than this M2 Ultra.
+
+The optional 588 MB vision encoder also loaded successfully. On a synthetic 640x480 fixture, the model read **“MAPLE 8153”** correctly. The image used 300 tokens, and the short OCR turn generated at 51.33 tok/s with MTP, accepting 32 of 36 drafts. A deterministic no-thinking agent smoke test also made a valid `bash` tool call and wrote the expected value to a temporary file.
+
+DwarfStar also exposes `DS4_QWEN4_PLE_EVICT_TOKENS=1024` to discard clean PLE pages periodically during marathon sessions. In alternating 8K runs that each generated 1,024 tokens, the warm median was 36.53 tok/s by default and 36.30 tok/s with eviction. Median warm prefill fell from 522.88 to 495.41 tok/s. That is about a 0.6% decode cost and a 5.3% prefill cost in this small test. Both modes kept Swap at 0.25 MB, so I would leave eviction off unless a long-lived session shows growing PLE residency.
+
+The revised answer to Ivan's question is clear: **the updated Qwen3.8 Flash Next Q2 is a practical 64 GB M2 Ultra model through 128K context.** Demand-paging the PLE solved the severe swap problem seen in the first build. The near-262K allocation still exceeded this machine's Metal memory limit, so 128K is my tested ceiling rather than a promise that every native context size fits.
+
+The public result archive includes the reproduction command, direct benchmark CSVs, artifact sizes, commit, checksum, context settings, throughput, MTP acceptance, PLE eviction comparison, swap readings, and failure boundary.[^flash-results]
 
 ## A 284B model from an 81 GiB file
 
 Then I changed the question from “what is fast?” to “how far can this machine go?”
 
-[DwarfStar](https://github.com/antirez/ds4) is a specialized DeepSeek V4 and GLM runtime by Salvatore Sanfilippo. Unlike ordinary MLX model loading, it can keep selected MoE experts in memory and stream the rest from SSD. The DeepSeek V4 Flash checkpoint I tested has 284B logical parameters, 13B active parameters, and a specialized 80.76 GiB Q2 layout. Sensitive tensors remain at Q8 or F16 while routed experts take most of the compression ([DwarfStar model documentation](https://github.com/antirez/ds4/blob/main/README.md)).
+DwarfStar is a specialized DeepSeek V4 and GLM runtime by Salvatore Sanfilippo.[^dwarfstar] Unlike ordinary MLX model loading, it can keep selected MoE experts in memory and stream the rest from SSD. The DeepSeek V4 Flash checkpoint I tested has 284B logical parameters, 13B active parameters, and a specialized 80.76 GiB Q2 layout.[^deepseek] Sensitive tensors remain at Q8 or F16 while routed experts take most of the compression ([DwarfStar model documentation](https://github.com/antirez/ds4/blob/main/README.md)).
 
 At 32K context, a 40 GiB expert-cache target was the fastest isolated result:
 
@@ -180,8 +208,6 @@ The useful way to operate that mode would be to pay the initial prefill once, pe
 
 The DwarfStar vision checkpoint did not survive the same experiment. Its image tokens reached a Metal range that the SSD-streaming model map had not covered, and prefill failed. Full residency is impossible on 64 GB, so Qwen remains my screenshot model.
 
-> **Screenshot placeholder — DwarfStar terminal showing the successful 1M allocation.** Follow it with a smaller crop of the vision mapping error.
-
 The failure belongs in the results: showing the mechanism and measurement is more useful than hiding an inconvenient outcome.
 
 ## What I would use today
@@ -193,6 +219,7 @@ The failure belongs in the results: showing the mechanism and measurement is mor
 | Reproducible automation | Qwen3.8 27B oQ4e, MTP off |
 | Maximum practical Qwen context | Qwen3.8 27B oQ4e, 256K ceiling |
 | Higher-precision dense work | Qwen3.8 27B oQ6e, 128K |
+| Practical Flash model | Qwen3.8 Flash Next Q2 + PLE, up to 128K tested |
 | Oversized model research | DeepSeek V4 Q2, 32K and 32 GB expert cache |
 | Million-token experiment | DeepSeek V4 Q2, 16 GB expert cache, patience |
 
@@ -202,12 +229,14 @@ The other lesson is that local inference is a whole-system test. A clean benchma
 
 ## Sources and reproducibility
 
-1. Apple, [Apple introduces M2 Ultra](https://www.apple.com/newsroom/2023/06/apple-introduces-m2-ultra/).
-2. Apple ML Research, [MLX](https://github.com/ml-explore/mlx) and [Unified Memory](https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html).
-3. Jun Kim, [oMLX](https://github.com/jundot/omlx), [oQ quantization](https://github.com/jundot/omlx/blob/main/docs/oQ_Quantization.md), and [Jundot model collection](https://huggingface.co/Jundot/models).
-4. Qwen Team, [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B).
-5. Salvatore Sanfilippo, [DwarfStar](https://github.com/antirez/ds4) and its [DeepSeek V4 synopsis](https://github.com/antirez/ds4/blob/main/MODEL_CARD.md).
-6. DeepSeek, [DeepSeek V4 Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash).
-7. Raw prompts, logs, and result files: [`b1tank/ds4`, `research/m2-ultra-runtime-comparison`](https://github.com/b1tank/ds4/tree/research/m2-ultra-runtime-comparison/research/m2-ultra).
-
 All throughput and memory figures are measurements from this one machine. They are useful for choosing my configuration, not a universal model ranking.
+
+[^apple]: Apple, [Apple introduces M2 Ultra](https://www.apple.com/newsroom/2023/06/apple-introduces-m2-ultra/).
+[^mlx]: Apple ML Research, [MLX](https://github.com/ml-explore/mlx) and [Unified Memory](https://ml-explore.github.io/mlx/build/html/usage/unified_memory.html).
+[^original-results]: Raw prompts, logs, and result files for the original comparison: [`b1tank/ds4`, `research/m2-ultra-runtime-comparison`](https://github.com/b1tank/ds4/tree/research/m2-ultra-runtime-comparison/research/m2-ultra).
+[^qwen]: Qwen Team, [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B).
+[^omlx]: Jun Kim, [oMLX](https://github.com/jundot/omlx), [oQ quantization](https://github.com/jundot/omlx/blob/main/docs/oQ_Quantization.md), and [Jundot model collection](https://huggingface.co/Jundot/models).
+[^flash]: Ivan Fioravanti, [64 GB demand-paging update](https://x.com/ivanfioravanti/status/2097343957940474076), [Qwen3.8 Flash Next Q2 weights](https://huggingface.co/ivanfioravanti/Qwen3.8-Flash-Next-DS4-IQ2), and [DwarfStar test branch](https://github.com/ivanfioravanti/ds4-metal/tree/qwen3.8-flash-next).
+[^flash-results]: Reproduction notes and raw results: [`b1tank/ds4-metal`, `research/m2-ultra-qwen38-flash-next`](https://github.com/b1tank/ds4-metal/tree/research/m2-ultra-qwen38-flash-next/research/m2-ultra-qwen38-flash-next).
+[^dwarfstar]: Salvatore Sanfilippo, [DwarfStar](https://github.com/antirez/ds4) and its [DeepSeek V4 synopsis](https://github.com/antirez/ds4/blob/main/MODEL_CARD.md).
+[^deepseek]: DeepSeek, [DeepSeek V4 Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash).

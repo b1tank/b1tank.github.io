@@ -2,7 +2,10 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatDate, publishedPosts } from '../../lib/content';
-const posts = publishedPosts(await getCollection('posts'));
+const entries = await getCollection('posts');
+const posts = import.meta.env.DEV
+  ? entries.sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+  : publishedPosts(entries);
 ---
 <BaseLayout title="Writing" description="Writing by Zhichao Li.">
   <div class="shell simple-page">

@@ -71,6 +71,19 @@
   .home-content { max-width: 700px; }
   .plain-content { max-width: 700px; font: 1.09rem/1.72 var(--serif); }
   .plain-content p + p { margin-top: 1.35em; }
+  .focus-quote { margin-top: 1.6em; padding: 16px 20px; border-left: 3px solid var(--gold); background: color-mix(in srgb, var(--paper-deep) 45%, transparent); font-style: italic; }
+  .focus-quote footer { margin-top: 10px; color: var(--muted); font: 600 .78rem/1.4 var(--sans); letter-spacing: .02em; text-align: right; }
+  .focus-quote + p { margin-top: 1.35em; }
+  .github-profile-link, .inline-brand-link { display: inline-flex; align-items: center; gap: 4px; vertical-align: -.12em; }
+  .github-profile-link svg, .inline-brand-icon { width: 16px; height: 16px; flex: 0 0 auto; }
+  .github-profile-link svg { fill: currentColor; }
+  .inline-brand-icon-mai { width: 34px; }
+  .inline-brand-icon.washu-logo { width: 66px; mask-image: url('/images/logos/washu.svg'); }
+  img.inline-brand-icon { object-fit: contain; }
+  span.inline-brand-icon { display: inline-block; background: currentColor; mask: center / contain no-repeat; }
+  .inline-brand-icon.brand-icon-copilot { mask-image: url('/images/logos/github-copilot.svg'); }
+  .inline-brand-icon.brand-icon-openai { mask-image: url('/images/logos/openai.svg'); }
+  .inline-brand-icon.brand-icon-anthropic { mask-image: url('/images/logos/anthropic.svg'); }
 
   .public-work-section { margin-top: clamp(52px, 8vw, 80px); padding-top: 30px; border-top: 1px solid var(--line); }
   .public-work-section h2, .projects-section h2 { font: 600 clamp(1.65rem, 4vw, 2rem)/1.2 var(--serif); letter-spacing: -.02em; }
@@ -99,14 +112,20 @@
   .oss-contribution-icon img { width: 30px; height: 30px; padding: 1px; border-radius: 6px; object-fit: contain; }
 
   .projects-section { margin-top: clamp(52px, 8vw, 80px); padding-top: 30px; border-top: 1px solid var(--line); }
-  .project-list { margin-top: 22px; padding: 0; list-style: none; }
+  .project-category { margin-top: 34px; }
+  .project-category > h3 { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; color: var(--muted); border-bottom: 1px solid var(--line); font: 650 1.3rem/1.35 var(--sans); letter-spacing: .02em; }
+  .project-category > h3 svg { width: 22px; height: 22px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .project-list { margin: 0; padding: 0; list-style: none; }
   .project-item { padding-block: 20px; border-bottom: 1px solid color-mix(in srgb, var(--line) 55%, transparent); }
+  .project-item[id] { scroll-margin-top: 24px; }
   .project-item:last-child { border-bottom: 0; }
-  .project-title-row { display: flex; align-items: center; gap: 10px; }
-  .project-title-row h3 { font: 600 1.08rem/1.35 var(--sans); }
+  .project-title-row { display: flex; flex-wrap: wrap; align-items: center; gap: 7px 10px; }
+  .project-title-row h4 { margin: 0; font: 600 1.08rem/1.35 var(--sans); }
+  .project-website-label { color: var(--muted); font: .76rem var(--mono); }
   .project-status { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 999px; font: 650 .66rem/1.4 var(--sans); letter-spacing: .02em; }
   .project-status svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
   .project-status-experimental { color: var(--gold); border: 1px solid color-mix(in srgb, var(--gold) 38%, var(--line)); background: color-mix(in srgb, var(--gold) 8%, transparent); }
+  .project-status-mentored { color: var(--blue); border: 1px solid color-mix(in srgb, var(--blue) 35%, var(--line)); background: color-mix(in srgb, var(--blue) 7%, transparent); }
   .project-item p { max-width: 650px; margin-top: 7px; color: var(--muted); font: .94rem/1.65 var(--sans); }
   .project-links { display: inline-flex; align-items: center; gap: 8px; }
   .project-links a { display: inline-flex; padding: 2px; color: var(--muted); text-decoration: none; }

@@ -62,87 +62,134 @@ const ossContributions = [
   },
 ];
 
-const projects = [
+interface Project {
+  id?: string;
+  name: string;
+  description: string;
+  repository?: string;
+  website?: string;
+  websiteLabel?: string;
+  experimental?: boolean;
+  mentored?: boolean;
+}
+
+interface ProjectCategory {
+  id: string;
+  name: string;
+  projects: Project[];
+}
+
+const projectCategories: ProjectCategory[] = [
   {
-    name: 'OTelux',
-    repository: 'https://github.com/b1tank/otelux',
-    description: 'A local-first OpenTelemetry workbench for receiving, exploring, and correlating traces, logs, and metrics. It keeps telemetry in a retention-bounded local SQLite database and gives coding agents read-only evidence through MCP.',
+    id: 'agents-observability',
+    name: 'Agent and Observability',
+    projects: [
+      {
+        name: 'OTelux',
+        repository: 'https://github.com/b1tank/otelux',
+        description: 'A cross-platform, local-first OpenTelemetry desktop app for receiving, exploring, and correlating traces, logs, and metrics. It keeps telemetry in a retention-bounded local SQLite database and gives coding agents read-only evidence through MCP.',
+      },
+      {
+        name: 'Agent Insights',
+        repository: 'https://github.com/michiisai/agent-insights',
+        mentored: true,
+        description: 'A VS Code extension for exploring agent behavior in depth through OpenTelemetry, designed for use by both people and agents.',
+      },
+      {
+        name: 'pi-otel',
+        repository: 'https://github.com/b1tank/pi-otel',
+        description: 'Vendor-neutral OpenTelemetry instrumentation for the Pi coding agent, exporting traces, metrics, and logs with GenAI semantic conventions, privacy-first content controls, and bounded shutdown behavior.',
+      },
+      {
+        name: 'Deskpal',
+        repository: 'https://github.com/b1tank/deskpal',
+        experimental: true,
+        description: 'A Linux desktop-control MCP server for X11/Xwayland, AT-SPI, OCR, and isolated Xvfb verification. Native-Wayland background control is not available in the public build.',
+      },
+    ],
   },
   {
-    name: 'pi-otel',
-    repository: 'https://github.com/b1tank/pi-otel',
-    description: 'Vendor-neutral OpenTelemetry instrumentation for the Pi coding agent, exporting traces, metrics, and logs with GenAI semantic conventions, privacy-first content controls, and bounded shutdown behavior.',
+    id: 'education',
+    name: 'Education',
+    projects: [
+      {
+        id: 'lezhiweng',
+        name: '乐之翁',
+        website: 'https://lezhiweng.com',
+        websiteLabel: 'lezhiweng.com',
+        description: 'A production learning platform that turns my dad’s original classroom material into structured, interactive high-school mathematics method courses with polished formulas, diagrams, and multiple learning paths.',
+      },
+      {
+        name: 'OpenMathBoard',
+        repository: 'https://github.com/b1tank/openmathboard',
+        website: 'https://lezhi.school',
+        description: 'A freehand-first mathematics whiteboard optimized for iPad and Apple Pencil. It converts drawn intent into editable parametric geometry and supports images, durable local boards, and browser-local course recording.',
+      },
+      {
+        id: 'learn-c',
+        name: 'Learn C',
+        repository: 'https://github.com/b1tank/learnc',
+        website: 'https://b1tank.github.io/learnc/',
+        experimental: true,
+        description: 'Runnable browser lessons for K&R and Salvatore Sanfilippo’s 37-part Let’s Learn C series, with hand-written walkthroughs, modern-C notes, and source-linked examples.',
+      },
+      {
+        name: 'Learn Ghostty',
+        repository: 'https://github.com/b1tank/learn-ghostty',
+        website: 'https://b1tank.github.io/learn-ghostty/',
+        experimental: true,
+        description: 'A source-backed workshop that teaches terminal architecture by reconstructing Ghostty one observable subsystem at a time, from process ownership and PTYs to a native GTK window and OpenGL rendering.',
+      },
+      {
+        name: 'ABC Balloon',
+        repository: 'https://github.com/b1tank/abc',
+        website: 'https://b1tank.github.io/projects/abc/demo/',
+        description: 'A small alphabet-learning game I built with my family: hear a letter, find it, and pop the matching balloon.',
+      },
+    ],
   },
   {
-    name: '乐之翁',
-    website: 'https://lezhiweng.com',
-    description: 'A production learning platform that turns my dad’s original classroom material into structured, interactive high-school mathematics method courses with polished formulas, diagrams, and multiple learning paths.',
+    id: 'tools',
+    name: 'Tools',
+    projects: [
+      {
+        name: 'OpenSnipping',
+        repository: 'https://github.com/b1tank/opensnipping-web',
+        website: 'https://yummyjars.com/opensnipping/',
+        description: 'A browser-based screenshot and annotation tool with local editing, export, and no required backend.',
+      },
+      {
+        name: 'WireGuard Manager for GNOME',
+        repository: 'https://github.com/b1tank/wg-gnome-ext',
+        description: 'A GNOME Shell extension for discovering, controlling, and inspecting WireGuard tunnels from the desktop panel.',
+      },
+    ],
   },
   {
-    name: 'OpenMathBoard',
-    repository: 'https://github.com/b1tank/openmathboard',
-    website: 'https://lezhi.school',
-    description: 'A freehand-first mathematics whiteboard optimized for iPad and Apple Pencil. It converts drawn intent into editable parametric geometry and supports images, durable local boards, and browser-local course recording.',
-  },
-  {
-    name: 'Learn Ghostty',
-    repository: 'https://github.com/b1tank/learn-ghostty',
-    website: 'https://b1tank.github.io/learn-ghostty/',
-    description: 'A source-backed workshop that teaches terminal architecture by reconstructing Ghostty one observable subsystem at a time, from process ownership and PTYs to a native GTK window and OpenGL rendering.',
-  },
-  {
-    name: 'Learn C',
-    repository: 'https://github.com/b1tank/learnc',
-    website: 'https://b1tank.github.io/learnc/',
-    description: 'Runnable browser lessons for K&R and Salvatore Sanfilippo’s 37-part Let’s Learn C series, with hand-written walkthroughs, modern-C notes, and source-linked examples.',
-  },
-  {
-    name: 'OpenSnipping',
-    repository: 'https://github.com/b1tank/opensnipping-web',
-    website: 'https://yummyjars.com/opensnipping/',
-    description: 'A browser-based screenshot and annotation tool with local editing, export, and no required backend.',
-  },
-  {
-    name: 'ABC Balloon',
-    repository: 'https://github.com/b1tank/abc',
-    website: 'https://b1tank.github.io/projects/abc/demo/',
-    description: 'A small alphabet-learning game I built with my family: hear a letter, find it, and pop the matching balloon.',
-  },
-  {
-    name: 'Agent Skills',
-    repository: 'https://github.com/b1tank/skills',
-    description: 'One source of truth for reusable skills, prompts, agents, instructions, and MCP configuration across VS Code, Copilot CLI, Claude Code, Codex, Pi, and OpenCode.',
-  },
-  {
-    name: 'Deskpal',
-    repository: 'https://github.com/b1tank/deskpal',
-    experimental: true,
-    description: 'Experimental Linux desktop-control MCP server for X11/Xwayland, AT-SPI, OCR, and isolated Xvfb verification. Native-Wayland background control is not available in the public build.',
-  },
-  {
-    name: 'WireGuard Manager for GNOME',
-    repository: 'https://github.com/b1tank/wg-gnome-ext',
-    description: 'A GNOME Shell extension for discovering, controlling, and inspecting WireGuard tunnels from the desktop panel.',
-  },
-  {
-    name: 'Coag',
-    repository: 'https://github.com/b1tank/coag',
-    description: 'A C++ aerosol coagulation model from my scientific-computing work that ran about 90% faster than the legacy Fortran implementation.',
-  },
-  {
-    name: 'Direct Simulation Monte Carlo',
-    repository: 'https://github.com/b1tank/DSM-f90',
-    description: 'A Fortran implementation of aerosol coagulation using the Direct Simulation Monte Carlo method.',
-  },
-  {
-    name: 'Computational Fluid Dynamics Basics',
-    repository: 'https://github.com/b1tank/computational-fluid-dynamics-basics',
-    description: 'Small implementations of foundational computational-fluid-dynamics methods.',
-  },
-  {
-    name: 'Geospatial Clustering with PySpark',
-    repository: 'https://github.com/b1tank/kmeans-clustering-pyspark',
-    description: 'An early distributed-computing project applying k-means clustering to geospatial data with PySpark.',
+    id: 'scientific',
+    name: 'Scientific',
+    projects: [
+      {
+        name: 'Coag',
+        repository: 'https://github.com/b1tank/coag',
+        description: 'A C++ aerosol coagulation model from my scientific-computing work that ran about 90% faster than the legacy Fortran implementation.',
+      },
+      {
+        name: 'Direct Simulation Monte Carlo',
+        repository: 'https://github.com/b1tank/DSM-f90',
+        description: 'A Fortran implementation of aerosol coagulation using the Direct Simulation Monte Carlo method.',
+      },
+      {
+        name: 'Computational Fluid Dynamics Basics',
+        repository: 'https://github.com/b1tank/computational-fluid-dynamics-basics',
+        description: 'Small implementations of foundational computational-fluid-dynamics methods.',
+      },
+      {
+        name: 'Geospatial Clustering with PySpark',
+        repository: 'https://github.com/b1tank/kmeans-clustering-pyspark',
+        description: 'An early distributed-computing project applying k-means clustering to geospatial data with PySpark.',
+      },
+    ],
   },
 ];
 ---
@@ -150,13 +197,26 @@ const projects = [
   <div class="shell simple-page">
     <div class="home-content">
       <section class="plain-content intro" aria-label="About Zhichao Li">
-        <p>I live in Seattle and work on AI agents in <a href="https://code.visualstudio.com/">Visual Studio Code</a> and <a href="https://github.com/features/copilot">GitHub Copilot</a> at Microsoft. I focus on agent products, evaluation, and OpenTelemetry-based observability.</p>
+        <p>I live in Seattle, WA, and work on AI agents in <a class="inline-brand-link" href="https://code.visualstudio.com/"><span>Visual Studio Code</span><img class="inline-brand-icon" src="/images/logos/vscode.png" alt="" /></a> and <a class="inline-brand-link" href="https://github.com/features/copilot"><span>GitHub Copilot</span><span class="inline-brand-icon brand-icon-copilot" aria-hidden="true"></span></a> at Microsoft. My work spans agent products, evaluation, and <a href="#project-category-agents-observability">agent observability</a>. You can find it at <a class="github-profile-link" href="https://github.com/zhichli"><span>@zhichli</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z"/></svg></a>, primarily across VS Code and the <a href="https://github.com/github/copilot-sdk">GitHub Copilot SDK</a>.</p>
 
-        <p>I’m building <strong>OTelux</strong>, a local-first telemetry workbench for developers and coding agents, and <strong>pi-otel</strong>, vendor-neutral traces, metrics, and logs for the Pi coding agent.</p>
+        <p>I led the VS Code evaluation engineering workstream and created the <a href="https://code.visualstudio.com/blogs/2026/05/15/agent-harnesses-github-copilot-vscode">evaluation harness</a> and associated agentic analysis and reporting framework (public showcase: <a href="https://code.visualstudio.com/blogs/2026/06/19/what-50000-runs-taught-us">What 50,000 agent runs taught us</a>), as well as <a href="https://code.visualstudio.com/blogs/2026/05/15/agent-harnesses-github-copilot-vscode#_building-vsc-bench">VSC-Bench</a>, a benchmarking suite for VS Code and its extensions. I worked closely with model providers, including <a class="inline-brand-link" href="https://microsoft.ai/"><span>Microsoft AI</span><svg class="inline-brand-icon inline-brand-icon-mai" viewBox="0 0 56 26" fill="none" aria-hidden="true"><path d="M55.1321 10.9639C55.1321 7.20253 55.2011 4.64896 55.4082 0.922134H51.5088C51.7158 4.64896 51.7849 7.20253 51.7849 10.9639V15.0358C51.7849 18.7971 51.7158 21.3852 51.5088 25.0775H55.4082C55.2011 21.3852 55.1321 18.7971 55.1321 15.0358V10.9639Z" fill="currentColor"/><path d="M41.0615 3.78627L39.8883 0.922134H37.6108C37.3002 1.78483 36.8861 2.78555 36.541 3.61373C33.8149 10.4808 30.2606 18.4175 27.293 25.0775H30.4332C30.8127 23.6972 31.3304 22.3169 31.848 20.9021C32.1772 20.0525 32.516 19.1974 32.8622 18.3385C33.9823 18.2339 35.3546 18.2105 37.8261 18.2105H38.8613C41.0422 18.2105 42.3687 18.2284 43.416 18.3023C43.8273 19.3023 44.238 20.3065 44.6503 21.3162C45.1334 22.5239 45.6165 23.8697 45.9616 25.0775H50.2751C47.4454 18.6591 43.6841 10.1702 41.0615 3.78627ZM38.8613 16.071H37.8261C35.9982 16.071 34.7718 16.071 33.8035 16.032C35.1907 12.6748 36.6625 9.27471 38.107 5.90573C38.1649 6.03686 38.2288 6.17972 38.3009 6.33984C39.7609 9.57389 41.133 12.7938 42.4839 16.0465C41.5805 16.071 40.4466 16.071 38.8613 16.071Z" fill="currentColor"/><path d="M25.7986 10.964C25.7986 7.20266 25.8676 4.64909 26.0747 0.922264H21.2781C19.002 7.32792 16.3584 13.7029 13.5491 20.249C10.5632 13.6835 8.14279 7.6554 5.50813 0.922264H0.953125C1.12566 2.57863 1.22919 5.51178 1.22919 7.27167V18.7282C1.22919 20.1085 1.12566 23.3177 0.953125 25.0776H3.9898C3.81726 23.3177 3.71374 20.1085 3.71374 18.7282L3.74445 5.96073C6.54302 12.3188 9.35056 18.761 11.7195 25.0776H14.3421C16.7428 18.5336 19.5507 11.7704 22.3779 5.3251C22.4269 7.08499 22.4514 8.84073 22.4514 10.964V15.0359C22.4514 18.7972 22.3824 21.3853 22.1753 25.0776H26.0747C25.8676 21.3853 25.7986 18.7972 25.7986 15.0359V10.964Z" fill="currentColor"/></svg></a>, <a class="inline-brand-link" href="https://openai.com/"><span>OpenAI</span><span class="inline-brand-icon brand-icon-openai" aria-hidden="true"></span></a>, and <a class="inline-brand-link" href="https://www.anthropic.com/"><span>Anthropic</span><span class="inline-brand-icon brand-icon-anthropic" aria-hidden="true"></span></a>, to produce accurate, meaningful evaluations, and with the community to advance <a href="https://code.visualstudio.com/docs/agents/guides/monitoring-agents">observability in VS Code</a>.</p>
 
-        <p>Before developer tools, I worked on cloud infrastructure, distributed tracing, and Azure Managed Grafana. My route into software began in chemical engineering and scientific computing, where I built aerosol models in Fortran and C++ and learned to care about performance, numerical correctness, and observable systems.</p>
+        <p>Before joining the VS Code core team, I worked on the <a href="https://www.microsoft.com/en-us/research/people/zhichli/">GitHub Copilot Applied Science team</a>, focusing on coding data synthesis, model training pipelines, and recommendation systems (<a href="https://www.youtube.com/watch?v=WiYinkO15Yg">public display</a>). Earlier, I helped build cloud services including <a href="https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/">Azure Datadog</a> and <a href="https://learn.microsoft.com/en-us/azure/managed-grafana/">Azure Managed Grafana</a>, where I was a founding engineer. Across these roles, I developed broad experience in full-stack application development, cloud infrastructure, operations, and observability.</p>
 
-        <p>Outside work, I enjoy basketball and billiards. I’m a Warriors fan and still find Stephen Curry’s combination of movement, geometry, repetition, and calm unusually instructive.</p>
+        <p>My path into software began in <a href="#project-category-scientific">scientific computing</a> during <a class="inline-brand-link" href="https://doi.org/10.7936/7z9a-5j48"><span>my PhD in chemical engineering</span><span class="inline-brand-icon washu-logo" aria-hidden="true"></span></a>, where I built machine learning models in MATLAB and aerosol models in Fortran and C++. Those experiences shaped my appreciation for performance, numerical correctness, and observable systems.</p>
+
+        <p>Having worked in both academia and the AI and software industries, I believe:</p>
+
+        <blockquote class="focus-quote">
+          <p>“As AI does more of our work, it can also take away the learning that work provides. In a changing job market, we must learn more, not less - and wield AI to advance <a href="#project-category-education">education</a>, not replace it.”</p>
+          <footer>My bet in the AI era</footer>
+        </blockquote>
+
+        <p>That is why I began building an <a href="#project-lezhiweng">educational site for my dad</a>, a longtime mathematics teacher, and <a href="#project-learn-c">learning projects for myself</a> to catch up on foundational technologies that still matter.</p>
+
+        <p>I also enjoy basketball 🏀 and billiards 🎱. I’m a Stephen Curry and Golden State Warriors fan, and I admire Curry’s humility, work ethic, and competitive drive.</p>
+
+        <p>My public collection of reusable agent skills is available at <a href="https://github.com/b1tank/skills">b1tank/skills</a>. Other <a href="#project-category-tools">tools I have built</a> are shown below.</p>
       </section>
 
       <section class="public-work-section" aria-labelledby="public-work-heading">
@@ -196,23 +256,53 @@ const projects = [
 
       <section class="projects-section" aria-labelledby="projects-heading">
         <h2 id="projects-heading">Projects</h2>
-        <ul class="project-list">
-          {projects.map((project) => (
-            <li class="project-item">
-              <div class="project-title-row">
-                <h3>{project.name}</h3>
-                {project.experimental && (
-                  <span class="project-status project-status-experimental" title="Experimental project">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v5l-5.5 9.5A2.3 2.3 0 0 0 6.5 21h11a2.3 2.3 0 0 0 2-3.5L14 8V3M7.5 15h9"/></svg>
-                    Experimental
-                  </span>
-                )}
-                <ProjectLinks name={project.name} repository={project.repository} website={project.website} />
-              </div>
-              <p>{project.description}</p>
-            </li>
-          ))}
-        </ul>
+        {projectCategories.map((category) => (
+          <section class="project-category" aria-labelledby={`project-category-${category.id}`}>
+            <h3 id={`project-category-${category.id}`}>
+              {category.id === 'agents-observability' && (
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01M8 16h8"/></svg>
+              )}
+              {category.id === 'education' && (
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5A3.5 3.5 0 0 1 6.5 2H11v17H6.5A3.5 3.5 0 0 0 3 22V5.5ZM21 5.5A3.5 3.5 0 0 0 17.5 2H13v17h4.5A3.5 3.5 0 0 1 21 22V5.5Z"/></svg>
+              )}
+              {category.id === 'tools' && (
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5-5L12 3.6 9.6 6 7.3 3.7a4 4 0 0 0 5 5L4 17a2.1 2.1 0 1 0 3 3l7.7-8.3a4 4 0 0 0 5-5L17.4 9 15 6.6l2.3-2.3a4 4 0 0 0-2.6 2Z"/></svg>
+              )}
+              {category.id === 'scientific' && (
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2"/><path d="M12 21c3.3 0 6-4 6-9s-2.7-9-6-9-6 4-6 9 2.7 9 6 9ZM4.2 7.5c-1.7 2.9.4 7.2 4.7 9.7s9.2 2.2 10.9-.7-.4-7.2-4.7-9.7-9.2-2.2-10.9.7ZM4.2 16.5c1.7 2.9 6.6 3.2 10.9.7s6.4-6.8 4.7-9.7-6.6-3.2-10.9-.7-6.4 6.8-4.7 9.7Z"/></svg>
+              )}
+              <span>{category.name}</span>
+            </h3>
+            <ul class="project-list">
+              {category.projects.map((project) => (
+                <li class="project-item" id={project.id ? `project-${project.id}` : undefined}>
+                  <div class="project-title-row">
+                    <h4>{project.name}</h4>
+                    {project.websiteLabel && (
+                      <a class="project-website-label" href={project.website}>{project.websiteLabel}</a>
+                    )}
+                    {project.experimental && (
+                      <span class="project-status project-status-experimental" title="Experimental project">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6M10 3v5l-5.5 9.5A2.3 2.3 0 0 0 6.5 21h11a2.3 2.3 0 0 0 2-3.5L14 8V3M7.5 15h9"/></svg>
+                        Experimental
+                      </span>
+                    )}
+                    {project.mentored && (
+                      <span class="project-status project-status-mentored" title="Developed by an intern I mentored">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 20v-2a5.5 5.5 0 0 1 11 0v2M16 11l2 2 3-4"/></svg>
+                        Mentored intern project
+                      </span>
+                    )}
+                    {(project.repository || project.website) && (
+                      <ProjectLinks name={project.name} repository={project.repository} website={project.website} />
+                    )}
+                  </div>
+                  <p>{project.description}</p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
       </section>
     </div>
   </div>

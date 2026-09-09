@@ -1,6 +1,6 @@
 ---
 title: "How Far Can a 64 GB M2 Ultra Push Local LLMs?"
-description: "A practical test of Qwen 3.8, a fast Qwen MoE, oMLX, MTP, screenshots, long context, and DwarfStar models on a 64 GB M2 Ultra."
+description: "Measured throughput, memory, and context limits for dense Qwen3.8, a Qwen3.6 MoE, Qwen3.8 Flash Next, and a 284B DeepSeek V4 on a 64 GB M2 Ultra."
 published: 2026-09-03T10:00:00-07:00
 updated: 2026-09-08T22:30:00-07:00
 draft: false
@@ -15,7 +15,7 @@ The experiment grew one model at a time. I began with a normal 27B Qwen model, m
 | Use | Model and mode | What I measured |
 | --- | --- | ---: |
 | Fast daily agent | Qwen3.6 35B-A3B oQ4e + MTP | **104.4 tok/s** |
-| Practical 64 GB Flash model | Qwen3.8 Flash Next Q2 + MTP | **48.14 tok/s median** |
+| Practical 64 GB Flash model | Qwen3.8 Flash Next Q2 + MTP | **48.14 tok/s** short-prompt median; 30–34 tok/s at 8K–128K |
 | Harder coding | Qwen3.8 27B oQ4e + FP16 MTP | **39.9 tok/s** |
 | Reproducible long-context work | Qwen3.8 27B oQ4e, MTP off | **29.6 tok/s** |
 | Higher-precision dense baseline | Qwen3.8 27B oQ6e, MTP off | **23.8 tok/s** |
@@ -43,7 +43,7 @@ Unified memory is why this works at all. CPU and GPU share the same pool, which 
 
 ## How I tested
 
-I did not set out to build a scientific leaderboard. The goal was to collect useful measurements, preserve the prompts and raw outputs, and make a practical decision for this one machine.
+This was not meant to be a scientific leaderboard. The goal was to collect useful measurements, keep the prompts and raw outputs, and make a practical decision for one machine.
 
 Each model saw the same small set of tests:
 
@@ -57,15 +57,15 @@ Each model saw the same small set of tests:
 - MTP off and on, where supported;
 - process footprint and macOS Swap.
 
-The code gates are smoke tests, not proof that one model is smarter. I recorded failures because they reveal different behavior, not because three toy functions settle model quality.
+The code gates are smoke tests. I record failures because they show different behavior, not because three toy functions settle model quality.
 
-I present the results first, explain what each graph means, and leave enough detail for someone to reproduce the experiment.[^original-results]
+Prompts, logs, and raw result files are published so the runs can be repeated.[^original-results]
 
 ## First baseline: dense Qwen3.8
 
-I started with `mlx-community/Qwen3.8-27B-8bit`.[^qwen] It generated around **21.5 tok/s**, correctly read my terminal screenshot, produced valid tool calls, and retrieved all three hidden values from a 23K-token prompt. A repeated warm request reached the first token in 0.86 seconds.
+I started with `mlx-community/Qwen3.8-27B-8bit`.[^qwen] It generated around **21.5 tok/s**, correctly read my terminal screenshot, produced valid tool calls, and retrieved all three hidden values from a 23K-token prompt.
 
-The surprise was not generation. It was caching. The cold 23K prompt took 145 seconds. Reusing 20,480 cached tokens cut the next request to 21 seconds. For an agent that repeatedly sends the same tool definitions and conversation prefix, cache behavior matters more than a small decode improvement.
+The surprise was not generation. It was caching. The cold 23K prompt took 145 seconds; a follow-up that reused 20,480 cached tokens finished in 21 seconds, and a fully cached repeat reached its first token in 0.86 seconds. For an agent that resends the same tool definitions and conversation prefix, cache behavior matters more than a small decode improvement.
 
 That model came from the MLX community, but once I realized the oMLX author publishes his own oQ builds, I switched to those for a consistent runtime and quantization pipeline. The oQ format assigns precision based on measured sensitivity rather than giving every tensor the same width.[^omlx]
 
@@ -77,7 +77,7 @@ The first clean comparison used Jundot's Qwen3.8 27B oQ4e, oQ6e, and oQ8e checkp
 | --- | ---: | ---: | ---: |
 | Model size reported by oMLX | 16.60 GB | 23.19 GB | 29.34 GB |
 | Warm decode, MTP off | **29.6** | 23.8 | 20.6 |
-| Warm decode, MTP on | 32.3 | 22.8 | **31.3** |
+| Warm decode, MTP on | **32.3** | 22.8 | 31.3 |
 | Peak footprint in the comparison | **25 GiB** | 33 GiB | 39 GiB |
 | Long retrieval | 3/3 | 3/3 | 3/3 |
 | Tool call and screenshot | Pass | Pass | Pass |
@@ -85,14 +85,14 @@ The first clean comparison used Jundot's Qwen3.8 27B oQ4e, oQ6e, and oQ8e checkp
 
 <figure class="diagram-figure">
   <img src="/images/writing/m2-ultra-qwen-throughput.svg" alt="Grouped bar chart comparing warm generation throughput for five Qwen configurations with MTP disabled and enabled." />
-  <figcaption>MTP was not a universal speed button. It helped q8 substantially, barely helped q4, and made q6 slightly slower in this prompt.</figcaption>
+  <figcaption>MTP was not a universal speed button. It lifted q8 by half, gave q4 about 9%, and made q6 slightly slower in this prompt.</figcaption>
 </figure>
 
 The q8 code miss was mundane: it returned a tuple where the test requested a list of tuples. That is not evidence that lower precision is smarter. It is evidence that one deterministic sample can still be weird.
 
 I then used q4 in an actual chat. A 12,865-token prompt followed by 6,819 generated tokens sustained **26.2 tok/s**. After a clean restart, a 16,384-token answer sustained **26.9 tok/s** for ten minutes. The shorter 29.6 tok/s benchmark was real, but 26–27 tok/s better describes a long thinking session.
 
-That is close to what the hardware can reasonably deliver. Qwen3.8-27B is dense: every generated token works through the model body. At 23 GB of q6 weights and 800 GB/s of memory bandwidth, even the naive bandwidth ceiling is only about 35 weight reads per second before attention, state, dequantization, and dispatch overhead.
+That is close to what the hardware can reasonably deliver. Qwen3.8-27B is dense: every generated token reads the whole model body. At 16.6 GB of oQ4e weights and 800 GB/s of bandwidth, the naive ceiling is about 48 tokens per second, and that is before attention, KV traffic, dequantization, and dispatch overhead. Measuring 26–27 tok/s in long sessions means roughly half of theoretical bandwidth, which is a normal place to land.
 
 ## The model that finally felt fast
 
@@ -136,7 +136,7 @@ It passed all three executable code gates and produced a clean thinking answer a
 
 <h2 id="qwen38-flash-next-64gb-m2-ultra">Qwen3.8 Flash Next on a 64 GB M2 Ultra</h2>
 
-Ivan Fioravanti's September 8 update for 64 GB systems changed the practical question for this machine.[^flash] DwarfStar now demand-pages the external PLE table when RAM is tight, and its current Q2_K-down checkpoint reduces the main model to **44.81 GB**. Rather than mix results from superseded builds or higher-memory Macs, this section reports only my measurements from a physical 64 GB M2 Ultra.
+Ivan Fioravanti's September 8 update made Qwen3.8 Flash Next worth testing on a 64 GB machine.[^flash] [DwarfStar](https://github.com/antirez/ds4), the SSD-streaming runtime described in the next section, now demand-pages the external PLE table when RAM is tight, and the current Q2_K-down checkpoint reduces the main model to **44.81 GB**. Earlier builds swapped heavily here, so this section reports only my own measurements on a physical 64 GB M2 Ultra.
 
 I tested the updated `qwen3.8-flash-next` branch at commit [`18ca8ec`](https://github.com/ivanfioravanti/ds4-metal/commit/18ca8ecdb5732a5c77c053e554e57daadf5ca32e), the current [Q2 checkpoint](https://huggingface.co/ivanfioravanti/Qwen3.8-Flash-Next-DS4-IQ2), and its required 32 GB PLE sidecar. The model checksum matched the published SHA-256. I began from a zero-swap baseline and left my normal VM, Docker, browsers, editors, and desktop applications running. All performance runs used Metal, temperature 0, and a 1,024-token prefill chunk.
 
@@ -152,7 +152,7 @@ The ordinary-decode sweeps used the repository's public-domain *I Promessi Sposi
 | 128K | 345.01 tok/s | 30.03 tok/s | **30.14 tok/s** | 47.00 GiB | Passed |
 | 262K | - | - | - | 51.42 GiB | Metal out of memory before prefill |
 
-Swap rose from zero to only **0.25 MB** on the first run and stayed there through 128K. The demand-paged PLE therefore remained compatible with a normal active desktop throughout the successful sweep.
+Swap rose from zero to only **0.25 MB** on the first run and stayed there through 128K, so the demand-paged PLE coexisted with a normal active desktop. The 262K plan of 51.42 GiB sits just under the 51.84 GiB working-set recommendation, but with a desktop already resident there was no headroom left for the prefill allocation.
 
 ### MTP, vision, and tools
 
@@ -160,19 +160,19 @@ For MTP I repeated the same deterministic 45-token prompt, allowing up to 256 ge
 
 The optional 588 MB vision encoder also loaded successfully. On a synthetic 640x480 fixture, the model read **“MAPLE 8153”** correctly. The image used 300 tokens, and the short OCR turn generated at 51.33 tok/s with MTP, accepting 32 of 36 drafts. A deterministic no-thinking agent smoke test also made a valid `bash` tool call and wrote the expected value to a temporary file.
 
-DwarfStar also exposes `DS4_QWEN4_PLE_EVICT_TOKENS=1024` to discard clean PLE pages periodically during marathon sessions. In alternating 8K runs that each generated 1,024 tokens, the warm median was 36.53 tok/s by default and 36.30 tok/s with eviction. Median warm prefill fell from 522.88 to 495.41 tok/s. That is about a 0.6% decode cost and a 5.3% prefill cost in this small test. Both modes kept Swap at 0.25 MB, so I would leave eviction off unless a long-lived session shows growing PLE residency.
+DwarfStar also exposes `DS4_QWEN4_PLE_EVICT_TOKENS=1024` to discard clean PLE pages periodically during long sessions. In alternating 8K runs generating 1,024 tokens each, the warm decode median was 36.53 tok/s by default and 36.30 tok/s with eviction, while median warm prefill fell from 522.88 to 495.41 tok/s: about 0.6% of decode and 5.3% of prefill. Both modes kept Swap at 0.25 MB, so I leave eviction off unless a long-lived session shows growing PLE residency.
 
-The revised answer to Ivan's question is clear: **the updated Qwen3.8 Flash Next Q2 is a practical 64 GB M2 Ultra model through 128K context.** Demand-paging the PLE solved the severe swap problem seen in the first build. The near-262K allocation still exceeded this machine's Metal memory limit, so 128K is my tested ceiling rather than a promise that every native context size fits.
+So the updated Qwen3.8 Flash Next Q2 is a practical 64 GB M2 Ultra model through 128K context. Demand-paging the PLE removed the severe swapping of the first build. The near-262K allocation still exceeded this machine's Metal limit, so 128K is my tested ceiling, not a claim that every native context size fits.
 
-The public result archive includes the reproduction command, direct benchmark CSVs, artifact sizes, commit, checksum, context settings, throughput, MTP acceptance, PLE eviction comparison, swap readings, and failure boundary.[^flash-results]
+The public result archive includes the reproduction command, benchmark CSVs, artifact sizes, commit, checksum, context settings, throughput, MTP acceptance, the PLE eviction comparison, swap readings, and the failure boundary.[^flash-results]
 
 ## A 284B model from an 81 GiB file
 
 Then I changed the question from “what is fast?” to “how far can this machine go?”
 
-DwarfStar is a specialized DeepSeek V4 and GLM runtime by Salvatore Sanfilippo.[^dwarfstar] Unlike ordinary MLX model loading, it can keep selected MoE experts in memory and stream the rest from SSD. The DeepSeek V4 Flash checkpoint I tested has 284B logical parameters, 13B active parameters, and a specialized 80.76 GiB Q2 layout.[^deepseek] Sensitive tensors remain at Q8 or F16 while routed experts take most of the compression ([DwarfStar model documentation](https://github.com/antirez/ds4/blob/main/README.md)).
+DwarfStar is a specialized DeepSeek V4 and GLM runtime by Salvatore Sanfilippo.[^dwarfstar] Unlike ordinary MLX model loading, it keeps selected MoE experts in memory and streams the rest from SSD. The DeepSeek V4 Flash checkpoint I tested has 284B logical parameters, 13B active parameters, and a specialized 80.76 GiB Q2 layout.[^deepseek] Sensitive tensors stay at Q8 or F16 while routed experts absorb most of the compression ([DwarfStar model documentation](https://github.com/antirez/ds4/blob/main/README.md)).
 
-At 32K context, a 40 GiB expert-cache target was the fastest isolated result:
+At 32K context, a 40 GB expert-cache target was the fastest isolated result:
 
 | DwarfStar mode | Steady decode | Peak footprint | Practical result |
 | --- | ---: | ---: | --- |
@@ -182,7 +182,7 @@ At 32K context, a 40 GiB expert-cache target was the fastest isolated result:
 | 131K, 16 GB expert target | 6.35 tok/s | Lower cache budget | Capacity mode |
 | 262K, 16 GB expert target | 5.75 tok/s | Lower cache budget | Capacity mode |
 
-The isolated 40 GB result looked attractive until I ran the server alongside my normal VM, Docker, browser, and desktop applications. The process reached 41 GB and macOS created nearly 9 GiB of Swap. The 32 GB cache added no further Swap and became the honest recommendation.
+The isolated 40 GB result looked attractive until I ran the server alongside my normal VM, Docker, browser, and desktop applications. There the process settled at 41 GB and macOS still created nearly 9 GiB of Swap. The 32 GB cache added no Swap and became the honest recommendation.
 
 <figure class="diagram-figure">
   <img src="/images/writing/m2-ultra-ds4-context.svg" alt="Line chart showing DwarfStar DeepSeek V4 generation throughput declining as context grows from 32K to 262K and the expert cache is reduced." />
@@ -191,7 +191,7 @@ The isolated 40 GB result looked attractive until I ran the server alongside my 
 
 ## One million tokens fits
 
-A full **1,048,576-token allocation succeeded** with a 16 GiB expert-cache target.
+A full **1,048,576-token allocation succeeded** with a 16 GB expert-cache target.
 
 | 1M allocation component | Planned memory |
 | --- | ---: |
@@ -202,13 +202,9 @@ A full **1,048,576-token allocation succeeded** with a 16 GiB expert-cache targe
 | Prefill reserve | 3.38 GiB |
 | **Total** | **35.20 GiB** |
 
-This is a good demonstration of compressed attention and explicit SSD streaming. It is not a good interactive configuration. The measured prefill rate dropped from 174.6 tok/s at 131K to 106.9 tok/s for the next segment at 262K, while steady generation fell below 6 tok/s. Filling a million-token session would take hours.
-
-The useful way to operate that mode would be to pay the initial prefill once, persist checkpoints, and reuse the same enormous prefix. For normal coding, Qwen at 128K or 256K is much faster.
+This is a good demonstration of compressed attention and explicit SSD streaming, and a bad interactive configuration. Measured prefill dropped from 174.6 tok/s at 131K to 106.9 tok/s for the next segment at 262K, and steady generation fell below 6 tok/s, so filling a million-token session would take hours. The only sensible use is to pay the prefill once, persist checkpoints, and reuse the same enormous prefix. For normal coding, Qwen at 128K is much faster.
 
 The DwarfStar vision checkpoint did not survive the same experiment. Its image tokens reached a Metal range that the SSD-streaming model map had not covered, and prefill failed. Full residency is impossible on 64 GB, so Qwen remains my screenshot model.
-
-The failure belongs in the results: showing the mechanism and measurement is more useful than hiding an inconvenient outcome.
 
 ## What I would use today
 
@@ -217,15 +213,15 @@ The failure belongs in the results: showing the mechanism and measurement is mor
 | Fast daily thinking agent | Qwen3.6 35B-A3B oQ4e, MTP on, 128K |
 | Difficult coding or review | Qwen3.8 27B oQ4e FP16-MTP, 128K |
 | Reproducible automation | Qwen3.8 27B oQ4e, MTP off |
-| Maximum practical Qwen context | Qwen3.8 27B oQ4e, 256K ceiling |
+| Maximum tested Qwen context | Qwen3.8 27B oQ4e at 128K |
 | Higher-precision dense work | Qwen3.8 27B oQ6e, 128K |
 | Practical Flash model | Qwen3.8 Flash Next Q2 + PLE, up to 128K tested |
 | Oversized model research | DeepSeek V4 Q2, 32K and 32 GB expert cache |
 | Million-token experiment | DeepSeek V4 Q2, 16 GB expert cache, patience |
 
-The main lesson is not that one model won. Architecture won different rounds. Dense Qwen3.8 gave me stronger recent-model behavior at 20–40 tok/s. Qwen3.6 MoE crossed 100 tok/s and felt dramatically better for repeated agent steps. DwarfStar made an 81 GiB checkpoint and a million-token allocation possible on a 64 GB machine, but capacity and usability separated quickly.
+No single model won; architecture won different rounds. Dense Qwen3.8 gave the strongest recent-model behavior at 20–40 tok/s. The Qwen3.6 MoE crossed 100 tok/s and felt dramatically better for repeated agent steps. DwarfStar made an 81 GiB checkpoint and a million-token allocation possible on a 64 GB machine, but capacity and usability separated quickly.
 
-The other lesson is that local inference is a whole-system test. A clean benchmark can say “no Swap” while the same configuration disrupts a real desktop. A model switch can temporarily keep two sets of weights resident. Prefix caching can save more time than speculative decoding. The number worth keeping is not the highest token rate; it is the configuration I still want to use the next day.
+The other lesson is that local inference is a whole-system test. A clean benchmark can report “no Swap” while the same configuration disrupts a real desktop, a model switch can briefly keep two sets of weights resident, and prefix caching can save more time than speculative decoding. The number worth keeping is not the highest token rate; it is the configuration I still want to use the next day.
 
 ## Sources and reproducibility
 

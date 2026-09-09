@@ -39,7 +39,7 @@ If the human is the bottleneck, launching many agents does not automatically hel
 
 Agents already use complex general tools such as [Bash](https://www.gnu.org/software/bash/), browsers, and [FFmpeg](https://ffmpeg.org/). They also need narrower domain tools. OpenSnipping ([yummyjars.com/opensnipping](https://yummyjars.com/opensnipping/)) can provide image annotation and export. OpenMathBoard ([lezhi.school](https://lezhi.school)) can provide geometry and a teaching canvas. A repository tool can provide commits, issues, and pull requests without making the agent scrape a website.
 
-The [Model Context Protocol](https://modelcontextprotocol.io/) gives tool providers a common way to expose capabilities and structured results. A protocol helps discovery and transport, but it does not make a tool good. The API still needs clear actions, bounded permissions, stable results, and useful errors.
+The Model Context Protocol gives tool providers a common way to expose capabilities and structured results.[^mcp] A protocol helps discovery and transport, but it does not make a tool good. The API still needs clear actions, bounded permissions, stable results, and useful errors.
 
 A focused screenshot tool might expose a contract as small as this:
 
@@ -81,7 +81,7 @@ Presentation tools should make verification easier. A generated diagram that hid
 
 A person cannot inspect only the final message and understand everything an agent did. We need a way to see the trajectory: model calls, tool calls, failures, retries, delegation, timing, and the evidence used to reach a conclusion.
 
-This is where [OpenTelemetry](https://opentelemetry.io/) and agent observability become part of the tool system. Monitoring is not only for debugging the runtime. It helps the human decide whether the result deserves trust.
+This is where OpenTelemetry and agent observability become part of the tool system.[^opentelemetry] Monitoring is not only for debugging the runtime. It helps the human decide whether the result deserves trust.
 
 The monitoring surface should remain separate from the agent's ordinary output. Otherwise, the agent can end up reading its own observability results, writing them back into telemetry, and creating a feedback loop.
 
@@ -97,3 +97,6 @@ A useful agent store would not only contain actions. It would contain the pieces
 The store metaphor can be made more human. Action tools are equipment. Work can arrive from a direct manager, a freelance marketplace, or a benchmark. Results can be presented through text, images, video, or an interactive artifact.
 
 The important part is not the metaphor itself. It is recognizing that a smarter model does not remove the need for well-designed tools. As agents become more capable, the quality of their inputs, actions, outputs, and monitoring will matter even more.
+
+[^mcp]: [Model Context Protocol](https://modelcontextprotocol.io/).
+[^opentelemetry]: [OpenTelemetry](https://opentelemetry.io/).

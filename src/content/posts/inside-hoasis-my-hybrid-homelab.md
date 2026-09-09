@@ -66,7 +66,7 @@ Away from home, the path begins differently. I run WireGuard through [wg-easy](h
 
 This means [`wg.yummyjars.com`](https://wg.yummyjars.com/) and [`adg.yummyjars.com`](https://adg.yummyjars.com/) work on the LAN and over VPN, but they are not normal public websites. Public DNS only needs to expose the entrance. The rest of the names become useful after the client is inside.
 
-Caddy gets a wildcard certificate through an [Azure DNS challenge](https://caddyserver.com/docs/automatic-https#dns-challenge). Internal services can therefore use trusted HTTPS names without opening each service to the public internet.
+Caddy gets a wildcard certificate through an Azure DNS challenge.[^caddy-dns] Internal services can therefore use trusted HTTPS names without opening each service to the public internet.
 
 ```text
 *.yummyjars.com {
@@ -86,7 +86,7 @@ joplin.yummyjars.com {
 }
 ```
 
-The Caddy image includes the Azure DNS module and is stored in [Azure Container Registry](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-intro).
+The Caddy image includes the Azure DNS module and is stored in Azure Container Registry.[^acr]
 
 WireGuard also taught me that “connected” and “working” are different states. Mobile and overseas networks can add encapsulation, restrictive NAT, and smaller path MTUs. The tunnel would sometimes establish successfully while sustained SSH or screen-sharing traffic stalled. A conservative MTU, persistent keepalives, DSCP clearing, and TCP MSS clamping fixed those paths.
 
@@ -130,7 +130,7 @@ if public_ip != dns_ip:
     update_azure_dns_record(public_ip)
 ```
 
-The real implementation wraps those operations in OpenTelemetry spans, emits structured logs, and exposes a traced health endpoint. [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview) makes this tiny background job observable.
+The real implementation wraps those operations in OpenTelemetry spans, emits structured logs, and exposes a traced health endpoint. Application Insights makes this tiny background job observable.[^application-insights]
 
 I recently added that exception alert around the reconciliation loop. For a long time, I had traces and logs but no email when the job threw, which was a very enterprise-looking way for the only operator to still get locked out.
 
@@ -192,3 +192,7 @@ Documenting the topology has become more useful in the AI era. I can point a cod
 Across its different versions, the lab has made me practice networking, platform engineering, cloud resources, container delivery, security, observability, backups, and the less glamorous work of retiring things I no longer need. The most important part is not knowing each product. It is being able to trace a request from a remote phone, through public DNS and a VPN, into private DNS, through a reverse proxy, across a LAN, into the right container, and then back through logs and traces when something fails.
 
 I keep doing this because I get to build something I personally use, my family benefits from it, and, of course, it is fun. The lab is still a work in progress, but now it has split DNS, automated certificates, telemetry, and a reasonably current topology diagram. That counts as progress.
+
+[^caddy-dns]: Caddy documentation, [DNS challenge](https://caddyserver.com/docs/automatic-https#dns-challenge).
+[^acr]: Microsoft Learn, [Introduction to Azure Container Registry](https://learn.microsoft.com/en-us/azure/container-registry/container-registry-intro).
+[^application-insights]: Microsoft Learn, [Application Insights overview](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview).

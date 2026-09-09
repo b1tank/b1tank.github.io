@@ -15,11 +15,11 @@ What if there were a notebook where every note could become an app?
 
 ## Personal software needs a home
 
-A macOS menu bar can host small personal utilities, but every utility still needs to be packaged and installed. A browser extension lives inside the browser and must follow the [extension platform](https://developer.chrome.com/docs/extensions/). A personal website can collect web tools, but browser applications cannot use every native desktop capability. Putting a private application on an iPhone brings another set of distribution steps.
+A macOS menu bar can host small personal utilities, but every utility still needs to be packaged and installed. A browser extension lives inside the browser and must follow the extension platform.[^chrome-extensions] A personal website can collect web tools, but browser applications cannot use every native desktop capability. Putting a private application on an iPhone brings another set of distribution steps.
 
 None of these approaches is wrong. The friction comes from repeating the full application lifecycle for software that may only be used by one person.
 
-People are already making collections of small tools. [Simon Willison's tools](https://tools.simonwillison.net/) and Yummy Jars ([yummyjars.com](https://yummyjars.com/), a self-hosted shelf for small web apps and tools) show how useful a simple web shelf can be. I want to explore the same idea as a desktop workspace where creating and hosting happen together.
+People are already making collections of small tools. Simon Willison's tools and Yummy Jars[^tool-shelves] ([yummyjars.com](https://yummyjars.com/), a self-hosted shelf for small web apps and tools) show how useful a simple web shelf can be. I want to explore the same idea as a desktop workspace where creating and hosting happen together.
 
 ## A notebook made of applications
 
@@ -66,3 +66,6 @@ HTML, CSS, and JavaScript may be enough for the first version. The point is not 
 When everyone can generate another small application, it becomes useful to think one level higher. Where do those applications live? How are they arranged? How does a person trust them, keep them, show them, and use them again?
 
 A notebook for apps is one answer. Start with an empty page, describe what you need, and let the page become the tool. Over time, the notebook becomes a personal software collection that is practical, expressive, and entirely your own.
+
+[^chrome-extensions]: Chrome for Developers, [Extensions documentation](https://developer.chrome.com/docs/extensions/).
+[^tool-shelves]: [Simon Willison's tools](https://tools.simonwillison.net/) and [Yummy Jars](https://yummyjars.com/) are examples of web shelves for small tools.

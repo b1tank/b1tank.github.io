@@ -30,7 +30,7 @@ The agent can still be a powerful assistant. It can answer questions, trace code
 
 ## What good learning material looks like
 
-Projects such as [Build Your Own X](https://github.com/codecrafters-io/build-your-own-x) and [CodeCrafters](https://codecrafters.io/) make systems understandable by asking people to build smaller versions themselves. [Eureka Labs](https://eurekalabs.ai/) and [Andrej Karpathy's Zero to Hero](https://karpathy.ai/zero-to-hero.html) explore how expert-created material and AI assistance can work together.
+Projects such as Build Your Own X and CodeCrafters make systems understandable by asking people to build smaller versions themselves. Eureka Labs and Andrej Karpathy's Zero to Hero explore how expert-created material and AI assistance can work together.[^learning-examples]
 
 The subjects I keep returning to are similarly foundational:
 
@@ -58,3 +58,5 @@ I like learning, digging down to first principles, pulling a complicated subject
 This is a difficult area because good teaching takes interest, patience, and persistence. Many people are busy following the latest thing and shipping another thin application around it. Fewer people want to spend months understanding the layer below.
 
 That gap is exactly what interests me. If agents make software easier to produce, then carefully learned and carefully taught fundamentals may become more valuable, not less.
+
+[^learning-examples]: [Build Your Own X](https://github.com/codecrafters-io/build-your-own-x), [CodeCrafters](https://codecrafters.io/), [Eureka Labs](https://eurekalabs.ai/), and [Andrej Karpathy's Zero to Hero](https://karpathy.ai/zero-to-hero.html).

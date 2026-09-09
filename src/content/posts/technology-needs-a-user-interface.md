@@ -17,7 +17,7 @@ A few examples make this pattern obvious:
 | large language models | [ChatGPT](https://chatgpt.com/) |
 | Linux control groups | [Docker](https://www.docker.com/) and containers |
 
-The mapping is not historically complete. Browsers did not create the internet, ChatGPT did not create language models, and Docker did not create [cgroups](https://docs.kernel.org/admin-guide/cgroup-v2.html). Each interface made a difficult capability much easier for more people to approach.
+The mapping is not historically complete. Browsers did not create the internet, ChatGPT did not create language models, and Docker did not create cgroups.[^cgroups] Each interface made a difficult capability much easier for more people to approach.
 
 ## An interface is a mental model
 
@@ -42,3 +42,5 @@ When I look at a technology that has not reached ordinary users, I now ask a pro
 > What interface would make this capability understandable?
 
 Sometimes the next breakthrough is not another layer of infrastructure. It is the surface that finally lets people use what is already there.
+
+[^cgroups]: Linux kernel documentation, [Control Group v2](https://docs.kernel.org/admin-guide/cgroup-v2.html).

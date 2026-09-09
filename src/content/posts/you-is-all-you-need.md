@@ -9,7 +9,7 @@ I think the really valuable personal agent is the one that mimics the most of yo
 
 That is the idea behind **You Is All You Need**.
 
-Tools such as [GitHub Copilot](https://github.com/features/copilot) can already write code, explain a repository, and carry out a list of tasks. A general agent can know much more about programming than I do. That does not mean it will naturally do my work the way I want it done.
+Tools such as GitHub Copilot can already write code, explain a repository, and carry out a list of tasks.[^copilot] A general agent can know much more about programming than I do. That does not mean it will naturally do my work the way I want it done.
 
 My work contains many small preferences that are obvious to me but invisible to a new agent. I care about which problem to solve first, how much explanation is useful, when a change is too broad, what evidence is enough, and which tradeoffs I am willing to make. Two implementations can both be technically correct while only one feels like something I would choose.
 
@@ -26,3 +26,5 @@ There is also a limit. I still want the agent to question a bad assumption, find
 So when I think about tuning a personal agent, I am less interested in making it sound like me. I want it to make choices that I recognize, explain the places where it disagrees, and improve through the feedback I already give it. The model matters, but the accumulated understanding between the agent and its user may matter more.
 
 > **For a personal agent, you may be the most important part of the context.**
+
+[^copilot]: [GitHub Copilot](https://github.com/features/copilot).

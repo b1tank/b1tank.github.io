@@ -15,7 +15,7 @@ Many of my consumer ideas begin with my family. YummyLog ([yummylog.yummyjars.co
 
 The teaching idea is the one I return to most often. [Shopify](https://www.shopify.com/) helps people sell, and [Replit](https://replit.com/) helps people create software. I wonder what a similarly direct platform for teaching might look like. Teachers can publish on [YouTube](https://www.youtube.com/) or other creator platforms, but those platforms are not built around a complete learning path.
 
-I am especially interested in material that has been digested by a real teacher. [Andrej Karpathy's Zero to Hero](https://karpathy.ai/zero-to-hero.html) is valuable because the explanation comes from someone who deeply understands the subject. Products such as [MagicSchool](https://www.magicschool.ai/) explore AI for educators, while [Eureka Labs](https://eurekalabs.ai/) explores AI-native education. My own interest remains centered on helping a person package and teach what they genuinely know.
+I am especially interested in material that has been digested by a real teacher. Andrej Karpathy's Zero to Hero is valuable because the explanation comes from someone who deeply understands the subject. Products such as MagicSchool explore AI for educators, while Eureka Labs explores AI-native education.[^education-examples] My own interest remains centered on helping a person package and teach what they genuinely know.
 
 That line of thinking now appears in projects such as 乐之翁 ([lezhiweng.com](https://lezhiweng.com), an educational website hosting high-school math materials curated by my dad) and OpenMathBoard ([lezhi.school](https://lezhi.school), an open-source math whiteboard for teaching).
 
@@ -67,7 +67,7 @@ I use three simple categories to classify project ideas:
 - tool
 - fun
 
-Learn C ([b1tank.github.io/learnc](https://b1tank.github.io/learnc/), runnable browser courses for K&R and antirez's *Let's Learn C*) and Learn Ghostty ([b1tank.github.io/learn-ghostty](https://b1tank.github.io/learn-ghostty/), a source-backed terminal reconstruction workshop) follow this knowledge-first path. Learn C ([b1tank.github.io/learnc](https://b1tank.github.io/learnc/)) began as a runnable companion to K&R. More recently, I learned from [Salvatore Sanfilippo](https://antirez.com)'s [*Let's Learn C* YouTube series](https://www.youtube.com/playlist?list=PLrEMgOSrS_3cFJpM2gdw8EGFyRBZOyAKY) and started building [an English companion](https://b1tank.github.io/learnc/antirez.html) with runnable code, modern-C notes, and links back to each video. Learn Ghostty ([b1tank.github.io/learn-ghostty](https://b1tank.github.io/learn-ghostty/)) reconstructs a terminal one observable subsystem at a time, from process ownership and PTYs to a GTK window and OpenGL rendering.
+Learn C ([b1tank.github.io/learnc](https://b1tank.github.io/learnc/), runnable browser courses for K&R and antirez's *Let's Learn C*) and Learn Ghostty ([b1tank.github.io/learn-ghostty](https://b1tank.github.io/learn-ghostty/), a source-backed terminal reconstruction workshop) follow this knowledge-first path. Learn C ([b1tank.github.io/learnc](https://b1tank.github.io/learnc/)) began as a runnable companion to K&R. More recently, I learned from Salvatore Sanfilippo's *Let's Learn C* YouTube series[^lets-learn-c] and started building [an English companion](https://b1tank.github.io/learnc/antirez.html) with runnable code, modern-C notes, and links back to each video. Learn Ghostty ([b1tank.github.io/learn-ghostty](https://b1tank.github.io/learn-ghostty/)) reconstructs a terminal one observable subsystem at a time, from process ownership and PTYs to a GTK window and OpenGL rendering.
 
 <div class="project-shot-grid">
   <figure>
@@ -82,6 +82,10 @@ Learn C ([b1tank.github.io/learnc](https://b1tank.github.io/learnc/), runnable b
 
 > **Organizing the knowledge is not preparation before building. It is part of the building.**
 
-I naturally want to build tools and fun things. The problem is that I sometimes do not yet know the area well enough to build the right tool. In that case, a knowledge base may be the better first project. [Kamran Ahmed](https://github.com/nilbuild) built [roadmap.sh](https://roadmap.sh/) around structured learning paths. Organizing a field can itself be a useful product, and the work exposes where better tools are missing.
+I naturally want to build tools and fun things. The problem is that I sometimes do not yet know the area well enough to build the right tool. In that case, a knowledge base may be the better first project. Kamran Ahmed built roadmap.sh around structured learning paths.[^roadmap] Organizing a field can itself be a useful product, and the work exposes where better tools are missing.
 
 This gives me a practical order: learn enough to organize the problem, build something I need, and then see whether it is useful to anyone else. I do not need to start with the biggest idea on the list. I need to start with the idea whose user and problem I understand best.
+
+[^education-examples]: [Andrej Karpathy's Zero to Hero](https://karpathy.ai/zero-to-hero.html), [MagicSchool](https://www.magicschool.ai/), and [Eureka Labs](https://eurekalabs.ai/).
+[^lets-learn-c]: Salvatore Sanfilippo, [website](https://antirez.com) and [*Let's Learn C* video series](https://www.youtube.com/playlist?list=PLrEMgOSrS_3cFJpM2gdw8EGFyRBZOyAKY).
+[^roadmap]: [Kamran Ahmed](https://github.com/nilbuild), creator of [roadmap.sh](https://roadmap.sh/).

@@ -9,7 +9,7 @@ AI can reduce the amount of work people need to do. That is one of its great pro
 
 At the same time, AI is changing the job market faster than most educational systems can adapt. Some tasks will disappear. Existing roles will absorb new tools. New roles will demand combinations of skills that did not previously belong together. The result is a paradox: AI may reduce how much work humans perform directly, while increasing how much and how often humans need to learn.
 
-> **As AI does more of our work, it can also take away the learning that work provides. In a changing job market, we must learn more, not less - and wield AI to advance education, not replace it.**
+> **AI can save us work, but it can also distance us from the learning that work provides. Curiosity is fundamental to human nature. We want to learn more, not less - and AI should be wielded to advance education, not deprive us of opportunities to learn.**
 
 This is not an argument against AI in education. It is an argument for using it deliberately. AI can help teachers create, help learners practice, and make excellent instruction available to more people. But the goal should be deeper human understanding, not merely faster completion.
 
@@ -20,7 +20,7 @@ I increasingly see two distinct problems in education:
 1. How does valuable knowledge become trustworthy learning material?
 2. How does that material become a learning experience suited to one person?
 
-The second problem receives much of the attention. Once a body of material exists, AI can help plan a path, adjust the pace, generate examples, answer questions, and provide feedback. [LearnVector](https://learnvector.ai/), founded by Andrew Ng, describes this as moving learning from one-to-many toward one-to-one. It plans to combine personalized guidance with authoritative material, including material from Coursera.
+The second problem receives much of the attention. Once a body of material exists, AI can help plan a path, adjust the pace, generate examples, answer questions, and provide feedback. LearnVector, founded by Andrew Ng, describes this as moving learning from one-to-many toward one-to-one. It plans to combine personalized guidance with authoritative material, including material from Coursera.[^learnvector]
 
 That is an important direction. A learner should not have to follow the same sequence, explanation, and pace as everyone else.
 
@@ -62,7 +62,7 @@ In that sense, the opportunity is not merely an AI course generator. It is infra
 
 ## The other side is personal learning
 
-Once trusted material exists, AI can make it personal. This is where the direction described by [LearnVector](https://learnvector.ai/) becomes complementary rather than competitive. Its stated focus is a trustworthy, one-to-one learning guide that plans a path with the learner, adapts to how the learner learns, and stays until the learner has mastered the skill.
+Once trusted material exists, AI can make it personal. This is where the direction described by LearnVector becomes complementary rather than competitive.[^learnvector] Its stated focus is a trustworthy, one-to-one learning guide that plans a path with the learner, adapts to how the learner learns, and stays until the learner has mastered the skill.
 
 I think both sides are necessary:
 
@@ -77,7 +77,7 @@ The same structure applies to technical hiring.
 
 Suppose I want to work at a company whose product requires a specialized combination of terminal internals, native application development, remote sessions, systems programming, and agent workflows. A conventional computer science course is too broad. A list of interview questions is too shallow. Reading a large codebase without a path is too slow.
 
-[Superlogical](https://www.superlogical.com/) is an example that interests me. It is building a terminal multiplexer intended to connect local development, remote environments, production systems, people, and agents. Preparing to contribute to a product like that requires more than passing a general coding interview. It requires domain knowledge and evidence that I can apply it.
+Superlogical is an example that interests me. It is building a terminal multiplexer intended to connect local development, remote environments, production systems, people, and agents.[^superlogical] Preparing to contribute to a product like that requires more than passing a general coding interview. It requires domain knowledge and evidence that I can apply it.
 
 The candidate and the company have opposite sides of the same problem. I want a credible path into the domain. The company wants people who can become effective in a specialized domain, but the pool of obvious experts is small.
 
@@ -101,7 +101,7 @@ These motivations reinforce one another. The project is useful to me even if no 
 
 ## The precedents are already visible
 
-This idea does not begin from nothing. [CodeCrafters](https://codecrafters.io/) teaches experienced developers by having them rebuild tools such as Redis, Git, and SQLite. [Build Your Own X](https://github.com/codecrafters-io/build-your-own-x) collects tutorials for learning technologies through implementation. Both recognize that building a smaller version of a real system can turn abstract knowledge into working ability.
+This idea does not begin from nothing. CodeCrafters teaches experienced developers by having them rebuild tools such as Redis, Git, and SQLite. Build Your Own X collects tutorials for learning technologies through implementation.[^build-to-learn] Both recognize that building a smaller version of a real system can turn abstract knowledge into working ability.
 
 There should be more material like this, across more domains and subjects. There should also be better infrastructure for experts to create it.
 
@@ -169,3 +169,7 @@ The opportunity is to connect those forces responsibly: help humans preserve wha
 Today, I am doing that on a very small scale. I am turning my dad's mathematics material into [乐之翁](https://lezhiweng.com), and I am turning my own curiosity about terminal systems into [Learn Ghostty](https://b1tank.github.io/learn-ghostty/). Both projects are early, but together they point toward the same idea.
 
 There may be millions of experts with valuable knowledge trapped in private materials, and millions of learners trying to enter domains that existing courses do not reach. AI can help bridge that gap. The hard and worthwhile part is making sure that human knowledge, human judgment, and human learning remain at the center.
+
+[^learnvector]: [LearnVector](https://learnvector.ai/), founded by Andrew Ng, describes its approach to trustworthy one-to-one learning and collaboration with Coursera and Udemy.
+[^superlogical]: [Superlogical](https://www.superlogical.com/), a company building a multiplexer intended to connect developers, agents, tools, and infrastructure.
+[^build-to-learn]: [CodeCrafters](https://codecrafters.io/) and [Build Your Own X](https://github.com/codecrafters-io/build-your-own-x).

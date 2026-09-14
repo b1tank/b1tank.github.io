@@ -2,7 +2,7 @@
 title: "How Far Can a 64 GB M2 Ultra Push Local LLMs?"
 description: "Measured throughput, memory, and context limits for dense Qwen3.8, a Qwen3.6 MoE, Qwen3.8 Flash Next, and a 284B DeepSeek V4 on a 64 GB M2 Ultra."
 published: 2026-09-03T10:00:00-07:00
-updated: 2026-09-13T20:35:00-07:00
+updated: 2026-09-13T21:45:00-07:00
 draft: false
 ---
 
@@ -150,9 +150,11 @@ The ordinary-decode sweeps used the repository's public-domain *I Promessi Sposi
 | 32K | 347.98 tok/s | 33.31 tok/s | **33.42 tok/s** | 43.69 GiB | Passed |
 | 64K | 410.16 tok/s | 32.49 tok/s | **32.62 tok/s** | 44.80 GiB | Passed |
 | 128K | 345.01 tok/s | 30.03 tok/s | **30.14 tok/s** | 47.00 GiB | Passed |
-| 262K | - | - | - | 51.42 GiB | Metal out of memory before prefill |
+| 192K rerun | 269.49 tok/s | 25.73 tok/s | **26.24 tok/s** | 49.21 GiB | Passed, after prior 128K run |
+| 224K rerun | - | - | - | 50.32 GiB | Metal out of memory at token 2,048 |
+| Near 262K | - | - | - | 51.42 GiB | Metal out of memory before prefill |
 
-Swap rose from zero to only **0.25 MB** on the first run and stayed there through 128K, so the demand-paged PLE coexisted with a normal active desktop. The 262K plan of 51.42 GiB sits just under the 51.84 GiB working-set recommendation, but with a desktop already resident there was no headroom left for the prefill allocation.
+In the original sweep, Swap rose from zero to only **0.25 MB** on the first run and stayed there through 128K. I repeated the 128K control after restarting the Mac: it passed at **29.31 tok/s** steady decode, but macOS Swap grew from zero to **721.94 MB** by the end of the run. A subsequent 192K run passed at **26.24 tok/s**, but began with that existing Swap and should not be treated as a clean memory-fit comparison. The 224K attempt planned **50.32 GiB** and failed during prefill at token 2,048 with Metal out of memory. The 262K plan of 51.42 GiB also remains beyond this machine's tested limit. These reruns reinforce that the result depends on the active system memory state, not just the nominal context allocation.
 
 ### MTP, vision, and tools
 
@@ -162,7 +164,7 @@ The optional 588 MB vision encoder also loaded successfully. On a synthetic 640x
 
 DwarfStar also exposes `DS4_QWEN4_PLE_EVICT_TOKENS=1024` to discard clean PLE pages periodically during long sessions. In alternating 8K runs generating 1,024 tokens each, the warm decode median was 36.53 tok/s by default and 36.30 tok/s with eviction, while median warm prefill fell from 522.88 to 495.41 tok/s: about 0.6% of decode and 5.3% of prefill. Both modes kept Swap at 0.25 MB, so I leave eviction off unless a long-lived session shows growing PLE residency.
 
-So the updated Qwen3.8 Flash Next Q2 is a practical 64 GB M2 Ultra model through 128K context. Demand-paging the PLE removed the severe swapping of the first build. The near-262K allocation still exceeded this machine's Metal limit, so 128K is my tested ceiling, not a claim that every native context size fits. A later report reached 224K context on a different 64 GB machine, an M4 Max, reinforcing that this boundary is specific to my tested M2 Ultra configuration rather than a universal 64 GB limit.[^flash-followup]
+So the updated Qwen3.8 Flash Next Q2 remains usable through 128K on this 64 GB M2 Ultra under the original controlled run, although the restart rerun shows that system memory pressure can materially change the Swap result. The 192K rerun completed but was not a clean memory-state test; 224K failed during prefill. I therefore keep 128K as the practical tested recommendation for this machine, not as a universal 64 GB limit. A later report reached 224K context on a different 64 GB machine, an M4 Max, reinforcing that this boundary is specific to my tested M2 Ultra configuration rather than a universal 64 GB limit.[^flash-followup]
 
 The public result archive includes the reproduction command, benchmark CSVs, artifact sizes, commit, checksum, context settings, throughput, MTP acceptance, the PLE eviction comparison, swap readings, and the failure boundary.[^flash-results]
 

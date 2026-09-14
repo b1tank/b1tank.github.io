@@ -1,8 +1,7 @@
 ---
 title: "How Far Can a 64 GB M2 Ultra Push Local LLMs?"
 description: "Measured throughput, memory, and context limits for dense Qwen3.8, a Qwen3.6 MoE, Qwen3.8 Flash Next, and a 284B DeepSeek V4 on a 64 GB M2 Ultra."
-published: 2026-09-03T10:00:00-07:00
-updated: 2026-09-14T00:05:00-07:00
+published: 2026-09-14T00:05:00-07:00
 draft: false
 ---
 

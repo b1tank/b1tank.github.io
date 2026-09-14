@@ -2,7 +2,7 @@
 title: "How Far Can a 64 GB M2 Ultra Push Local LLMs?"
 description: "Measured throughput, memory, and context limits for dense Qwen3.8, a Qwen3.6 MoE, Qwen3.8 Flash Next, and a 284B DeepSeek V4 on a 64 GB M2 Ultra."
 published: 2026-09-03T10:00:00-07:00
-updated: 2026-09-13T21:45:00-07:00
+updated: 2026-09-13T22:05:00-07:00
 draft: false
 ---
 
@@ -168,6 +168,10 @@ So the updated Qwen3.8 Flash Next Q2 remains usable through 128K on this 64 GB M
 
 The public result archive includes the reproduction command, benchmark CSVs, artifact sizes, commit, checksum, context settings, throughput, MTP acceptance, the PLE eviction comparison, swap readings, and the failure boundary.[^flash-results]
 
+### A newer DwarfStar follow-up
+
+After this M2 Ultra test, DwarfStar's Qwen3.8 Flash Next support advanced beyond the `18ca8ec` commit used here. Ivan now describes the Q2 result as surprisingly strong, while a separate 64 GB M4 Max report measured 224K end to end and used 160K as its practical daily window.[^flash-latest] That report also observed substantial memory pressure during real server use. These are encouraging follow-ups, but they do not change the M2-specific measurements above: on this machine and pinned build, 128K remains the practical recommendation, 192K completed only after prior Swap use, and 224K failed during prefill.
+
 ## A 284B model from an 81 GiB file
 
 Then I changed the question from “what is fast?” to “how far can this machine go?”
@@ -237,5 +241,6 @@ All throughput and memory figures are measurements from this one machine. They a
 [^flash]: Ivan Fioravanti, [64 GB demand-paging update](https://x.com/ivanfioravanti/status/2097343957940474076), [Qwen3.8 Flash Next Q2 weights](https://huggingface.co/ivanfioravanti/Qwen3.8-Flash-Next-DS4-IQ2), and [DwarfStar test branch](https://github.com/ivanfioravanti/ds4-metal/tree/qwen3.8-flash-next).
 [^flash-results]: Reproduction notes and raw results: [`b1tank/ds4-metal`, `research/m2-ultra-qwen38-flash-next`](https://github.com/b1tank/ds4-metal/tree/research/m2-ultra-qwen38-flash-next/research/m2-ultra-qwen38-flash-next).
 [^flash-followup]: Ivan Fioravanti, [Qwen3.8 Flash Next reaching 224K context on a 64 GB M4 Max](https://x.com/ivanfioravanti/status/2098056827598754200), tested by [@pswai](https://x.com/pswai).
+[^flash-latest]: Ivan Fioravanti, [latest Q2 quality and DwarfStar update](https://x.com/ivanfioravanti/status/2099493781460443561); [@pswai's 64 GB M4 Max daily-use report](https://www.pswai.com/essays/qwen38-flash-next-daily).
 [^dwarfstar]: Salvatore Sanfilippo, [DwarfStar](https://github.com/antirez/ds4) and its [DeepSeek V4 synopsis](https://github.com/antirez/ds4/blob/main/MODEL_CARD.md).
 [^deepseek]: DeepSeek, [DeepSeek V4 Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash).

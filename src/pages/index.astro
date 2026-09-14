@@ -93,7 +93,7 @@ const projectCategories: ProjectCategory[] = [
         name: 'Agent Insights',
         repository: 'https://github.com/michiisai/agent-insights',
         mentored: true,
-        description: 'A VS Code extension for exploring agent behavior in depth through OpenTelemetry, designed for use by both people and agents.',
+        description: 'A VS Code extension built by Michelle Ma (@michiisai), an intern I mentored, for exploring agent behavior in depth through OpenTelemetry, designed for use by both people and agents.'
       },
       {
         name: 'pi-otel',
@@ -288,9 +288,9 @@ const projectCategories: ProjectCategory[] = [
                       </span>
                     )}
                     {project.mentored && (
-                      <span class="project-status project-status-mentored" title="Developed by an intern I mentored">
+                      <span class="project-status project-status-mentored" title="Built by Michelle Ma, an intern I mentored">
                         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3.5 20v-2a5.5 5.5 0 0 1 11 0v2M16 11l2 2 3-4"/></svg>
-                        Mentored intern project
+                        Built by Michelle Ma
                       </span>
                     )}
                     {(project.repository || project.website) && (

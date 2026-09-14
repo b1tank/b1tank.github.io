@@ -15,7 +15,7 @@ The experiment grew one model at a time. I began with a normal 27B Qwen model, m
 | Use | Model and mode | What I measured |
 | --- | --- | ---: |
 | Fast daily agent | Qwen3.6 35B-A3B oQ4e + MTP | **104.4 tok/s** |
-| Practical 64 GB Flash model | Qwen3.8 Flash Next Q2 + MTP | **48.14 tok/s** short-prompt median; 30–34 tok/s at 8K–128K |
+| Practical 64 GB Flash model | Qwen3.8 Flash Next Q2 + MTP | **48.14 tok/s** short-prompt median; 30–34 tok/s at 8K–128K; 224K failed on M2 |
 | Harder coding | Qwen3.8 27B oQ4e + FP16 MTP | **39.9 tok/s** |
 | Reproducible long-context work | Qwen3.8 27B oQ4e, MTP off | **29.6 tok/s** |
 | Higher-precision dense baseline | Qwen3.8 27B oQ6e, MTP off | **23.8 tok/s** |

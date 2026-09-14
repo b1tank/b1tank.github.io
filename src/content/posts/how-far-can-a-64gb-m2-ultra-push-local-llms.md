@@ -2,7 +2,7 @@
 title: "How Far Can a 64 GB M2 Ultra Push Local LLMs?"
 description: "Measured throughput, memory, and context limits for dense Qwen3.8, a Qwen3.6 MoE, Qwen3.8 Flash Next, and a 284B DeepSeek V4 on a 64 GB M2 Ultra."
 published: 2026-09-03T10:00:00-07:00
-updated: 2026-09-08T22:30:00-07:00
+updated: 2026-09-13T20:35:00-07:00
 draft: false
 ---
 
@@ -162,7 +162,7 @@ The optional 588 MB vision encoder also loaded successfully. On a synthetic 640x
 
 DwarfStar also exposes `DS4_QWEN4_PLE_EVICT_TOKENS=1024` to discard clean PLE pages periodically during long sessions. In alternating 8K runs generating 1,024 tokens each, the warm decode median was 36.53 tok/s by default and 36.30 tok/s with eviction, while median warm prefill fell from 522.88 to 495.41 tok/s: about 0.6% of decode and 5.3% of prefill. Both modes kept Swap at 0.25 MB, so I leave eviction off unless a long-lived session shows growing PLE residency.
 
-So the updated Qwen3.8 Flash Next Q2 is a practical 64 GB M2 Ultra model through 128K context. Demand-paging the PLE removed the severe swapping of the first build. The near-262K allocation still exceeded this machine's Metal limit, so 128K is my tested ceiling, not a claim that every native context size fits.
+So the updated Qwen3.8 Flash Next Q2 is a practical 64 GB M2 Ultra model through 128K context. Demand-paging the PLE removed the severe swapping of the first build. The near-262K allocation still exceeded this machine's Metal limit, so 128K is my tested ceiling, not a claim that every native context size fits. A later report reached 224K context on a different 64 GB machine, an M4 Max, reinforcing that this boundary is specific to my tested M2 Ultra configuration rather than a universal 64 GB limit.[^flash-followup]
 
 The public result archive includes the reproduction command, benchmark CSVs, artifact sizes, commit, checksum, context settings, throughput, MTP acceptance, the PLE eviction comparison, swap readings, and the failure boundary.[^flash-results]
 
@@ -234,5 +234,6 @@ All throughput and memory figures are measurements from this one machine. They a
 [^omlx]: Jun Kim, [oMLX](https://github.com/jundot/omlx), [oQ quantization](https://github.com/jundot/omlx/blob/main/docs/oQ_Quantization.md), and [Jundot model collection](https://huggingface.co/Jundot/models).
 [^flash]: Ivan Fioravanti, [64 GB demand-paging update](https://x.com/ivanfioravanti/status/2097343957940474076), [Qwen3.8 Flash Next Q2 weights](https://huggingface.co/ivanfioravanti/Qwen3.8-Flash-Next-DS4-IQ2), and [DwarfStar test branch](https://github.com/ivanfioravanti/ds4-metal/tree/qwen3.8-flash-next).
 [^flash-results]: Reproduction notes and raw results: [`b1tank/ds4-metal`, `research/m2-ultra-qwen38-flash-next`](https://github.com/b1tank/ds4-metal/tree/research/m2-ultra-qwen38-flash-next/research/m2-ultra-qwen38-flash-next).
+[^flash-followup]: Ivan Fioravanti, [Qwen3.8 Flash Next reaching 224K context on a 64 GB M4 Max](https://x.com/ivanfioravanti/status/2098056827598754200), tested by [@pswai](https://x.com/pswai).
 [^dwarfstar]: Salvatore Sanfilippo, [DwarfStar](https://github.com/antirez/ds4) and its [DeepSeek V4 synopsis](https://github.com/antirez/ds4/blob/main/MODEL_CARD.md).
 [^deepseek]: DeepSeek, [DeepSeek V4 Flash](https://huggingface.co/deepseek-ai/DeepSeek-V4-Flash).

@@ -186,10 +186,15 @@
   .prose h2, .prose h3 { scroll-margin-top: 30px; font-family: var(--serif); }
   .prose h2 { margin-top: 2.3em; padding-top: .7em; border-top: 1px solid var(--line); font-size: 1.75rem; }
   .prose h3 { margin-top: 1.9em; font-size: 1.3rem; }
+  .prose .heading-link { color: inherit; text-decoration: none; }
+  .prose .heading-link::after { margin-left: .35em; color: var(--muted); content: '#'; opacity: 0; font: .7em var(--sans); }
+  .prose .heading-link:hover::after, .prose .heading-link:focus-visible::after { opacity: 1; }
   .prose ul, .prose ol { padding-left: 1.35em; }
   .prose li + li { margin-top: .35em; }
   .prose blockquote { padding-left: 20px; color: var(--muted); border-left: 3px solid var(--gold); font-style: italic; }
   .prose img { height: auto; margin-inline: auto; }
+  .prose .image-lightbox-trigger { cursor: zoom-in; }
+  .prose .image-lightbox-trigger:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
   .prose figure { margin-block: 2.2em; }
   .prose figure > img, .prose figure > a > img { border: 1px solid var(--line); border-radius: 6px; }
   .prose .diagram-figure > img { border: 0; border-radius: 0; }
@@ -207,6 +212,14 @@
   .prose pre { position: relative; padding: 18px; overflow: auto; border: 1px solid var(--line); border-radius: 5px; }
   .prose pre code { font-size: .82rem; line-height: 1.65; }
   :root[data-theme="dark"] .astro-code, :root[data-theme="dark"] .astro-code span { color: var(--shiki-dark) !important; background-color: var(--shiki-dark-bg) !important; }
+  .image-lightbox { width: min(96vw, 1800px); max-width: none; height: min(94vh, 1200px); max-height: none; padding: 46px 18px 18px; color: var(--ink); border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+  .image-lightbox::backdrop { background: rgb(0 0 0 / .82); }
+  .image-lightbox[open] { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 12px; }
+  .image-lightbox img { width: 100%; height: 100%; object-fit: contain; }
+  .image-lightbox-close { position: absolute; top: 7px; right: 11px; padding: 0 8px 3px; color: var(--muted); border: 0; background: transparent; font: 30px/1 var(--sans); cursor: pointer; }
+  .image-lightbox-close:hover { color: var(--ink); }
+  .image-lightbox-original { justify-self: center; color: var(--blue); font: .78rem var(--mono); }
+  body:has(.image-lightbox[open]) { overflow: hidden; }
   .copy-code { position: absolute; top: 7px; right: 7px; padding: 4px 7px; color: var(--muted); border: 1px solid var(--line); background: var(--paper); font: .62rem var(--mono); cursor: pointer; opacity: 0; }
   .prose pre:hover .copy-code, .copy-code:focus-visible { opacity: 1; }
   @media (max-width: 620px) { .copy-code { opacity: 1; } }

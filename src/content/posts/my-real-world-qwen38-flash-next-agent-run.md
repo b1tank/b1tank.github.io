@@ -71,8 +71,6 @@ The startup log reported the effective runtime configuration:
 
 The generation rates below are from an MTP-enabled run, not an ordinary-decoding baseline. I did not enable `--mtp-timing`, so this log does not provide draft-acceptance statistics or establish a speedup over MTP off.
 
-*Correction: an earlier version incorrectly said MTP was disabled, based on a truncated screenshot of the command. The full process command confirms it was enabled.*
-
 ### Pi
 
 I ran [Pi](https://pi.dev) **0.85.1** with medium reasoning. Its local OpenAI-compatible provider pointed to `http://127.0.0.1:8001/v1`, advertised a 131,072-token context window, and allowed up to 8,192 output tokens per response.

@@ -169,8 +169,8 @@
   .post-header .post-meta { margin-top: 14px; color: var(--muted); font: .78rem var(--mono); }
   .article-toc { max-width: 700px; margin-bottom: 38px; padding: 18px 22px; border: 1px solid var(--line); border-radius: 6px; background: color-mix(in srgb, var(--paper-deep) 45%, transparent); }
   .article-toc > p { color: var(--muted); font: 700 .72rem var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-  .article-toc ol { margin: 12px 0 0; padding-left: 1.3em; }
-  .article-toc li { padding-left: .2em; color: var(--muted); font: .9rem/1.55 var(--sans); }
+  .prose .article-toc ol { margin: 12px 0 0; padding-left: 0; list-style: none; }
+  .prose .article-toc li { padding-left: 0; color: var(--muted); font: .9rem/1.55 var(--sans); list-style: none; }
   .article-toc li + li { margin-top: .3em; }
   .article-toc .toc-subsection { margin-left: 1em; font-size: .84rem; }
   .article-toc a { color: var(--muted); text-decoration: none; }

@@ -1,5 +1,5 @@
 ---
-title: "How Does Qwen3.8-Flash-Next Perform for Real Work in Pi on a 64 GB M2 Ultra?"
+title: "Qwen3.8-Flash-Next on a 64 GB M2 Ultra: A 66-Minute Real Work Run"
 description: "A 66-minute local Pi coding session on a 64 GB M2 Ultra: 106 tool calls, a 131K context window, automatic compaction, and a working macOS OTelux install."
 published: 2026-09-15T08:00:00-07:00
 draft: false
